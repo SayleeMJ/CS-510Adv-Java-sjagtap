@@ -7,7 +7,7 @@ import java.util.ArrayList;
 /**                                                                                 
  * This class is represents a <code>Student</code>.                                 
  */                                                                                 
-public class Student extends Human {                                                
+public class Student extends Human {
                                                                                     
   /**                                                                               
    * Creates a new <code>Student</code>                                             
@@ -30,8 +30,9 @@ public class Student extends Human {
    * All students say "This class is too much work"
    */
   @Override
-  public String says() {                                                            
-    throw new UnsupportedOperationException("Not implemented yet");
+  public String says() {
+    return "This class is too much work";
+//    throw new UnsupportedOperationException("Not implemented yet");
   }
                                                                                     
   /**                                                                               
