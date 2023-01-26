@@ -109,7 +109,11 @@ public class Project1 {
       InputStream readme = Project1.class.getResourceAsStream("README.txt");
       BufferedReader reader = new BufferedReader(new InputStreamReader(readme));
       String line = reader.readLine();
-      System.out.println(line);
+      while(line!= null)
+      {
+        System.out.println(line);
+        line = reader.readLine();
+      }
     }
     catch (Exception e){
       System.err.println("Unable to read README.md");
