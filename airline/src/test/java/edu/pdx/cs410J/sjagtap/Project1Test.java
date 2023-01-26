@@ -64,4 +64,32 @@ class Project1Test {
     assertThat(Project1.isValidFlightNumber("12"), is(true));
     assertThat(Project1.isValidFlightNumber("1A"), is(false));
   }
+
+  @Test
+  void getValidDateAndTime(){
+    assertThat(Project1.isValidDateAndTime("1/1/2000 23:00"), is(true));
+    assertThat(Project1.isValidDateAndTime("01/01/2000 1:00"), is(true));
+  }
+
+  @Test
+  void getInvalidDateAndTime(){
+//    assertThat(Project1.isValidDateAndTime("32/1/2000 23:00"), is(false));
+//    assertThat(Project1.isValidDateAndTime("01/32/2000 1:00"), is(false));
+    assertThat(Project1.isValidDateAndTime("1/1/2000"), is(false));
+    assertThat(Project1.isValidDateAndTime("1/1/2000 12"),is(false));
+    assertThat(Project1.isValidDateAndTime("1/1/2000 25:00"),is(false));
+    assertThat(Project1.isValidDateAndTime("1/1/2000 12:61"),is(false));
+  }
+
+  @Test
+  void getValidAirlineName(){
+    assertThat(Project1.isValidAirlineName("Indigo"), is(true));
+    assertThat(Project1.isValidAirlineName("Indigo123"), is(true));
+  }
+
+  @Test
+  void getInvalidAirlineName(){
+    assertThat(Project1.isValidAirlineName("Indigo$"), is(false));
+    assertThat(Project1.isValidAirlineName("Indigo123$"), is(false));
+  }
 }

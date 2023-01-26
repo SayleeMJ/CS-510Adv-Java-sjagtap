@@ -11,16 +11,78 @@ public class Project1 {
 
   @VisibleForTesting
   static boolean isValidDateAndTime(String dateAndTime) {
-    SimpleDateFormat date = new SimpleDateFormat("mm/dd/yyyy hh:mm");
+    String[] splitDateTimes = dateAndTime.split(" ");
+    if(splitDateTimes.length != 2){
+      return false;
+    }
+
+    // Validate date
+    String date = splitDateTimes[0];
+    String[] splitDates = date.split("/");
+    if (splitDates.length != 3) {
+      return false;
+    }
+
+    if (splitDates[0].length() > 2 || splitDates[0].length() < 0) {
+      return false;
+    }
+
+    if (splitDates[1].length() > 2 || splitDates[1].length() < 0) {
+      return false;
+    }
+
+    if (splitDates[2].length() > 4 || splitDates[2].length() < 0) {
+      return false;
+    }
+
+    String time = splitDateTimes[1];
+
+    String[] splitTime = time.split(":");
+
+    if (splitTime.length != 2) {
+      return  false;
+    }
+
+    if (splitTime[0].length() < 0 || splitTime[0].length() > 2) {
+      return false;
+    }
+
+    if (splitTime[1].length() < 0 || splitTime[1].length() > 2) {
+      return false;
+    }
+
     try {
-      date.parse(dateAndTime);
+      if (Integer.parseInt(splitTime[0]) > 24) {
+        return false;
+      }
+
+      if (Integer.parseInt(splitTime[1]) > 24) {
+        return false;
+      }
+
+    }
+    catch (Exception e) {
+      return false;
+    }
+
+    SimpleDateFormat dateFormat = new SimpleDateFormat("mm/dd/yyyy hh:mm");
+    try {
+      dateFormat.parse(dateAndTime);
     } catch (Exception e) {
       return false;
     }
 
     return true;
+}
+  @VisibleForTesting
+  static boolean isValidAirlineName(String str) {
+    for (int i = 0; i < str.length(); i++) {
+      if (!Character.isLetterOrDigit(str.charAt(i))) {
+        return false;
+      }
+    }
+    return true;
   }
-
   public static void main(String[] args) {
     if (args.length != 9) {
       System.err.println("Missing command line arguments" + getHelpMessage());
@@ -35,7 +97,10 @@ public class Project1 {
 
     // validate flight number
     String airline = args[1];
-
+    if(isValidAirlineName(airline)){
+      System.err.println("Invalid Airline Name");
+      return;
+    }
     // Validate flight number
     String flightNumber = args[2];
     if(isValidFlightNumber(flightNumber)){
