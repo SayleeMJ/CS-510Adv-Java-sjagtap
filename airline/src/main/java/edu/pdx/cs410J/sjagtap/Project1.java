@@ -3,12 +3,22 @@ package edu.pdx.cs410J.sjagtap;
 import com.google.common.annotations.VisibleForTesting;
 
 import java.text.SimpleDateFormat;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.text.SimpleDateFormat;
 
 /**
  * The main class for the CS410J airline Project
  */
 public class Project1 {
 
+  /**
+   * Validate Data and Time given in string format (mm/dd/yyyy hh:mm)
+   *
+   * @param  dateAndTime  date time in string format.
+   * @return      true if valid value is provided. else false.
+   */
   @VisibleForTesting
   static boolean isValidDateAndTime(String dateAndTime) {
     String[] splitDateTimes = dateAndTime.split(" ");
@@ -74,6 +84,13 @@ public class Project1 {
 
     return true;
 }
+
+  /**
+   * Validate airline name to be alphanumeric.
+   *
+   * @param  str  airline name.
+   * @return      true if valid value is provided. else false.
+   */
   @VisibleForTesting
   static boolean isValidAirlineName(String str) {
     for (int i = 0; i < str.length(); i++) {
@@ -83,7 +100,32 @@ public class Project1 {
     }
     return true;
   }
+
+  /**
+   * Read and print read me file.
+   */
+  static void printReadMeFile() {
+    try {
+      InputStream readme = Project1.class.getResourceAsStream("README.txt");
+      BufferedReader reader = new BufferedReader(new InputStreamReader(readme));
+      String line = reader.readLine();
+      System.out.println(line);
+    }
+    catch (Exception e){
+      System.err.println("Unable to read README.md");
+    }
+  }
+
+  /**
+   * Main entry point of program.
+   *
+   * @param  args  list of command line arguments.
+   */
   public static void main(String[] args) {
+    if (args.length == 1 && args[0].equals("-README")) {
+      printReadMeFile();
+         return;
+    }
     if (args.length != 9) {
       System.err.println("Missing command line arguments" + getHelpMessage());
       return;
@@ -145,6 +187,10 @@ public class Project1 {
     }
   }
 
+  /**
+   * Returns program help and explanation of inputs.
+   * @return      String representation of input option.
+   */
   @VisibleForTesting
   static String getHelpMessage() {
     return "\n usage: java -jar target/airline-2023.0.0.jar [options] <args>\n" +
@@ -161,15 +207,27 @@ public class Project1 {
             "Date and time should be in the format: mm/dd/yyyy hh:mm";
   }
 
+  /**
+   * Validate option argument passed to be either print or README.
+   *
+   * @param  option  provided option.
+   * @return      true if valid value is provided. else false.
+   */
   @VisibleForTesting
   static boolean isValidOption(String option) {
-    if (option.equals("-print") || option.equals("-README")) {
+    if (option.equals("-print")) {
       return true;
     }
 
     return false;
   }
 
+  /**
+   * Validate source and destination to be of length 3 and all letters.
+   *
+   * @param  str  src or destination argument.
+   * @return      true if valid value is provided. else false.
+   */
   @VisibleForTesting
   static boolean isValidSrcAndDest(String str) {
     // check size of 3

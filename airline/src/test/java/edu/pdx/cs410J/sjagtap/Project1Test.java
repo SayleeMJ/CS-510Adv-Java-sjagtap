@@ -44,7 +44,6 @@ class Project1Test {
   @Test
   void validateOption(){
     assertThat(Project1.isValidOption("-print"), is(true));
-    assertThat(Project1.isValidOption("-README"), is(true));
   }
 
   @Test
