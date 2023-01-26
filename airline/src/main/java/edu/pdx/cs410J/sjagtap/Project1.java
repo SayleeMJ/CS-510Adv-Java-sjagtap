@@ -38,10 +38,7 @@ public class Project1 {
 
     // Validate flight number
     String flightNumber = args[2];
-    int flightNum;
-    try {
-      flightNum = Integer.parseInt(flightNumber);
-    } catch (Exception e) {
+    if(isValidFlightNumber(flightNumber)){
       System.err.println("Invalid flight number");
       return;
     }
@@ -93,11 +90,11 @@ public class Project1 {
 
   @VisibleForTesting
   static boolean isValidOption(String option) {
-    if (option != "-print" || option != "-README") {
-      return false;
+    if (option.equals("-print") || option.equals("-README")) {
+      return true;
     }
 
-    return true;
+    return false;
   }
 
   @VisibleForTesting
@@ -117,4 +114,13 @@ public class Project1 {
     return true;
   }
 
+  @VisibleForTesting
+  static boolean isValidFlightNumber(String num){
+    try {
+        Integer.parseInt(num);
+        return true;
+    } catch (Exception e) {
+      return false;
+    }
+  }
 }

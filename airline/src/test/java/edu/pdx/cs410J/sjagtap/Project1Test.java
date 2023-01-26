@@ -28,4 +28,40 @@ class Project1Test {
       assertThat(line, containsString("This is a README file!"));
     }
   }
+
+  @Test
+  void validateSourceAndDestination(){
+    assertThat(Project1.isValidSrcAndDest("src"), is(true));
+    assertThat(Project1.isValidSrcAndDest("source"), is(false));
+  }
+
+  @Test
+  void validateSourceAndDestinationNumbers(){
+    assertThat(Project1.isValidSrcAndDest("s12"), is(false));
+    assertThat(Project1.isValidSrcAndDest("s$12"), is(false));
+  }
+
+  @Test
+  void validateOption(){
+    assertThat(Project1.isValidOption("-print"), is(true));
+    assertThat(Project1.isValidOption("-README"), is(true));
+  }
+
+  @Test
+  void notValidateOption(){
+    assertThat(Project1.isValidOption("-abcd"), is(false));
+    assertThat(Project1.isValidOption("-efgh"), is(false));
+  }
+
+  @Test
+  void getValidHelpMessage(){
+      assertThat(Project1.getHelpMessage(), not(nullValue()));
+      assertThat(Project1.getHelpMessage(), containsString("usage: java -jar target/airline-2023.0.0.jar [options] <args>"));
+  }
+
+  @Test
+  void getFlightNumber(){
+    assertThat(Project1.isValidFlightNumber("12"), is(true));
+    assertThat(Project1.isValidFlightNumber("1A"), is(false));
+  }
 }

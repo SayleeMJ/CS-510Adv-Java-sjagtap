@@ -20,6 +20,13 @@ public class Flight extends AbstractFlight {
     this.time = time;
   }
 
+  public Flight(){
+    this.number =12;
+    this.src = "src";
+    this.dest = "dst";
+    this.date = "1/1/2000";
+    this.time = "00:00";
+  }
 
   @Override
   public int getNumber() {

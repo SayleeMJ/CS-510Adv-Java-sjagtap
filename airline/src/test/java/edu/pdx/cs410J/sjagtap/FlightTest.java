@@ -17,25 +17,25 @@ public class FlightTest {
    * This unit test will need to be modified (likely deleted) as you implement
    * your project.
    */
-//  @Test
-//  void getArrivalStringNeedsToBeImplemented() {
-//    Flight flight = new Flight();
-//    assertThrows(UnsupportedOperationException.class, flight::getArrivalString);
-//  }
-//    /**
-//   * This unit test will need to be modified (likely deleted) as you implement
-//   * your project.
-//   */
-//  @Test
-//  void initiallyAllFlightsHaveTheSameNumber() {
-//    Flight flight = new Flight();
-//    assertThat(flight.getNumber(), equalTo(42));
-//  }
-//
-//  @Test
-//  void forProject1ItIsOkayIfGetDepartureTimeReturnsNull() {
-//    Flight flight = new Flight();
-//    assertThat(flight.getDeparture(), is(nullValue()));
-//  }
+  @Test
+  void getArrivalStringNeedsToBeImplemented() {
+    Flight flight = new Flight();
+    assertThrows(UnsupportedOperationException.class, flight::getArrivalString);
+  }
+    /**
+   * This unit test will need to be modified (likely deleted) as you implement
+   * your project.
+   */
+  @Test
+  void initiallyAllFlightsHaveTheSameNumber() {
+    Flight flight = new Flight();
+    assertThat(flight.getNumber(), equalTo(42));
+  }
+
+  @Test
+  void forProject1ItIsOkayIfGetDepartureTimeReturnsNull() {
+    Flight flight = new Flight();
+    assertThat(flight.getDeparture(), is(nullValue()));
+  }
 
 }
