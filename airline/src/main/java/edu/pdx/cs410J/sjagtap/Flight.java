@@ -2,7 +2,25 @@ package edu.pdx.cs410J.sjagtap;
 
 import edu.pdx.cs410J.AbstractFlight;
 
+import java.util.ArrayList;
+
 public class Flight extends AbstractFlight {
+
+  private final int number;
+  private final String src;
+  private final String dest ;
+  private final String date;
+  private final String time;
+
+  public Flight(int number, String src, String dest, String date, String time) {
+    this.number = number;
+    this.src = src;
+    this.dest = dest;
+    this.date = date;
+    this.time = time;
+  }
+
+
   @Override
   public int getNumber() {
     return 42;
