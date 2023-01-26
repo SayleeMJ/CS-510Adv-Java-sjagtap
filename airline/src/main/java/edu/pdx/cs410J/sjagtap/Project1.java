@@ -143,12 +143,15 @@ public class Project1 {
       System.err.println("Invalid Airline Name");
       return;
     }
+
     // Validate flight number
     String flightNumber = args[2];
     if(!isValidFlightNumber(flightNumber)){
       System.err.println("Invalid flight number");
       return;
     }
+
+    int flightNum = Integer.parseInt(flightNumber);
 
     // validate src
     String src = args[3];
@@ -178,7 +181,7 @@ public class Project1 {
       return;
     }
 
-    Flight flight = new Flight(flightNumber,src, depart, dst, arrive);
+    Flight flight = new Flight(flightNum,src, depart, dst, arrive);
     Airline airline1 = new Airline(airline);
     airline1.addFlight(flight);
 

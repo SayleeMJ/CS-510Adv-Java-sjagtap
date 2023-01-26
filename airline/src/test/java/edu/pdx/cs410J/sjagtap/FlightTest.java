@@ -19,8 +19,8 @@ public class FlightTest {
    */
   @Test
   void getArrivalStringNeedsToBeImplemented() {
-    Flight flight = new Flight();
-    assertThrows(UnsupportedOperationException.class, flight::getArrivalString);
+    Flight flight = new Flight(42, "src", "3/15/2023 1:03", "dst", "3/15/2023 1:09");
+    assertThat(flight.getArrivalString(),equalTo("3/15/2023 1:09"));
   }
     /**
    * This unit test will need to be modified (likely deleted) as you implement
@@ -28,13 +28,13 @@ public class FlightTest {
    */
   @Test
   void initiallyAllFlightsHaveTheSameNumber() {
-    Flight flight = new Flight();
+    Flight flight = new Flight(42, "src", "3/15/2023 1:03", "dst", "3/15/2023 1:09" );
     assertThat(flight.getNumber(), equalTo(42));
   }
 
   @Test
   void forProject1ItIsOkayIfGetDepartureTimeReturnsNull() {
-    Flight flight = new Flight();
+    Flight flight = new Flight(42, "src", "3/15/2023 1:03", "dst", "3/15/2023 1:09");
     assertThat(flight.getDeparture(), is(nullValue()));
   }
 

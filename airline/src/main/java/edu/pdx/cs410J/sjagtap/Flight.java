@@ -4,14 +4,14 @@ import edu.pdx.cs410J.AbstractFlight;
 
 public class Flight extends AbstractFlight {
 
-  private final String flightNumber;
+  private final int flightNumber;
   private final String src;
   private final String dst;
   private final String depart;
   private final String arrive;
 
 
-  public Flight(String flightNumber, String src, String depart, String dst, String arrive) {
+  public Flight(int flightNumber, String src, String depart, String dst, String arrive) {
     this.flightNumber = flightNumber;
     this.src = src;
     this.depart = depart;
@@ -20,7 +20,7 @@ public class Flight extends AbstractFlight {
   }
 
   public Flight(){
-    this.flightNumber ="12";
+    this.flightNumber =12;
     this.src = "src";
     this.dst = "dst";
     this.depart = "1/1/2000";
@@ -30,7 +30,7 @@ public class Flight extends AbstractFlight {
 
   @Override
   public int getNumber() {
-    return 42;
+    return this.flightNumber;
   }
 
   @Override
