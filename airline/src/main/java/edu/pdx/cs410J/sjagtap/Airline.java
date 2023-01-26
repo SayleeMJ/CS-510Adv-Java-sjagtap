@@ -12,8 +12,9 @@ public class Airline extends AbstractAirline<Flight> {
 
   public Airline(String name) {
     this.name = name;
-    arrayList = new ArrayList<>();
+    arrayList = new ArrayList<Flight>();
   }
+
 
   @Override
   public String getName() {

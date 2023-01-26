@@ -2,30 +2,30 @@ package edu.pdx.cs410J.sjagtap;
 
 import edu.pdx.cs410J.AbstractFlight;
 
-import java.util.ArrayList;
-
 public class Flight extends AbstractFlight {
 
-  private final int number;
+  private final String flightNumber;
   private final String src;
-  private final String dest ;
-  private final String date;
-  private final String time;
+  private final String dst;
+  private final String depart;
+  private final String arrive;
 
-  public Flight(int number, String src, String dest, String date, String time) {
-    this.number = number;
+
+  public Flight(String flightNumber, String src, String depart, String dst, String arrive) {
+    this.flightNumber = flightNumber;
     this.src = src;
-    this.dest = dest;
-    this.date = date;
-    this.time = time;
+    this.depart = depart;
+    this.dst = dst;
+    this.arrive = arrive;
   }
 
   public Flight(){
-    this.number =12;
+    this.flightNumber ="12";
     this.src = "src";
-    this.dest = "dst";
-    this.date = "1/1/2000";
-    this.time = "00:00";
+    this.dst = "dst";
+    this.depart = "1/1/2000";
+    this.arrive = "00:00";
+
   }
 
   @Override
@@ -35,22 +35,21 @@ public class Flight extends AbstractFlight {
 
   @Override
   public String getSource() {
-
-    throw new UnsupportedOperationException("This method is not implemented yet");
+    return this.src;
   }
 
   @Override
   public String getDepartureString() {
-    throw new UnsupportedOperationException("This method is not implemented yet");
+    return this.depart;
   }
 
   @Override
   public String getDestination() {
-    throw new UnsupportedOperationException("This method is not implemented yet");
+    return this.dst;
   }
 
   @Override
   public String getArrivalString() {
-    throw new UnsupportedOperationException("This method is not implemented yet");
+    return this.arrive;
   }
 }

@@ -90,20 +90,20 @@ public class Project1 {
     }
 
     // validate option
-    if (isValidOption(args[0])) {
+    if (!isValidOption(args[0])) {
       System.err.println("Invalid option");
       return;
     }
 
     // validate flight number
     String airline = args[1];
-    if(isValidAirlineName(airline)){
+    if(!isValidAirlineName(airline)){
       System.err.println("Invalid Airline Name");
       return;
     }
     // Validate flight number
     String flightNumber = args[2];
-    if(isValidFlightNumber(flightNumber)){
+    if(!isValidFlightNumber(flightNumber)){
       System.err.println("Invalid flight number");
       return;
     }
@@ -116,8 +116,8 @@ public class Project1 {
     }
 
     // validate depart
-    String date = args[4] + " " + args[5];
-    if (!isValidDateAndTime(date)) {
+    String depart = args[4] + " " + args[5];
+    if (!isValidDateAndTime(depart)) {
       System.err.println("Invalid depart date");
       return;
     }
@@ -134,6 +134,14 @@ public class Project1 {
     if (!isValidDateAndTime(arrive)) {
       System.err.println("Invalid destination code");
       return;
+    }
+
+    Flight flight = new Flight(flightNumber,src, depart, dst, arrive);
+    Airline airline1 = new Airline(airline);
+    airline1.addFlight(flight);
+
+    for(Flight f : airline1.getFlights()) {
+      System.out.println("\n" + f.toString());
     }
   }
 
