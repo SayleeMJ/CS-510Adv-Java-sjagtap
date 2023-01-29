@@ -48,40 +48,64 @@ public class Project2 {
             return;
         }
         String fileName = args[1];
+        File file = new File(fileName);
         String airlineName = args[2];
         if (!Airline.isValidAirlineName(airlineName)) {
             System.err.println("Invalid Airline Name");
             return;
         }
-        String flightNumber = args[3];
-        String src = args[4];
-        String depart = args[5] + " " + args[6];
-        String dst = args[7];
-        String arrive = args[8] + " " + args[9];
+        if(file.exists()){
 
-        Airline airline;
+            String flightNumber = args[3];
+            String src = args[4];
+            String depart = args[5] + " " + args[6];
+            String dst = args[7];
+            String arrive = args[8] + " " + args[9];
 
-        //reading details of Airline and Flights from demo.txt and creating new flight
-        try {
-            Reader r = new FileReader("D://demo.txt");
-            TextParser textParser = new TextParser(r);
-            airline = textParser.parse();
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        } catch (ParserException e) {
-            throw new RuntimeException(e.getMessage());
+            Airline airline;
+
+            //reading details of Airline and Flights from demo.txt and creating new flight
+            try {
+                Reader r = new FileReader(fileName);
+                TextParser textParser = new TextParser(r);
+                airline = textParser.parse();
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+            } catch (ParserException e) {
+                throw new RuntimeException(e.getMessage());
+            }
+
+            // Getting flight details from command line argument
+            Flight flightDetails = createAndValidateFlight(flightNumber, src, depart, dst, arrive);
+            airline.addFlight(flightDetails);
+            try {
+                Writer w = new PrintWriter(fileName);
+                TextDumper textDumper = new TextDumper(w);
+                textDumper.dump(airline);
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+        } else {
+            try {
+                // create empty airline object
+                Airline emptyAirline = new Airline(airlineName);
+                // file create
+                file.createNewFile();
+                // write airline object conents
+                try {
+                    Writer w = new PrintWriter(fileName);
+                    TextDumper textDumper = new TextDumper(w);
+                    textDumper.dump(emptyAirline);
+                } catch (FileNotFoundException e) {
+                    throw new RuntimeException(e);
+                }
+
+
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
 
-        // Getting flight details from command line argument
-        Flight flightDetails = createAndValidateFlight(flightNumber, src, depart, dst, arrive);
-        airline.addFlight(flightDetails);
-        try {
-            Writer w = new PrintWriter("D://demo2.txt");
-            TextDumper textDumper = new TextDumper(w);
-            textDumper.dump(airline);
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     /**
