@@ -1,5 +1,6 @@
 package edu.pdx.cs410J.sjagtap;
 
+import com.google.common.annotations.VisibleForTesting;
 import edu.pdx.cs410J.AbstractAirline;
 
 import java.util.ArrayList;
@@ -28,5 +29,21 @@ public class Airline extends AbstractAirline<Flight> {
   @Override
   public Collection<Flight> getFlights() {
     return arrayList;
+  }
+
+  /**
+   * Validate airline name to be alphanumeric.
+   *
+   * @param  str  airline name.
+   * @return      true if valid value is provided. else false.
+   */
+  @VisibleForTesting
+  static boolean isValidAirlineName(String str) {
+    for (int i = 0; i < str.length(); i++) {
+      if (!Character.isLetterOrDigit(str.charAt(i))) {
+        return false;
+      }
+    }
+    return true;
   }
 }

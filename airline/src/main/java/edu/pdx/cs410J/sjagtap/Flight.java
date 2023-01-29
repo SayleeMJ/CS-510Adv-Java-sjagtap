@@ -105,23 +105,6 @@ public class Flight extends AbstractFlight {
 
     return true;
   }
-
-  /**
-   * Validate airline name to be alphanumeric.
-   *
-   * @param  str  airline name.
-   * @return      true if valid value is provided. else false.
-   */
-  @VisibleForTesting
-  static boolean isValidAirlineName(String str) {
-    for (int i = 0; i < str.length(); i++) {
-      if (!Character.isLetterOrDigit(str.charAt(i))) {
-        return false;
-      }
-    }
-    return true;
-  }
-
   @VisibleForTesting
   static boolean isValidOption(String option) {
     if (option.equals("-print")) {
