@@ -12,28 +12,60 @@ import java.io.Reader;
  * A skeletal implementation of the <code>TextParser</code> class for Project 2.
  */
 public class TextParser implements AirlineParser<Airline> {
-  private final Reader reader;
+    private final Reader reader;
 
-  public TextParser(Reader reader) {
-    this.reader = reader;
-  }
-
-  @Override
-  public Airline parse() throws ParserException {
-    try (
-      BufferedReader br = new BufferedReader(this.reader)
-    ) {
-
-      String airlineName = br.readLine();
-
-      if (airlineName == null) {
-        throw new ParserException("Missing airline name");
-      }
-
-      return new Airline(airlineName);
-
-    } catch (IOException e) {
-      throw new ParserException("While parsing airline text", e);
+    public TextParser(Reader reader) {
+        this.reader = reader;
     }
-  }
+
+    @Override
+    public Airline parse() throws ParserException {
+        try (
+                BufferedReader br = new BufferedReader(this.reader)
+        ) {
+
+            String airlineName = br.readLine(); //reads the current line
+
+            if (airlineName == null) {
+                throw new ParserException("Missing airline name");
+            }
+            Airline airline = new Airline(airlineName);
+            ;
+            String flightNumber = br.readLine();
+
+            while (flightNumber != null) {
+                if (flightNumber == null) {
+                    throw new ParserException("Missing depart name");
+                }
+                int flightNum = Integer.parseInt(flightNumber);
+
+                String src = br.readLine();
+                if (src == null) {
+                    throw new ParserException("Missing src name");
+                }
+                //add validation code from project 1
+                String depart = br.readLine();
+                if (depart == null) {
+                    throw new ParserException("Missing depart name");
+                }
+
+                String dst = br.readLine();
+                if (dst == null) {
+                    throw new ParserException("Missing dst name");
+                }
+
+                String arrive = br.readLine();
+                if (arrive == null) {
+                    throw new ParserException("Missing arrive name");
+                }
+
+                Flight flight = new Flight(flightNum, src, depart, dst, arrive);
+                airline.addFlight(flight);
+                flightNumber = br.readLine();
+            }
+            return airline;
+        } catch (IOException e) {
+            throw new ParserException("While parsing airline text", e);
+        }
+    }
 }

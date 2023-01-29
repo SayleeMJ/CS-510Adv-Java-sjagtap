@@ -4,7 +4,6 @@ import edu.pdx.cs410J.AbstractAirline;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 public class Airline extends AbstractAirline<Flight> {
   private final String name;

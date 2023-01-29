@@ -6,7 +6,7 @@ import java.text.SimpleDateFormat;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.text.SimpleDateFormat;
+
 
 /**
  * The main class for the CS410J airline Project
@@ -66,7 +66,7 @@ public class Project1 {
         return false;
       }
 
-      if (Integer.parseInt(splitTime[1]) > 24) {
+      if (Integer.parseInt(splitTime[1]) > 59) {
         return false;
       }
 
@@ -128,7 +128,7 @@ public class Project1 {
   public static void main(String[] args) {
     if (args.length == 1 && args[0].equals("-README")) {
       printReadMeFile();
-         return;
+      return;
     }
     if (args.length != 9) {
       System.err.println("Missing command line arguments" + getHelpMessage());
