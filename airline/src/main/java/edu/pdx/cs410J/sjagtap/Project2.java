@@ -28,14 +28,11 @@ public class Project2 {
                 System.err.println("Invalid option");
 
         }
-        //Todo -> Validation  of airlineName look through assignment
-        //TODO-> Go through assignment
-        // Add Test cases
-        // Add readme code and update readme
-        // update Command line argument
-        // Create new jar file
-        // what to when file not found
-        // TODO -> Handle File not found exception
+
+        //TODO Add Test cases
+        //TODO Add readme code and update readme
+        //TODO update Command line argument
+        //TODO Create new jar file
 
     }
 
@@ -54,7 +51,7 @@ public class Project2 {
             System.err.println("Invalid Airline Name");
             return;
         }
-        if(file.exists()){
+        if (file.exists()) {
 
             String flightNumber = args[3];
             String src = args[4];
@@ -62,28 +59,39 @@ public class Project2 {
             String dst = args[7];
             String arrive = args[8] + " " + args[9];
 
-            Airline airline;
+            Airline airline = null;
 
             //reading details of Airline and Flights from demo.txt and creating new flight
             try {
                 Reader r = new FileReader(fileName);
                 TextParser textParser = new TextParser(r);
                 airline = textParser.parse();
+                String existingAirlineName = airline.getName();
+                if (!existingAirlineName.equals(airlineName)) {
+                    System.err.println("Airline name is different!");
+                    return;
+                }
             } catch (FileNotFoundException e) {
-                throw new RuntimeException(e);
+                System.err.println("File does not exists!");
+                return;
             } catch (ParserException e) {
-                throw new RuntimeException(e.getMessage());
+                System.err.println(e.getMessage());
+                return;
             }
 
             // Getting flight details from command line argument
             Flight flightDetails = createAndValidateFlight(flightNumber, src, depart, dst, arrive);
+            if (flightDetails == null) {
+                return;
+            }
             airline.addFlight(flightDetails);
             try {
                 Writer w = new PrintWriter(fileName);
                 TextDumper textDumper = new TextDumper(w);
                 textDumper.dump(airline);
             } catch (FileNotFoundException e) {
-                throw new RuntimeException(e);
+                System.err.println("File does not exists!");
+                return;
             }
         } else {
             try {
@@ -91,18 +99,20 @@ public class Project2 {
                 Airline emptyAirline = new Airline(airlineName);
                 // file create
                 file.createNewFile();
-                // write airline object conents
+                // write airline object contents
                 try {
                     Writer w = new PrintWriter(fileName);
                     TextDumper textDumper = new TextDumper(w);
                     textDumper.dump(emptyAirline);
                 } catch (FileNotFoundException e) {
-                    throw new RuntimeException(e);
+                    System.err.println("File does not exists!");
+                    return;
                 }
 
 
             } catch (IOException e) {
-                throw new RuntimeException(e);
+                System.err.println("File have an issue with writing!");
+                return;
             }
         }
 
@@ -148,6 +158,9 @@ public class Project2 {
         String dst = args[6];
         String arrive = args[7] + " " + args[8];
         Flight flightDetail = createAndValidateFlight(flightNumber, src, depart, dst, arrive);
+        if (flightDetail == null) {
+            return;
+        }
         Airline airline1 = new Airline(airlineName);
         airline1.addFlight(flightDetail);
 

@@ -24,20 +24,25 @@ public class TextParser implements AirlineParser<Airline> {
                 BufferedReader br = new BufferedReader(this.reader)
         ) {
 
-            String airlineName = br.readLine(); //reads the current line
+            String airlineName = br.readLine();
 
             if (airlineName == null) {
                 throw new ParserException("Missing airline name");
             }
             Airline airline = new Airline(airlineName);
-            ;
             String flightNumber = br.readLine();
 
             while (flightNumber != null) {
                 if (flightNumber == null) {
                     throw new ParserException("Missing depart name");
                 }
-                int flightNum = Integer.parseInt(flightNumber);
+                int flightNum;
+                try{
+                    flightNum = Integer.parseInt(flightNumber);
+                } catch (Exception e){
+                    throw new ParserException("Invalid Flight Number");
+                }
+
 
                 String src = br.readLine();
                 if (src == null) {
