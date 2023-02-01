@@ -6,8 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.io.*;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.notNullValue;
+import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class TextParserTest {
@@ -44,8 +43,7 @@ public class TextParserTest {
   }
 
   @Test
-  void readingCreatedFileForExistingAirlineName() {
-    try{
+  void readingCreatedFileForExistingAirlineName() throws FileNotFoundException, ParserException {
       String fileName = "D:\\testing.txt";
       Airline airline;
       Reader r = new FileReader(fileName);
@@ -54,23 +52,5 @@ public class TextParserTest {
       String existingAirlineName = airline.getName();
       String newAirlineName = "Indigo";
       assertThat(existingAirlineName,equalTo(newAirlineName));
-    } catch (Exception e){
-      assertThat(e.getMessage(),equalTo("Airline name is different!"));
-    }
-  }
-
-@Test
-  void readingCreatedFileForNotExistingAirlineName() {
-    try{
-      String fileName = "D:\\testing.txt";
-      Airline airline;
-      Reader r = new FileReader(fileName);
-      TextParser textParser = new TextParser(r);
-      airline = textParser.parse();
-      String existingAirlineName = airline.getName();
-      String newAirlineName = "Emirates";
-    } catch (Exception e){
-      assertThat(e.getMessage(),equalTo("Airline name is different!"));
-    }
   }
 }
