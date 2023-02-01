@@ -30,10 +30,11 @@ public class TextParser implements AirlineParser<Airline> {
             }
             Airline airline = new Airline(airlineName);
             String flightNumber = br.readLine();
-            if (flightNumber == null) {
-                throw new ParserException("Missing flight number");
-            }
+
             while (flightNumber != null) {
+                if (flightNumber == null) {
+                    throw new ParserException("Missing flight number");
+                }
                 int flightNum;
                 try {
                     flightNum = Integer.parseInt(flightNumber);
