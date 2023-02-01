@@ -5,7 +5,6 @@ import edu.pdx.cs410J.ParserException;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.Reader;
 
 /**
@@ -31,11 +30,10 @@ public class TextParser implements AirlineParser<Airline> {
             }
             Airline airline = new Airline(airlineName);
             String flightNumber = br.readLine();
-
+            if (flightNumber == null) {
+                throw new ParserException("Missing depart name");
+            }
             while (flightNumber != null) {
-                if (flightNumber == null) {
-                    throw new ParserException("Missing depart name");
-                }
                 int flightNum;
                 try{
                     flightNum = Integer.parseInt(flightNumber);

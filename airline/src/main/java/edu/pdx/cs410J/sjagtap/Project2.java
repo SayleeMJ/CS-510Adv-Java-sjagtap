@@ -5,9 +5,20 @@ import edu.pdx.cs410J.ParserException;
 
 import java.io.*;
 
+/**
+ * The main class for the CS410J airline Project
+ */
+
 public class Project2 {
+
+    /**
+     * Main entry point of program.
+     *
+     * @param  args  list of command line arguments.
+     */
     public static void main(String[] args) {
 
+        // Validate length of args
         if (args.length == 0) {
             System.err.println("Missing command line arguments" + getHelpMessage());
             return;
@@ -37,7 +48,8 @@ public class Project2 {
     }
 
     /**
-     * Reading , creating new flight and write to text file.
+     * Reading, creating new flight and write to text file.
+     * @param args  list of command line arguments.
      */
     static void readAndWrite(String[] args) {
         if (args.length != 10) {
@@ -59,9 +71,9 @@ public class Project2 {
             String dst = args[7];
             String arrive = args[8] + " " + args[9];
 
-            Airline airline = null;
+            Airline airline;
 
-            //reading details of Airline and Flights from demo.txt and creating new flight
+            //reading details of Airline and Flights from filename and creating new flight
             try {
                 Reader r = new FileReader(fileName);
                 TextParser textParser = new TextParser(r);
@@ -91,13 +103,12 @@ public class Project2 {
                 textDumper.dump(airline);
             } catch (FileNotFoundException e) {
                 System.err.println("File does not exists!");
-                return;
             }
         } else {
             try {
                 // create empty airline object
                 Airline emptyAirline = new Airline(airlineName);
-                // file create
+                // create file
                 file.createNewFile();
                 // write airline object contents
                 try {
@@ -106,13 +117,11 @@ public class Project2 {
                     textDumper.dump(emptyAirline);
                 } catch (FileNotFoundException e) {
                     System.err.println("File does not exists!");
-                    return;
                 }
 
 
             } catch (IOException e) {
                 System.err.println("File have an issue with writing!");
-                return;
             }
         }
 
@@ -139,8 +148,11 @@ public class Project2 {
         }
     }
 
-    //      0
-    // java -jar airline.jar -print "Emerrate99" 42 src 3/15/2023 1:03 dst 3/15/2023 1:00
+    /**
+     * Function for -print option
+     * Creating a new flight and printing it to the command line
+     * @param  args  list of command line arguments.
+     */
     static void printUsingCMDLine(String[] args) {
         if (args.length != 9) {
             System.err.println("Missing command line arguments" + getHelpMessage());
@@ -171,8 +183,7 @@ public class Project2 {
 
     /**
      * Returns program help and explanation of inputs.
-     *
-     * @return String representation of input option.
+     * @return      String representation of input option.
      */
     @VisibleForTesting
     static String getHelpMessage() {
@@ -190,6 +201,15 @@ public class Project2 {
                 "Date and time should be in the format: mm/dd/yyyy hh:mm";
     }
 
+    /**
+     * validating and creating a new flight
+     *
+     * @param flightNumber   provided flight number.
+     * @param src    provided source.
+     * @param depart provided departure time and date.
+     * @param dst    provided destination
+     * @param arrive provided arriving time and date.
+     */
     static Flight createAndValidateFlight(String flightNumber, String src, String depart, String dst, String arrive) {
 
         // Validate flight number
@@ -229,12 +249,4 @@ public class Project2 {
         return flight;
     }
 
-    @VisibleForTesting
-    static boolean isValidOption(String option) {
-        if (option.equals("-print")) {
-            return true;
-        }
-
-        return false;
-    }
 }

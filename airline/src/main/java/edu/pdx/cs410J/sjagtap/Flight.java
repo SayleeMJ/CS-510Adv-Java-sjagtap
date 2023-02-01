@@ -30,7 +30,12 @@ public class Flight extends AbstractFlight {
     this.arrive = "00:00";
 
   }
-
+  /**
+   * Validate flight number for integer.
+   *
+   * @param  num  flight number.
+   * @return      true if valid value is provided. else false.
+   */
   @VisibleForTesting
   static boolean isValidFlightNumber(String num){
     try {
@@ -40,6 +45,13 @@ public class Flight extends AbstractFlight {
       return false;
     }
   }
+
+  /**
+   * Validate Data and Time given in string format (mm/dd/yyyy hh:mm)
+   *
+   * @param  dateAndTime  date time in string format.
+   * @return      true if valid value is provided. else false.
+   */
   @VisibleForTesting
   static boolean isValidDateAndTime(String dateAndTime) {
     String[] splitDateTimes = dateAndTime.split(" ");
@@ -105,16 +117,13 @@ public class Flight extends AbstractFlight {
 
     return true;
   }
-  @VisibleForTesting
-  static boolean isValidOption(String option) {
-    if (option.equals("-print")) {
-      return true;
-    }
 
-    return false;
-  }
-
-
+  /**
+   * Validate source and destination to be of length 3 and all letters.
+   *
+   * @param  str  src or destination argument.
+   * @return      true if valid value is provided. else false.
+   */
   @VisibleForTesting
   static boolean isValidSrcAndDest(String str) {
     // check size of 3
