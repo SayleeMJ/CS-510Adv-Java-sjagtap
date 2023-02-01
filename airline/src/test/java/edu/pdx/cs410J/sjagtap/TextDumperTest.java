@@ -10,6 +10,7 @@ import java.io.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.equalTo;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TextDumperTest {
 
@@ -62,6 +63,16 @@ public class TextDumperTest {
   void testingFileCreation() throws FileNotFoundException {
     String fileName = "D:\\testing.txt";
     Airline airline = new Airline("JFK");
+    Writer w = new PrintWriter(fileName);
+    TextDumper textDumper = new TextDumper(w);
+    textDumper.dump(airline);
+  }
+
+  @Test
+  void creatingFileInResources() throws FileNotFoundException {
+    String airlineName = "Test Airline";
+    String fileName = "src/test/resources/edu/pdx/cs410J/sjagtap/testing1.txt";
+    Airline airline = new Airline(airlineName);
     Writer w = new PrintWriter(fileName);
     TextDumper textDumper = new TextDumper(w);
     textDumper.dump(airline);
