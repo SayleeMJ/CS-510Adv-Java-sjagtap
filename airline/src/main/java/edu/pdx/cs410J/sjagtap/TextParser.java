@@ -35,9 +35,9 @@ public class TextParser implements AirlineParser<Airline> {
             }
             while (flightNumber != null) {
                 int flightNum;
-                try{
+                try {
                     flightNum = Integer.parseInt(flightNumber);
-                } catch (Exception e){
+                } catch (Exception e) {
                     throw new ParserException("Invalid Flight Number");
                 }
 

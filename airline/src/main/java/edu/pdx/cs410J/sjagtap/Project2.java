@@ -14,7 +14,7 @@ public class Project2 {
     /**
      * Main entry point of program.
      *
-     * @param  args  list of command line arguments.
+     * @param args list of command line arguments.
      */
     public static void main(String[] args) {
 
@@ -43,7 +43,8 @@ public class Project2 {
 
     /**
      * Reading, creating new flight and write to text file.
-     * @param args  list of command line arguments.
+     *
+     * @param args list of command line arguments.
      */
     static void readAndWrite(String[] args) {
         if (args.length != 10) {
@@ -145,7 +146,8 @@ public class Project2 {
     /**
      * Function for -print option
      * Creating a new flight and printing it to the command line
-     * @param  args  list of command line arguments.
+     *
+     * @param args list of command line arguments.
      */
     static void printUsingCMDLine(String[] args) {
         if (args.length != 9) {
@@ -177,7 +179,8 @@ public class Project2 {
 
     /**
      * Returns program help and explanation of inputs.
-     * @return      String representation of input option.
+     *
+     * @return String representation of input option.
      */
     @VisibleForTesting
     static String getHelpMessage() {
@@ -198,11 +201,11 @@ public class Project2 {
     /**
      * validating and creating a new flight
      *
-     * @param flightNumber   provided flight number.
-     * @param src    provided source.
-     * @param depart provided departure time and date.
-     * @param dst    provided destination
-     * @param arrive provided arriving time and date.
+     * @param flightNumber provided flight number.
+     * @param src          provided source.
+     * @param depart       provided departure time and date.
+     * @param dst          provided destination
+     * @param arrive       provided arriving time and date.
      */
     static Flight createAndValidateFlight(String flightNumber, String src, String depart, String dst, String arrive) {
 
