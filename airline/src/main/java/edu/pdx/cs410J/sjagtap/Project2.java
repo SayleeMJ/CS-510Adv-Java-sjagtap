@@ -39,9 +39,6 @@ public class Project2 {
                 System.err.println("Invalid option");
 
         }
-        //TODO update Command line argument
-        //TODO Create new jar file
-
     }
 
     /**
