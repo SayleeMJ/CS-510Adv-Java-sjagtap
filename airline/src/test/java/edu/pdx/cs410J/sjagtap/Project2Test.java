@@ -23,4 +23,16 @@ public class Project2Test {
 
         }
     }
+
+    @Test
+    void getValidAirlineName(){
+        assertThat(Airline.isValidAirlineName("Indigo"), is(true));
+        assertThat(Airline.isValidAirlineName("Indigo123"), is(true));
+    }
+
+    @Test
+    void getInvalidAirlineName(){
+        assertThat(Airline.isValidAirlineName("Indigo$"), is(false));
+        assertThat(Airline.isValidAirlineName("Indigo123$"), is(false));
+    }
 }

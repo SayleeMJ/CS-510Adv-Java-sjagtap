@@ -31,7 +31,7 @@ public class TextParser implements AirlineParser<Airline> {
             Airline airline = new Airline(airlineName);
             String flightNumber = br.readLine();
             if (flightNumber == null) {
-                throw new ParserException("Missing depart name");
+                throw new ParserException("Missing flight number");
             }
             while (flightNumber != null) {
                 int flightNum;

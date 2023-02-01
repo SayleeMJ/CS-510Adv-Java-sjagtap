@@ -1,6 +1,7 @@
 package edu.pdx.cs410J.sjagtap;
 
 import edu.pdx.cs410J.ParserException;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
@@ -37,5 +38,27 @@ public class TextDumperTest {
     TextParser parser = new TextParser(new FileReader(textFile));
     Airline read = parser.parse();
     assertThat(read.getName(), equalTo(airlineName));
+  }
+
+  @Test
+  void airlineNameIsDumpedInTextFormatToFile() {
+    String airlineName = "Emirates";
+    Airline airline = new Airline(airlineName);
+
+    StringWriter sw = new StringWriter();
+    TextDumper dumper = new TextDumper(sw);
+    dumper.dump(airline);
+
+    String text = sw.toString();
+    assertThat(text, containsString(airlineName));
+  }
+
+  @Test
+  void testingFileCreation() throws FileNotFoundException {
+    String fileName = "D:\\testing.txt";
+    Airline airline = new Airline("JFK");
+    Writer w = new PrintWriter(fileName);
+    TextDumper textDumper = new TextDumper(w);
+    textDumper.dump(airline);
   }
 }
