@@ -7,6 +7,7 @@ PSU ID: 972267084
 
 This application creates an Airline object with Airline name and all the flights for this airline.
 Each flight object has flight number, source , depart date time, destination, arrive date time.
+After creating Airline it reads/writes the object's data into the text file.
 
 The application takes three options print, README and textFile
 Print option prints the details of all flights
