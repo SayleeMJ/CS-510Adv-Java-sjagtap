@@ -59,7 +59,8 @@
         <configuration>
           <archive>
             <manifest>
-              <mainClass>edu.pdx.cs410J.sjagtap.Project1</mainClass>
+<!--              <mainClass>edu.pdx.cs410J.sjagtap.Project1</mainClass>-->
+              <mainClass>edu.pdx.cs410J.sjagtap.Project2</mainClass>
             </manifest>
           </archive>
         </configuration>
@@ -123,6 +124,7 @@
       <id>grader</id>
       <activation>
         <activeByDefault>${grader}</activeByDefault>
+        <!--suppress UnresolvedMavenProperty -->
       </activation>
       <build>
         <plugins>
