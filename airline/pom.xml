@@ -60,6 +60,7 @@
           <archive>
             <manifest>
               <mainClass>edu.pdx.cs410J.sjagtap.Project1</mainClass>
+
 <!--              <mainClass>edu.pdx.cs410J.sjagtap.Project2</mainClass>-->
             </manifest>
           </archive>
