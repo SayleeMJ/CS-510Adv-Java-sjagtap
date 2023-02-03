@@ -133,7 +133,7 @@ public class Project1 {
         }
 
         if (args.length != 9) {
-            System.err.println("An argument is malformed");
+            System.err.println("An argument is malformed.");
             return;
         }
 
