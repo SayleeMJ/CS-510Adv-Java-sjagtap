@@ -128,7 +128,7 @@ public class Project1 {
             return;
         }
         if (args.length != 9) {
-            System.err.println("Missing command line arguments" + getHelpMessage());
+            System.err.println("An argument is malformed");
             return;
         }
 
