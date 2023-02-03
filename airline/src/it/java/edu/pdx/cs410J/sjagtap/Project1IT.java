@@ -24,7 +24,6 @@ class Project1IT extends InvokeMainTestCase {
   @Test
   void testNoCommandLineArguments() {
     MainMethodResult result = invokeMain();
-    assertThat(result.getTextWrittenToStandardError(), containsString("An argument is malformed"));
+    assertThat(result.getTextWrittenToStandardError(), containsString("Missing command line arguments"));
   }
-
 }

@@ -131,6 +131,7 @@ public class Project1 {
             printReadMeFile();
             return;
         }
+
         if (args.length != 9) {
             System.err.println("An argument is malformed");
             return;
