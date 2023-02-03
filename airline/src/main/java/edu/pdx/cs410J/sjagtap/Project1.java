@@ -123,6 +123,10 @@ public class Project1 {
      * @param args list of command line arguments.
      */
     public static void main(String[] args) {
+        if (args.length == 0) {
+            System.err.println("Missing command line arguments" + getHelpMessage());
+            return;
+        }
         if (args.length == 1 && args[0].equals("-README")) {
             printReadMeFile();
             return;
