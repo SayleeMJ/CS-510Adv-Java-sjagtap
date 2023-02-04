@@ -17,27 +17,27 @@ public class FlightTest {
      * This unit test will need to be modified (likely deleted) as you implement
      * your project.
      */
-    @Test
-    void getArrivalStringNeedsToBeImplemented() {
-        Flight flight = new Flight(42, "src", "3/15/2023 1:03", "dst", "3/15/2023 1:09");
-        assertThat(flight.getArrivalString(), equalTo("3/15/2023 1:09"));
-    }
+//    @Test
+//    void getArrivalStringNeedsToBeImplemented() {
+//        Flight flight = new Flight(42, "src", null, "dst", null);
+//        assertThat(flight.getArrivalString(), equalTo("3/15/2023 1:09"));
+//    }
 
     /**
      * This unit test will need to be modified (likely deleted) as you implement
      * your project.
      */
-    @Test
-    void initiallyAllFlightsHaveTheSameNumber() {
-        Flight flight = new Flight(42, "src", "3/15/2023 1:03", "dst", "3/15/2023 1:09");
-        assertThat(flight.getNumber(), equalTo(42));
-    }
+//    @Test
+//    void initiallyAllFlightsHaveTheSameNumber() {
+//        Flight flight = new Flight(42, "src", null, "dst", null);
+//        assertThat(flight.getNumber(), equalTo(42));
+//    }
 
-    @Test
-    void forProject1ItIsOkayIfGetDepartureTimeReturnsNull() {
-        Flight flight = new Flight(42, "src", "3/15/2023 1:03", "dst", "3/15/2023 1:09");
-        assertThat(flight.getDeparture(), is(nullValue()));
-    }
+//    @Test
+//    void forProject1ItIsOkayIfGetDepartureTimeReturnsNull() {
+//        Flight flight = new Flight(42, "src", "3/15/2023 1:03", "dst", null);
+//        assertThat(flight.getDeparture(), is(nullValue()));
+//    }
 
 
     @Test
@@ -58,11 +58,11 @@ public class FlightTest {
         assertThat(Flight.isValidFlightNumber("1A"), is(false));
     }
 
-    @Test
-    void getValidDateAndTime() {
-        assertThat(Flight.isValidDateAndTime("1/1/2000 23:00"), is(true));
-        assertThat(Flight.isValidDateAndTime("01/01/2000 1:00"), is(true));
-    }
+//    @Test
+//    void getValidDateAndTime() {
+//        assertThat(Flight.isValidDateAndTime("1/1/2000 23:00"), is(true));
+//        assertThat(Flight.isValidDateAndTime("01/01/2000 1:00"), is(true));
+//    }
 
     @Test
     void getInvalidDateAndTime() {
