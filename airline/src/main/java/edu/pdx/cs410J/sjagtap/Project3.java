@@ -1,23 +1,23 @@
 package edu.pdx.cs410J.sjagtap;
 
 import com.google.common.annotations.VisibleForTesting;
+import edu.pdx.cs410J.ParserException;
 
+import java.io.*;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.util.Date;
 
+public class Project3 {
 
-/**
- * The main class for the CS410J airline Project
- */
-public class Project1 {
     /**
      * Main entry point of program.
      *
      * @param args list of command line arguments.
      */
     public static void main(String[] args) {
+
+        // Validate length of args
         if (args.length == 0) {
             System.err.println("Missing command line arguments" + Options.getHelpMessage());
             return;
@@ -29,10 +29,15 @@ public class Project1 {
                 Options.printReadMeFile(args);
                 break;
             case "-print":
-                Options.printUsingCMDLine(args);
+                Options.printUsingCommandLine(args);
+                break;
+            case "-textFile":
+                Options.readAndWrite(args);
                 break;
             default:
                 System.err.println("Invalid option");
         }
     }
+
+
 }

@@ -6,6 +6,9 @@ import edu.pdx.cs410J.ParserException;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.Reader;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * A skeletal implementation of the <code>TextParser</code> class for Project 2.
@@ -63,7 +66,16 @@ public class TextParser implements AirlineParser<Airline> {
                     throw new ParserException("Missing arrive name");
                 }
 
-                Flight flight = new Flight(flightNum, src, depart, dst, arrive);
+                Date arriveDate;
+                Date departDate;
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm a");
+                try {
+                    departDate = simpleDateFormat.parse(depart);
+                    arriveDate = simpleDateFormat.parse(arrive);
+                } catch (ParseException e) {
+                    throw new RuntimeException(e);
+                }
+                Flight flight = new Flight(flightNum, src, departDate, dst, arriveDate);
                 airline.addFlight(flight);
                 flightNumber = br.readLine();
             }
