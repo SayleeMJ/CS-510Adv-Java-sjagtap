@@ -2,11 +2,12 @@ package edu.pdx.cs410J.sjagtap;
 
 import com.google.common.annotations.VisibleForTesting;
 import edu.pdx.cs410J.AbstractFlight;
+import edu.pdx.cs410J.AirportNames;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Flight extends AbstractFlight {
+public class Flight extends AbstractFlight implements Comparable {
 
     private final int flightNumber;
     private final String src;
@@ -223,27 +224,56 @@ public class Flight extends AbstractFlight {
         return this.flightNumber;
     }
 
+
     @Override
     public String getSource() {
+//        String source = AirportNames.getName(this.src);
+//        return source;
         return this.src;
     }
 
     @Override
     public String getDepartureString() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("mm/dd/yyyy hh:mm a");
-        String departDateTime = dateFormat.format(depart);
+        String departDateTime = dateFormat.format(this.depart);
         return departDateTime;
     }
 
     @Override
     public String getDestination() {
-        return this.dst;
+//        String destination = AirportNames.getName(this.dst);
+//        return destination;
+        return  this.dst;
     }
 
     @Override
     public String getArrivalString() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("mm/dd/yyyy hh:mm a");
-        String arrivalDateTime = dateFormat.format(arrive);
+        String arrivalDateTime = dateFormat.format(this.arrive);
         return arrivalDateTime;
+    }
+
+    //An Airline’s Flights should be sorted alphabetically by their code of their source. Flights that
+    //depart from same airport should be sorted chronologically by their departure time. Flights that depart
+    //from the same airport at the same time are considered to be the same (“equal”). To facilitate sorting,
+    //your Flight class should implement the java.lang.Comparable interface.
+    // TODO -->
+    //f(todayDate.after(historyDate) && todayDate.before(futureDate))
+    @Override
+    public int compareTo(Object o) {
+        Flight flight = (Flight)o;
+        if(this.src.equals(flight.src)){
+            //TODO -> sort departure time
+            if(this.depart.equals(flight.depart)){
+                return 0;
+            } else if (this.depart.before(flight.depart)) {
+                return -1;
+            } else {
+                return 1;
+            }
+        } else {
+            //TODO -> sort on source
+            return this.src.compareTo(flight.src);
+        }
     }
 }

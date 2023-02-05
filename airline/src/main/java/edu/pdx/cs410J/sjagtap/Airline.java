@@ -5,6 +5,7 @@ import edu.pdx.cs410J.AbstractAirline;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 
 public class Airline extends AbstractAirline<Flight> {
     private final String name;
@@ -28,6 +29,7 @@ public class Airline extends AbstractAirline<Flight> {
 
     @Override
     public Collection<Flight> getFlights() {
+        Collections.sort(arrayList);
         return arrayList;
     }
 

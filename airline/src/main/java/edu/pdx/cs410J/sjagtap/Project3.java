@@ -34,10 +34,11 @@ public class Project3 {
             case "-textFile":
                 Options.readAndWrite(args);
                 break;
+            case "-pretty":
+                Options.prettyPrint(args);
+                break;
             default:
                 System.err.println("Invalid option");
         }
     }
-
-
 }

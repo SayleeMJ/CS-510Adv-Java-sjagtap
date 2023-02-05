@@ -130,7 +130,7 @@ public class Options {
         }
         String flightNumber = args[2];
         String src = args[3];
-        String depart = args[4] + " " + args[5] ;
+        String depart = args[4] + " " + args[5];
         String dst = args[6];
         String arrive = args[7] + " " + args[8];
         Flight flightDetail = createAndValidateFlight(flightNumber, src, depart, dst, arrive);
@@ -150,6 +150,7 @@ public class Options {
     /**
      * Function for -print option for new parameters
      * Creating a new flight and printing it to the command line
+     *
      * @param args list of command line arguments.
      */
     static void printUsingCommandLine(String[] args) {
@@ -162,9 +163,10 @@ public class Options {
             System.err.println("Invalid Airline Name");
             return;
         }
+
         String flightNumber = args[2];
         String src = args[3];
-        String depart = args[4] + " " + args[5] + " " + args[6] ;
+        String depart = args[4] + " " + args[5] + " " + args[6];
         String dst = args[7];
         String arrive = args[8] + " " + args[9] + " " + args[10];
         Flight flightDetail = createAndValidateFlightForPretty(flightNumber, src, depart, dst, arrive);
@@ -178,6 +180,54 @@ public class Options {
 
         for (Flight f : airline1.getFlights()) {
             System.out.println("\n" + f.toString());
+        }
+    }
+
+    static void prettyPrint(String[] args) {
+        //TODO --> Check filename argument
+        // if '-' then writer object will point to dump to print it on console
+        // if "filename" the writer will point to dump and write flight details to text file
+
+        if (args.length != 12) {
+            System.err.println("Missing command line arguments" + getHelpMessage());
+            return;
+        }
+
+        String airlineName = args[2];
+        if (!Airline.isValidAirlineName(airlineName)) {
+            System.err.println("Invalid Airline Name");
+            return;
+        }
+
+        String fileName = args[1];
+        File file = new File(fileName);
+
+        if (file.exists()) {
+            String flightNumber = args[3];
+            String src = args[4];
+            String depart = args[5] + " " + args[6] + " " + args[7];
+            String dst = args[8];
+            String arrive = args[9] + " " + args[10] + " " + args[11];
+
+            Airline airline = new Airline(airlineName);
+
+            Flight flightDetails = createAndValidateFlightForPretty(flightNumber, src, depart, dst, arrive);
+            if (flightDetails == null) {
+                return;
+            }
+
+            Flight flightDetails2 = createAndValidateFlightForPretty("1", src, depart, dst, arrive);
+            Flight flightDetails3 = createAndValidateFlightForPretty("2", src, depart, dst, arrive);
+            Flight flightDetails4 = createAndValidateFlightForPretty("3", src, depart, dst, arrive);
+            airline.addFlight(flightDetails);
+            airline.addFlight(flightDetails);
+            try {
+                Writer w = new PrintWriter(file);
+                PrettyPrinter prettyPrinter = new PrettyPrinter(w);
+                prettyPrinter.dump(airline);
+            } catch (FileNotFoundException e) {
+                System.err.println("File does not exists!");
+            }
         }
     }
 
@@ -313,4 +363,5 @@ public class Options {
         Flight flight = new Flight(flightNum, src, departDate, dst, arriveDate);
         return flight;
     }
+
 }
