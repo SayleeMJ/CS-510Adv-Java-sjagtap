@@ -3,9 +3,7 @@ package edu.pdx.cs410J.sjagtap;
 import com.google.common.annotations.VisibleForTesting;
 import edu.pdx.cs410J.AbstractAirline;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
+import java.util.*;
 
 public class Airline extends AbstractAirline<Flight> {
     private final String name;
@@ -29,8 +27,10 @@ public class Airline extends AbstractAirline<Flight> {
 
     @Override
     public Collection<Flight> getFlights() {
-        Collections.sort(arrayList);
-        return arrayList;
+        Flight[] flightArray = arrayList.toArray(new Flight[0]);
+        Arrays.sort(flightArray);
+        List covertedArrayList = Arrays.asList(flightArray);
+        return covertedArrayList;
     }
 
     /**

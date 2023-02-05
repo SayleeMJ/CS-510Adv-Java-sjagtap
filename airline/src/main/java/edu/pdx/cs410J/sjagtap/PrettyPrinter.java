@@ -1,6 +1,7 @@
 package edu.pdx.cs410J.sjagtap;
 
 import edu.pdx.cs410J.AirlineDumper;
+import edu.pdx.cs410J.AirportNames;
 
 import java.io.PrintWriter;
 import java.io.Writer;
@@ -28,12 +29,33 @@ public class PrettyPrinter implements AirlineDumper<Airline> {
     @Override
     public void dump(Airline airline) {
         PrintWriter pw = new PrintWriter(this.writer);
-        Collection<Flight> flightList = airline.getFlights();
-        Iterator<Flight> iterator = flightList.iterator();
+
+        Collection<Flight> flight1 = airline.getFlights();
+        Iterator<Flight> iterator = flight1.iterator();
+        pw.println(airline.getName());
+
         while (iterator.hasNext()) {
-            Flight flight = iterator.next();
-            String flightTOString = flight.toString();
-            pw.println(flightTOString);
+            Flight details = iterator.next();
+            int flightNumber = details.getNumber();
+            pw.println(flightNumber);
+
+            String src = details.getSource();
+            String source = AirportNames.getName(src);
+            pw.println(source);
+
+            String depart = details.getDepartureString();
+            pw.println(depart);
+
+            String dst = details.getDestination();
+            String destination = AirportNames.getName(dst);
+            pw.println(destination);
+
+            String arrive = details.getArrivalString();
+            pw.println(arrive);
+
+            long duration = details.durationOfFlight();
+            pw.println( "Duration of flight: " + duration);
+
         }
         pw.flush();
     }

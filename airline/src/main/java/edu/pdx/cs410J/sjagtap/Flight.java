@@ -2,7 +2,6 @@ package edu.pdx.cs410J.sjagtap;
 
 import com.google.common.annotations.VisibleForTesting;
 import edu.pdx.cs410J.AbstractFlight;
-import edu.pdx.cs410J.AirportNames;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -32,6 +31,8 @@ public class Flight extends AbstractFlight implements Comparable {
         this.arrive = null; //TODO for now initialize with null
 
     }
+
+
 
     /**
      * Validate flight number for integer.
@@ -109,7 +110,7 @@ public class Flight extends AbstractFlight implements Comparable {
             return false;
         }
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm");
         try {
             dateFormat.parse(dateAndTime);
         } catch (Exception e) {
@@ -185,7 +186,8 @@ public class Flight extends AbstractFlight implements Comparable {
             return  false;
         }
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm a");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm aa");
+        dateFormat.setLenient(false);
         try {
             dateFormat.parse(dateAndTime);
         } catch (Exception e) {
@@ -234,7 +236,7 @@ public class Flight extends AbstractFlight implements Comparable {
 
     @Override
     public String getDepartureString() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("mm/dd/yyyy hh:mm a");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("mm/dd/yyyy hh:mm aa");
         String departDateTime = dateFormat.format(this.depart);
         return departDateTime;
     }
@@ -248,17 +250,20 @@ public class Flight extends AbstractFlight implements Comparable {
 
     @Override
     public String getArrivalString() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("mm/dd/yyyy hh:mm a");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("mm/dd/yyyy hh:mm aa");
         String arrivalDateTime = dateFormat.format(this.arrive);
         return arrivalDateTime;
     }
 
-    //An Airline’s Flights should be sorted alphabetically by their code of their source. Flights that
-    //depart from same airport should be sorted chronologically by their departure time. Flights that depart
-    //from the same airport at the same time are considered to be the same (“equal”). To facilitate sorting,
-    //your Flight class should implement the java.lang.Comparable interface.
-    // TODO -->
-    //f(todayDate.after(historyDate) && todayDate.before(futureDate))
+    //TODO --> Fix this time difference
+    long durationOfFlight(){
+        Date departTime = this.depart;
+        Date arriveTime = this.arrive;
+        double differenceInTime = arriveTime.getTime() - departTime.getTime();
+        double differenceInMinutes = (differenceInTime / (60 * 1000.0)) % 60;
+        return (long)differenceInMinutes;
+    }
+
     @Override
     public int compareTo(Object o) {
         Flight flight = (Flight)o;
@@ -276,4 +281,6 @@ public class Flight extends AbstractFlight implements Comparable {
             return this.src.compareTo(flight.src);
         }
     }
+
+
 }

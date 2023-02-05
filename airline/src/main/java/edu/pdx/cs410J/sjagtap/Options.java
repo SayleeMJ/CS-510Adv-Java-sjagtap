@@ -1,6 +1,7 @@
 package edu.pdx.cs410J.sjagtap;
 
 import com.google.common.annotations.VisibleForTesting;
+import edu.pdx.cs410J.AirportNames;
 import edu.pdx.cs410J.ParserException;
 
 import java.io.*;
@@ -209,26 +210,65 @@ public class Options {
             String dst = args[8];
             String arrive = args[9] + " " + args[10] + " " + args[11];
 
-            Airline airline = new Airline(airlineName);
+            Airline airline;
+
+            //reading details of Airline and Flights from filename and creating new flight
+            try {
+                Reader r = new FileReader(fileName);
+                TextParser textParser = new TextParser(r);
+                airline = textParser.prettyParse();
+                String existingAirlineName = airline.getName();
+
+                // Add logic to concert src airport name to code
+                if (!existingAirlineName.equals(airlineName)) {
+                    System.err.println("Airline name is different!");
+                    return;
+                }
+            } catch (FileNotFoundException e) {
+                System.err.println("File does not exists!");
+                return;
+            } catch (ParserException e) {
+                System.err.println(e.getMessage());
+                return;
+            }
 
             Flight flightDetails = createAndValidateFlightForPretty(flightNumber, src, depart, dst, arrive);
             if (flightDetails == null) {
                 return;
             }
 
-            Flight flightDetails2 = createAndValidateFlightForPretty("1", "CDE", "10/08/2023 1:30 am", dst, arrive);
-            Flight flightDetails3 = createAndValidateFlightForPretty("2", "CDE", "10/12/2023 1:30 am", dst, arrive);
-            Flight flightDetails4 = createAndValidateFlightForPretty("3", "CDE", "10/07/2023 1:30 am", dst, arrive);
+//            Flight flightDetails2 = createAndValidateFlightForPretty("1", "SXM", "10/08/2023 1:30 am", dst, arrive);
+//            Flight flightDetails3 = createAndValidateFlightForPretty("2", "SXM", "10/12/2023 1:30 am", dst, arrive);
+//            Flight flightDetails4 = createAndValidateFlightForPretty("3", "SXM", "10/07/2023 1:30 am", dst, arrive);
             airline.addFlight(flightDetails);
-            airline.addFlight(flightDetails2);
-            airline.addFlight(flightDetails3);
-            airline.addFlight(flightDetails4);
+//            airline.addFlight(flightDetails2);
+//            airline.addFlight(flightDetails3);
+//            airline.addFlight(flightDetails4);
             try {
                 Writer w = new PrintWriter(file);
                 PrettyPrinter prettyPrinter = new PrettyPrinter(w);
                 prettyPrinter.dump(airline);
             } catch (FileNotFoundException e) {
                 System.err.println("File does not exists!");
+            }
+        } else {
+            try {
+                // create empty airline object
+                Airline emptyAirline = new Airline(airlineName);
+                // create file
+                file.createNewFile();
+                // write airline object contents
+                try {
+                    Writer w = new PrintWriter(file);
+                    PrettyPrinter prettyPrinter = new PrettyPrinter(w);
+                    prettyPrinter.dump(emptyAirline);
+                } catch (FileNotFoundException e) {
+                    System.err.println("File does not exists!");
+                }
+
+
+            } catch (IOException e) {
+                System.err.println("File have an issue with writing!");
             }
         }
     }
@@ -332,6 +372,15 @@ public class Options {
             return null;
         }
 
+         src = src.toUpperCase();
+
+        String source = AirportNames.getName(src);
+        if(source == null){
+            System.err.println("Source airport does not exist");
+            return null;
+        }
+
+
         // validate depart
         if (!Flight.isValidDateAndTimeAndZone(depart)) {
             System.err.println("Invalid depart date");
@@ -341,6 +390,14 @@ public class Options {
         // validate dest
         if (!Flight.isValidSrcAndDest(dst)) {
             System.err.println("Invalid destination code");
+            return null;
+        }
+
+        dst = dst.toUpperCase();
+
+        String destination = AirportNames.getName(dst);
+        if(destination == null){
+            System.err.println("Destination airport does not exist");
             return null;
         }
 
@@ -361,6 +418,11 @@ public class Options {
             arriveDate = simpleDateFormat.parse(arrive);
         } catch (ParseException e) {
             throw new RuntimeException(e);
+        }
+
+        if (arriveDate.before(departDate)) {
+            System.err.println("Arrival time is before Departure time");
+            return null;
         }
         Flight flight = new Flight(flightNum, src, departDate, dst, arriveDate);
         return flight;
