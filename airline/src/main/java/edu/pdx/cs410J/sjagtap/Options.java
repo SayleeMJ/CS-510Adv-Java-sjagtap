@@ -216,11 +216,13 @@ public class Options {
                 return;
             }
 
-            Flight flightDetails2 = createAndValidateFlightForPretty("1", src, depart, dst, arrive);
-            Flight flightDetails3 = createAndValidateFlightForPretty("2", src, depart, dst, arrive);
-            Flight flightDetails4 = createAndValidateFlightForPretty("3", src, depart, dst, arrive);
+            Flight flightDetails2 = createAndValidateFlightForPretty("1", "CDE", "10/08/2023 1:30 am", dst, arrive);
+            Flight flightDetails3 = createAndValidateFlightForPretty("2", "CDE", "10/12/2023 1:30 am", dst, arrive);
+            Flight flightDetails4 = createAndValidateFlightForPretty("3", "CDE", "10/07/2023 1:30 am", dst, arrive);
             airline.addFlight(flightDetails);
-            airline.addFlight(flightDetails);
+            airline.addFlight(flightDetails2);
+            airline.addFlight(flightDetails3);
+            airline.addFlight(flightDetails4);
             try {
                 Writer w = new PrintWriter(file);
                 PrettyPrinter prettyPrinter = new PrettyPrinter(w);

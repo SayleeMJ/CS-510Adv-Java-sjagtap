@@ -27,17 +27,14 @@ public class PrettyPrinter implements AirlineDumper<Airline> {
 
     @Override
     public void dump(Airline airline) {
-        try (
-                PrintWriter pw = new PrintWriter(this.writer)
-        ) {
-            Collection<Flight> flight1 = airline.getFlights();
-            Iterator<Flight> iterator = flight1.iterator();
-            while (iterator.hasNext()) {
-                Flight flight = iterator.next();
-                String flightTOString = flight.toString();
-                pw.println(flightTOString);
-            }
-            pw.flush();
+        PrintWriter pw = new PrintWriter(this.writer);
+        Collection<Flight> flightList = airline.getFlights();
+        Iterator<Flight> iterator = flightList.iterator();
+        while (iterator.hasNext()) {
+            Flight flight = iterator.next();
+            String flightTOString = flight.toString();
+            pw.println(flightTOString);
         }
+        pw.flush();
     }
 }
