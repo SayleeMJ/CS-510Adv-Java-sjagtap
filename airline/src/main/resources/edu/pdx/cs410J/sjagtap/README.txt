@@ -9,10 +9,11 @@ This application creates an Airline object with Airline name and all the flights
 Each flight object has flight number, source , depart date time, destination, arrive date time.
 After creating Airline it reads/writes the object's data into the text file.
 
-The application takes three options print, README and textFile
+The application takes four options print, README, textFile and pretty
 Print option prints the details of all flights
 README option will print the readme file.
-TextFile option read and write into text file.
+TextFile option will read and write into text file.
+Pretty option will Pretty print the airline's flights to a text file or standard out by providing filename as '-'.
 
 usage: java -jar target/airline-2023.0.0.jar [options] <args>
              args are (in this order):
