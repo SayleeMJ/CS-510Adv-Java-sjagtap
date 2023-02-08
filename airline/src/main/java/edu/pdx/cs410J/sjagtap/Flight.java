@@ -43,7 +43,7 @@ public class Flight extends AbstractFlight implements Comparable {
         this.src = "src";
         this.dst = "dst";
         this.depart = null;
-        this.arrive = null; //TODO for now initialize with null
+        this.arrive = null;
 
     }
 
