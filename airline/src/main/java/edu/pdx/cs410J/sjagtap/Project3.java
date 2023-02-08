@@ -84,6 +84,8 @@ public class Project3 {
             String departDate = args[i + 3] + " " + args[i + 4] + " " + args[i + 5];
             String dstAirport = args[i + 6];
             String arriveDate = args[i + 7] + " " + args[i + 8] + " " + args[i + 9];
+
+            flightObject = Options.createAndValidateFlightForPretty(flightNumber, srcAirport, departDate, dstAirport, arriveDate);
         } else if (remainingNumberOfArgument == 8) { // Check argument in old date format
             airlineName = args[i];
             String flightNumber = args[i + 1];
@@ -91,6 +93,7 @@ public class Project3 {
             String departDate = args[i + 3] + " " + args[i + 4];
             String dstAirport = args[i + 5];
             String arriveDate = args[i + 6] + " " + args[i + 7];
+            flightObject = Options.createAndValidateFlight(flightNumber, srcAirport, departDate, dstAirport, arriveDate);
         } else {
             System.err.println("Invalid number of argument present. Please check readme.");
             return;
@@ -106,7 +109,9 @@ public class Project3 {
         }
 
         if (optionPrint) {
-            // ToDo: Call option function
+            if (flightObject != null) {
+                Options.printUsingCommandLine(flightObject);
+            }
         }
 
         if (optionPretty) {

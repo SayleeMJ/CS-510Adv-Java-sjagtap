@@ -7,6 +7,8 @@ import edu.pdx.cs410J.ParserException;
 import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 
 public class Options {
@@ -154,34 +156,8 @@ public class Options {
      *
      * @param args list of command line arguments.
      */
-    static void printUsingCommandLine(String[] args) {
-        if (args.length != 11) {
-            System.err.println("An argument is malformed.");
-            return;
-        }
-        String airlineName = args[1];
-        if (!Airline.isValidAirlineName(airlineName)) {
-            System.err.println("Invalid Airline Name");
-            return;
-        }
-
-        String flightNumber = args[2];
-        String src = args[3];
-        String depart = args[4] + " " + args[5] + " " + args[6];
-        String dst = args[7];
-        String arrive = args[8] + " " + args[9] + " " + args[10];
-        Flight flightDetail = createAndValidateFlightForPretty(flightNumber, src, depart, dst, arrive);
-        if (flightDetail == null) {
-            return;
-        }
-        Airline airline1 = new Airline(airlineName);
-        airline1.addFlight(flightDetail);
-
-        //Can I add these flights to array or list?
-
-        for (Flight f : airline1.getFlights()) {
-            System.out.println("\n" + f.toString());
-        }
+    static void printUsingCommandLine(Flight flight) {
+        System.out.println(flight.toString());
     }
 
     static void prettyPrint(String[] args) {
