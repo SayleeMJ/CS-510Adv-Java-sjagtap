@@ -241,10 +241,6 @@ public class Options {
      * @param airline airline object to print in file.
      */
     static void prettyPrint(String fileName, Airline airline) {
-        // Check filename argument
-        // if '-' then writer object will point to dump to print it on console
-        // if "filename" the writer will point to dump and write flight details to text file
-
         try {
             Writer writer;
             if (fileName.equals("-")) {
