@@ -254,8 +254,6 @@ public class Flight extends AbstractFlight implements Comparable {
 
     @Override
     public String getSource() {
-//        String source = AirportNames.getName(this.src);
-//        return source;
         return this.src;
     }
 
@@ -268,8 +266,6 @@ public class Flight extends AbstractFlight implements Comparable {
 
     @Override
     public String getDestination() {
-//        String destination = AirportNames.getName(this.dst);
-//        return destination;
         return  this.dst;
     }
 
