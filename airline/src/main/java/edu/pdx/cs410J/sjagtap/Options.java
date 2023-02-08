@@ -342,7 +342,7 @@ public class Options {
 
         String source = AirportNames.getName(src);
         if(source == null){
-            System.err.println("Source airport does not exist");
+            System.err.println("Source code airport does not exist");
             return null;
         }
 
@@ -363,7 +363,7 @@ public class Options {
 
         String destination = AirportNames.getName(dst);
         if(destination == null){
-            System.err.println("Destination airport does not exist");
+            System.err.println("Destination airport code does not exist");
             return null;
         }
 
