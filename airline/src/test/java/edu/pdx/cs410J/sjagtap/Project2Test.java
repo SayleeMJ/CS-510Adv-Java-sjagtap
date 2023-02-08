@@ -10,7 +10,14 @@ import java.io.InputStreamReader;
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class Project2Test {
+/**
+ * A unit test for code in the <code>Project2</code> class.
+ */
+public class Project2Test
+{
+    /**
+     * Validate readme resource.
+     */
     @Test
     void readmeCanBeReadAsResource() throws IOException {
         try (
@@ -24,15 +31,30 @@ public class Project2Test {
         }
     }
 
+    /**
+     * Validate airline name.
+     */
     @Test
     void getValidAirlineName() {
         assertThat(Airline.isValidAirlineName("Indigo"), is(true));
         assertThat(Airline.isValidAirlineName("Indigo123"), is(true));
     }
 
+    /**
+     * Validate airline name.
+     */
     @Test
     void getInvalidAirlineName() {
         assertThat(Airline.isValidAirlineName("Indigo$"), is(false));
         assertThat(Airline.isValidAirlineName("Indigo123$"), is(false));
+    }
+
+    /**
+     * Validate airline name.
+     */
+    @Test
+    void validateMain() {
+        String[] args = new String[0];
+        Project2.main(args);
     }
 }

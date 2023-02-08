@@ -17,6 +17,9 @@ import static org.hamcrest.MatcherAssert.assertThat;
  */
 class Project1Test {
 
+  /**
+   * Validate resource fetch.
+   */
   @Test
   void readmeCanBeReadAsResource() throws IOException {
     try (
@@ -28,5 +31,14 @@ class Project1Test {
       assertThat(line, containsString("This is a README file!"));
 
     }
+  }
+
+  /**
+   * Validate airline name.
+   */
+  @Test
+  void validateMain() {
+    String[] args = new String[0];
+    Project1.main(args);
   }
 }
