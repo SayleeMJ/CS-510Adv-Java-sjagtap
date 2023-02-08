@@ -20,10 +20,13 @@ usage: java -jar target/airline-2023.0.0.jar [options] <args>
                  airline The name of the airline
                  flightNumber The flight number
                  src Three-letter code of departure airport
-                 depart Departure date and time (24-hour time)
+                 depart Departure date and time (am/pm)
                  dest Three-letter code of arrival airport
-                 arrive Arrival date and time (24-hour time)
+                 arrive Arrival date and time (am/pm)
              options are (options may appear in any order):
+                -pretty file Pretty print the airline’s flights to a text file or standard out (file -)
+                -textFile file Where to read/write the airline info
                 -print Prints a description of the new flight
                 -README Prints a README for this project and exits
-             Date and time should be in the format: mm/dd/yyyy hh:mm
+
+             Date and time should be in the format: mm/dd/yyyy hh:mm am/pm
