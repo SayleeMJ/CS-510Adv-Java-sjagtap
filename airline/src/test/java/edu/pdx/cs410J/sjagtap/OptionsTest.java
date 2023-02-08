@@ -30,6 +30,7 @@ public class OptionsTest {
         assertThat(flight1 != null, is(true));
     }
 
+
     /**
      * Test ValidateGetFlightPretty returns null when arrival time < departure time.
      */

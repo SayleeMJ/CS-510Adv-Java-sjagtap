@@ -164,7 +164,7 @@ public class Options {
                 System.err.println("File does not exists!");
                 return null;
             } catch (ParserException e) {
-                System.err.println(e.getMessage());
+                System.err.println("File malformed exception");
                 return null;
             }
 
@@ -413,7 +413,8 @@ public class Options {
             departDate = simpleDateFormat.parse(depart);
             arriveDate = simpleDateFormat.parse(arrive);
         } catch (ParseException e) {
-            throw new RuntimeException(e);
+            System.err.println("Invalid date-time format.");
+            return null;
         }
 
         if (arriveDate.before(departDate)) {

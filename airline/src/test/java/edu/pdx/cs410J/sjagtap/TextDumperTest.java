@@ -32,7 +32,9 @@ public class TextDumperTest {
         try {
             String airlineName = "Test Airline";
             Airline airline = new Airline(airlineName);
-
+            Flight flight1 = Options.createAndValidateFlight(
+                    "3", "SNN", "01/01/2022 10:10", "ABC", "01/01/2022 11:10");
+            airline.addFlight(flight1);
             File textFile = new File(tempDir, "airline.txt");
             TextDumper dumper = new TextDumper(new FileWriter(textFile));
             dumper.dump(airline);
