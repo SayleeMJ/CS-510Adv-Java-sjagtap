@@ -26,7 +26,7 @@ public class Options {
         boolean optionPretty = false;
 
         String textFileName = null;
-        String prettyFile;
+        String prettyFile = null;
 
         int i = 0;
         while (i < args.length) {
@@ -101,7 +101,7 @@ public class Options {
             return;
         }
 
-        Airline airlineFromFile;
+        Airline airlineFromFile = null;
         if (optionTextFile) {
             airlineFromFile = readAndWrite(textFileName, airlineName, flightObject);
         }
@@ -113,7 +113,18 @@ public class Options {
         }
 
         if (optionPretty) {
-            // ToDo: Call print pretty function
+            if (airlineFromFile == null) {
+                Airline airline = new Airline(airlineName);
+                airline.addFlight(flightObject);
+                Options.prettyPrint(prettyFile, airline);
+            } else {
+                Options.prettyPrint(prettyFile, airlineFromFile);
+            }
+
+            if (flightObject != null) {
+                System.out.println("Pretty printing new object:");
+                System.out.println(flightObject.ToStringPretty());
+            }
         }
     }
     /**
@@ -212,37 +223,10 @@ public class Options {
         System.out.println(flight.toString());
     }
 
-    static void prettyPrint(String[] args) {
+    static void prettyPrint(String fileName, Airline airline) {
         // Check filename argument
         // if '-' then writer object will point to dump to print it on console
         // if "filename" the writer will point to dump and write flight details to text file
-
-        if (args.length != 12) {
-            System.err.println("Missing command line arguments" + getHelpMessage());
-            return;
-        }
-
-        String airlineName = args[2];
-        if (!Airline.isValidAirlineName(airlineName)) {
-            System.err.println("Invalid Airline Name");
-            return;
-        }
-
-        String flightNumber = args[3];
-        String src = args[4];
-        String depart = args[5] + " " + args[6] + " " + args[7];
-        String dst = args[8];
-        String arrive = args[9] + " " + args[10] + " " + args[11];
-        String fileName = args[1];
-
-        // Create airline and add flight.
-        Airline airline = new Airline(airlineName);
-        Flight flightDetails = createAndValidateFlightForPretty(flightNumber, src, depart, dst, arrive);
-        if (flightDetails == null) {
-            return;
-        }
-
-        airline.addFlight(flightDetails);
 
         try {
             Writer writer;

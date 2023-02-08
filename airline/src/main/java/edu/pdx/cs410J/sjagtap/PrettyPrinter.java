@@ -30,11 +30,11 @@ public class PrettyPrinter implements AirlineDumper<Airline> {
     public void dump(Airline airline) {
         PrintWriter pw = new PrintWriter(this.writer);
 
-        Collection<Flight> flight1 = airline.getFlights();
-        Iterator<Flight> iterator = flight1.iterator();
         String airlineName = airline.getName();
         pw.println("AirlineName " + airlineName);
 
+        Collection<Flight> flight1 = airline.getFlights();
+        Iterator<Flight> iterator = flight1.iterator();
         while (iterator.hasNext()) {
             Flight flightObject = iterator.next();
             String flightDetails = flightObject.ToStringPretty();
