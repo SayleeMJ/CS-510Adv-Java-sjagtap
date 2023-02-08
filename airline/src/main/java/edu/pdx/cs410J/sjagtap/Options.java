@@ -367,7 +367,7 @@ public class Options {
 
         // validate src
         if (!Flight.isValidSrcAndDest(src)) {
-            System.err.println("Invalid src");
+            System.err.println("Invalid source airport code.");
             return null;
         }
 
@@ -382,13 +382,13 @@ public class Options {
 
         // validate depart
         if (!Flight.isValidDateAndTimeAndZone12Hour(depart)) {
-            System.err.println("Invalid depart date");
+            System.err.println("Invalid departure date-time format.");
             return null;
         }
 
         // validate dest
         if (!Flight.isValidSrcAndDest(dst)) {
-            System.err.println("Invalid destination code");
+            System.err.println("Invalid destination airport code.");
             return null;
         }
 
@@ -402,7 +402,7 @@ public class Options {
 
         // validate arrive
         if (!Flight.isValidDateAndTimeAndZone12Hour(arrive)) {
-            System.err.println("Invalid destination code");
+            System.err.println("Invalid arrival date-time format.");
             return null;
         }
 
