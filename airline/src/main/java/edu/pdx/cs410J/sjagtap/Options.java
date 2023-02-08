@@ -185,7 +185,7 @@ public class Options {
     }
 
     static void prettyPrint(String[] args) {
-        //TODO --> Check filename argument
+        // Check filename argument
         // if '-' then writer object will point to dump to print it on console
         // if "filename" the writer will point to dump and write flight details to text file
 
@@ -200,76 +200,42 @@ public class Options {
             return;
         }
 
+        String flightNumber = args[3];
+        String src = args[4];
+        String depart = args[5] + " " + args[6] + " " + args[7];
+        String dst = args[8];
+        String arrive = args[9] + " " + args[10] + " " + args[11];
         String fileName = args[1];
-        File file = new File(fileName);
 
-        if (file.exists()) {
-            String flightNumber = args[3];
-            String src = args[4];
-            String depart = args[5] + " " + args[6] + " " + args[7];
-            String dst = args[8];
-            String arrive = args[9] + " " + args[10] + " " + args[11];
+        // Create airline and add flight.
+        Airline airline = new Airline(airlineName);
+        Flight flightDetails = createAndValidateFlightForPretty(flightNumber, src, depart, dst, arrive);
+        if (flightDetails == null) {
+            return;
+        }
 
-            Airline airline;
+        airline.addFlight(flightDetails);
 
-            //reading details of Airline and Flights from filename and creating new flight
-            try {
-                Reader r = new FileReader(fileName);
-                TextParser textParser = new TextParser(r);
-                airline = textParser.prettyParse();
-                String existingAirlineName = airline.getName();
-
-                // Add logic to concert src airport name to code
-                if (!existingAirlineName.equals(airlineName)) {
-                    System.err.println("Airline name is different!");
-                    return;
-                }
-            } catch (FileNotFoundException e) {
-                System.err.println("File does not exists!");
-                return;
-            } catch (ParserException e) {
-                System.err.println(e.getMessage());
-                return;
-            }
-
-            Flight flightDetails = createAndValidateFlightForPretty(flightNumber, src, depart, dst, arrive);
-            if (flightDetails == null) {
-                return;
-            }
-
-//            Flight flightDetails2 = createAndValidateFlightForPretty("1", "SXM", "10/08/2023 1:30 am", dst, arrive);
-//            Flight flightDetails3 = createAndValidateFlightForPretty("2", "SXM", "10/12/2023 1:30 am", dst, arrive);
-//            Flight flightDetails4 = createAndValidateFlightForPretty("3", "SXM", "10/07/2023 1:30 am", dst, arrive);
-            airline.addFlight(flightDetails);
-//            airline.addFlight(flightDetails2);
-//            airline.addFlight(flightDetails3);
-//            airline.addFlight(flightDetails4);
-            try {
-                Writer w = new PrintWriter(file);
-                PrettyPrinter prettyPrinter = new PrettyPrinter(w);
-                prettyPrinter.dump(airline);
-            } catch (FileNotFoundException e) {
-                System.err.println("File does not exists!");
-            }
-        } else {
-            try {
-                // create empty airline object
-                Airline emptyAirline = new Airline(airlineName);
-                // create file
-                file.createNewFile();
-                // write airline object contents
-                try {
-                    Writer w = new PrintWriter(file);
-                    PrettyPrinter prettyPrinter = new PrettyPrinter(w);
-                    prettyPrinter.dump(emptyAirline);
-                } catch (FileNotFoundException e) {
-                    System.err.println("File does not exists!");
+        try {
+            Writer writer;
+            if (fileName.equals("-")) {
+                // Print on console. Point to console stream.
+                writer = new PrintWriter(System.out);
+            } else {
+                // Create file if not present.
+                File file = new File(fileName);
+                if (!file.exists()) {
+                    file.createNewFile();
                 }
 
-
-            } catch (IOException e) {
-                System.err.println("File have an issue with writing!");
+                writer = new PrintWriter(file);
             }
+
+            // Create dumper and write content.
+            PrettyPrinter prettyPrinter = new PrettyPrinter(writer);
+            prettyPrinter.dump(airline);
+        } catch (Exception e) {
+            System.err.println("IO error while writing the content.");
         }
     }
 
@@ -424,6 +390,7 @@ public class Options {
             System.err.println("Arrival time is before Departure time");
             return null;
         }
+
         Flight flight = new Flight(flightNum, src, departDate, dst, arriveDate);
         return flight;
     }

@@ -259,8 +259,9 @@ public class Flight extends AbstractFlight implements Comparable {
     long durationOfFlight(){
         Date departTime = this.depart;
         Date arriveTime = this.arrive;
-        double differenceInTime = arriveTime.getTime() - departTime.getTime();
-        double differenceInMinutes = (differenceInTime / (60 * 1000.0)) % 60;
+        double differenceInMiliSec = arriveTime.getTime() - departTime.getTime();
+        // Covert value from millisecond to minutes.
+        double differenceInMinutes = (differenceInMiliSec / 1000) / 60;
         return (long)differenceInMinutes;
     }
 
@@ -268,7 +269,7 @@ public class Flight extends AbstractFlight implements Comparable {
     public int compareTo(Object o) {
         Flight flight = (Flight)o;
         if(this.src.equals(flight.src)){
-            //TODO -> sort departure time
+            // sort departure time
             if(this.depart.equals(flight.depart)){
                 return 0;
             } else if (this.depart.before(flight.depart)) {
@@ -277,7 +278,7 @@ public class Flight extends AbstractFlight implements Comparable {
                 return 1;
             }
         } else {
-            //TODO -> sort on source
+            // sort on source
             return this.src.compareTo(flight.src);
         }
     }
