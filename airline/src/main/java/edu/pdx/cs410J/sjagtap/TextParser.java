@@ -29,41 +29,41 @@ public class TextParser implements AirlineParser<Airline> {
             String airlineName = br.readLine();
 
             if (airlineName == null) {
-                throw new ParserException("Missing airline name");
+                throw new ParserException("Malformed  input file.");
             }
             Airline airline = new Airline(airlineName);
             String flightNumber = br.readLine();
 
             while (flightNumber != null) {
                 if (flightNumber == null) {
-                    throw new ParserException("Missing flight number");
+                    throw new ParserException("Malformed  input file.");
                 }
                 int flightNum;
                 try {
                     flightNum = Integer.parseInt(flightNumber);
                 } catch (Exception e) {
-                    throw new ParserException("Invalid Flight Number");
+                    throw new ParserException("Malformed  input file.");
                 }
 
 
                 String src = br.readLine();
                 if (src == null) {
-                    throw new ParserException("Missing src name");
+                    throw new ParserException("Malformed  input file.");
                 }
                 //add validation code from project 1
                 String depart = br.readLine();
                 if (depart == null) {
-                    throw new ParserException("Missing depart name");
+                    throw new ParserException("Malformed  input file.");
                 }
 
                 String dst = br.readLine();
                 if (dst == null) {
-                    throw new ParserException("Missing dst name");
+                    throw new ParserException("Malformed  input file.");
                 }
 
                 String arrive = br.readLine();
                 if (arrive == null) {
-                    throw new ParserException("Missing arrive name");
+                    throw new ParserException("Malformed  input file.");
                 }
 
                 Date arriveDate;
@@ -81,7 +81,7 @@ public class TextParser implements AirlineParser<Airline> {
             }
             return airline;
         } catch (IOException e) {
-            throw new ParserException("While parsing airline text", e);
+            throw new ParserException("Malformed  input file.");
         }
     }
 }
