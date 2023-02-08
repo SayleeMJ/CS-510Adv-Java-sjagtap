@@ -18,9 +18,9 @@ public class Flight extends AbstractFlight implements Comparable {
 
     public Flight(int flightNumber, String src, Date depart, String dst, Date arrive) {
         this.flightNumber = flightNumber;
-        this.src = src;
+        this.src = src.toUpperCase();
         this.depart = depart;
-        this.dst = dst;
+        this.dst = dst.toUpperCase();
         this.arrive = arrive;
     }
 
@@ -183,7 +183,7 @@ public class Flight extends AbstractFlight implements Comparable {
 
         String zone = splitDateTimes[2];
 
-        if(!zone.equals("am") && !zone.equals("pm")){
+        if(!zone.equalsIgnoreCase("am") && !zone.equalsIgnoreCase("pm")){
             return  false;
         }
 

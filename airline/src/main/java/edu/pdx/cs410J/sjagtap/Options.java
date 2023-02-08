@@ -293,25 +293,25 @@ public class Options {
 
         // validate src
         if (!Flight.isValidSrcAndDest(src)) {
-            System.err.println("Invalid src");
+            System.err.println("Invalid source airport code.");
             return null;
         }
 
         // validate depart
         if (!Flight.isValidDateAndTime(depart)) {
-            System.err.println("Invalid depart date");
+            System.err.println("Invalid departure date-time format.");
             return null;
         }
 
         // validate dest
         if (!Flight.isValidSrcAndDest(dst)) {
-            System.err.println("Invalid destination code");
+            System.err.println("Invalid destination airport code.");
             return null;
         }
 
         // validate arrive
         if (!Flight.isValidDateAndTime(arrive)) {
-            System.err.println("Invalid destination code");
+            System.err.println("Invalid arrival date-time format.");
             return null;
         }
 
@@ -350,7 +350,7 @@ public class Options {
 
         String source = AirportNames.getName(src);
         if(source == null){
-            System.err.println("Source code airport does not exist");
+            System.err.println("The three-letter source airport code does not correspond to a known airport");
             return null;
         }
 
@@ -371,7 +371,7 @@ public class Options {
 
         String destination = AirportNames.getName(dst);
         if(destination == null){
-            System.err.println("Destination airport code does not exist");
+            System.err.println("The three-letter destination airport code does not correspond to a known airport");
             return null;
         }
 
@@ -393,7 +393,7 @@ public class Options {
         }
 
         if (arriveDate.before(departDate)) {
-            System.err.println("Arrival time is before Departure time");
+            System.err.println("Arrival datetime is before departure datetime.");
             return null;
         }
 
