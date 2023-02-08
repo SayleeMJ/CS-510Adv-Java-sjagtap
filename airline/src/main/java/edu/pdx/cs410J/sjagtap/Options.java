@@ -284,6 +284,9 @@ public class Options {
                 "\tdest Three-letter code of arrival airport\n" +
                 "\tarrive Arrival date and time (24-hour time)\n" +
                 "options are (options may appear in any order):\n" +
+                "\t-pretty file Pretty print the airline’s flights to\n" +
+                "\ta text file or standard out (file -)\n" +
+                "\t-textFile file Where to read/write the airline info\n" +
                 "\t-print Prints a description of the new flight\n" +
                 "\t-README Prints a README for this project and exits\n" +
                 "Date and time should be in the format: mm/dd/yyyy hh:mm";
