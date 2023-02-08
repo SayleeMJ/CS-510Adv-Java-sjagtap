@@ -24,7 +24,7 @@ public class FlightTest {
     void getDepartureStringNeedsToBeImplemented() {
         Date date = null;
         try {
-            date = new SimpleDateFormat("dd/mm/yyyy hh:mm").parse("3/15/2023 1:09");
+            date = new SimpleDateFormat("MM/dd/yyyy hh:mm").parse("09/03/2023 1:09");
         } catch (ParseException e) {
         }
         Flight flight = new Flight(42, "src", date, "dst", date);
@@ -33,13 +33,13 @@ public class FlightTest {
     }
 
     /**
-     * Initialize object with date and expect specific format fro get arrival string.
+     * Initialize object with date and expect specific format from get arrival string.
      */
     @Test
     void getArrivalStringNeedsToBeImplemented() {
         Date date = null;
         try {
-            date = new SimpleDateFormat("dd/mm/yyyy hh:mm").parse("3/15/2023 1:09");
+            date = new SimpleDateFormat("MM/dd/yyyy hh:mm").parse("09/03/2023 1:09");
         } catch (ParseException e) {
         }
         Flight flight = new Flight(42, "src", date, "dst", date);
