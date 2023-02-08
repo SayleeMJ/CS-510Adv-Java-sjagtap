@@ -13,7 +13,7 @@ The application takes four options print, README, textFile and pretty
 Print option prints the details of all flights
 README option will print the readme file.
 TextFile option will read and write into text file.
-Pretty option will Pretty print the airline's flights to a text file or standard out by providing filename as '-'.
+Pretty option will Pretty print the airlines flights to a text file or standard out by providing filename as '-'.
 
 usage: java -jar target/airline-2023.0.0.jar [options] <args>
              args are (in this order):
