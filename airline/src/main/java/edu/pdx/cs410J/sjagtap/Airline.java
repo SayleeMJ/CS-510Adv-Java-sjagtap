@@ -6,26 +6,41 @@ import edu.pdx.cs410J.AirportNames;
 
 import java.util.*;
 
+/**
+ * Class for airline information.
+ */
 public class Airline extends AbstractAirline<Flight> {
     private final String name;
     ArrayList<Flight> arrayList;
 
+    /**
+     * Constructor for airline.
+     * @param name airline name.
+     */
     public Airline(String name) {
         this.name = name;
         arrayList = new ArrayList<Flight>();
     }
 
-
+    /**
+     * Get airline name.
+     */
     @Override
     public String getName() {
         return this.name;
     }
 
+    /**
+     * Add flight to airline.
+     */
     @Override
     public void addFlight(Flight flight) {
         arrayList.add(flight);
     }
 
+    /**
+     * Get list of flights in sorted order first by src then by departure time.
+     */
     @Override
     public Collection<Flight> getFlights() {
         Flight[] flightArray = arrayList.toArray(new Flight[0]);

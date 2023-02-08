@@ -7,8 +7,6 @@ import edu.pdx.cs410J.ParserException;
 import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
 
 /**
@@ -317,7 +315,7 @@ public class Options {
         }
 
         // validate depart
-        if (!Flight.isValidDateAndTime(depart)) {
+        if (!Flight.isValidDateAndTime24Hours(depart)) {
             System.err.println("Invalid departure date-time format.");
             return null;
         }
@@ -329,7 +327,7 @@ public class Options {
         }
 
         // validate arrive
-        if (!Flight.isValidDateAndTime(arrive)) {
+        if (!Flight.isValidDateAndTime24Hours(arrive)) {
             System.err.println("Invalid arrival date-time format.");
             return null;
         }
@@ -383,7 +381,7 @@ public class Options {
 
 
         // validate depart
-        if (!Flight.isValidDateAndTimeAndZone(depart)) {
+        if (!Flight.isValidDateAndTimeAndZone12Hour(depart)) {
             System.err.println("Invalid depart date");
             return null;
         }
@@ -403,7 +401,7 @@ public class Options {
         }
 
         // validate arrive
-        if (!Flight.isValidDateAndTimeAndZone(arrive)) {
+        if (!Flight.isValidDateAndTimeAndZone12Hour(arrive)) {
             System.err.println("Invalid destination code");
             return null;
         }

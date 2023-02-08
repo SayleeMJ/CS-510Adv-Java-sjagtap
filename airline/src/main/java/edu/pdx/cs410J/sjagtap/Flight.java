@@ -71,7 +71,7 @@ public class Flight extends AbstractFlight implements Comparable {
      * @return true if valid value is provided. else false.
      */
     @VisibleForTesting
-    static boolean isValidDateAndTime(String dateAndTime) {
+    static boolean isValidDateAndTime24Hours(String dateAndTime) {
         String[] splitDateTimes = dateAndTime.split(" ");
         if (splitDateTimes.length != 2) {
             return false;
@@ -112,7 +112,7 @@ public class Flight extends AbstractFlight implements Comparable {
         }
 
         try {
-            if (Integer.parseInt(splitTime[0]) > 11) {
+            if (Integer.parseInt(splitTime[0]) > 23) {
                 return false;
             }
 
@@ -125,6 +125,7 @@ public class Flight extends AbstractFlight implements Comparable {
         }
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm");
+        dateFormat.setLenient(false);
         try {
             dateFormat.parse(dateAndTime);
         } catch (Exception e) {
@@ -141,7 +142,7 @@ public class Flight extends AbstractFlight implements Comparable {
      * @return true if valid value is provided. else false.
      */
     @VisibleForTesting
-    static boolean isValidDateAndTimeAndZone(String dateAndTime) {
+    static boolean isValidDateAndTimeAndZone12Hour(String dateAndTime) {
         String[] splitDateTimes = dateAndTime.split(" ");
         if (splitDateTimes.length != 3) {
             return false;
@@ -200,7 +201,7 @@ public class Flight extends AbstractFlight implements Comparable {
             return false;
         }
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm aa");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm a");
         dateFormat.setLenient(false);
         try {
             dateFormat.parse(dateAndTime);
