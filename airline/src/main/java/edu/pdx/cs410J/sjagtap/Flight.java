@@ -183,7 +183,7 @@ public class Flight extends AbstractFlight implements Comparable {
         }
 
         try {
-            if (Integer.parseInt(splitTime[0]) > 11) {
+            if (Integer.parseInt(splitTime[0]) > 12) {
                 return false;
             }
 
