@@ -25,7 +25,7 @@ public class Options {
         boolean optionTextFile = false;
         boolean optionPretty = false;
 
-        String textFileName;
+        String textFileName = null;
         String prettyFile;
 
         int i = 0;
@@ -101,8 +101,9 @@ public class Options {
             return;
         }
 
+        Airline airlineFromFile;
         if (optionTextFile) {
-            // ToDo: Call text file function
+            airlineFromFile = readAndWrite(textFileName, airlineName, flightObject);
         }
 
         if (optionPrint) {
@@ -120,52 +121,37 @@ public class Options {
      *
      * @param args list of command line arguments.
      */
-    static void readAndWrite(String[] args) {
-        if (args.length != 10) {
-            System.err.println("Missing command line arguments" + getHelpMessage());
-            return;
-        }
-        String fileName = args[1];
+    static Airline readAndWrite(String fileName, String airlineNameFromCmd, Flight flight) {
         File file = new File(fileName);
-        String airlineName = args[2];
-        if (!Airline.isValidAirlineName(airlineName)) {
-            System.err.println("Invalid Airline Name");
-            return;
-        }
+        Airline airline = null;
         if (file.exists()) {
-
-            String flightNumber = args[3];
-            String src = args[4];
-            String depart = args[5] + " " + args[6];
-            String dst = args[7];
-            String arrive = args[8] + " " + args[9];
-
-            Airline airline;
-
-            //reading details of Airline and Flights from filename and creating new flight
             try {
+
+                // Read airline info.
                 Reader r = new FileReader(fileName);
                 TextParser textParser = new TextParser(r);
                 airline = textParser.parse();
                 String existingAirlineName = airline.getName();
-                if (!existingAirlineName.equals(airlineName)) {
+
+                // Name not matching.
+                if (!existingAirlineName.equals(airlineNameFromCmd)) {
                     System.err.println("Airline name is different!");
-                    return;
+                    return null;
                 }
             } catch (FileNotFoundException e) {
                 System.err.println("File does not exists!");
-                return;
+                return null;
             } catch (ParserException e) {
                 System.err.println(e.getMessage());
-                return;
+                return null;
             }
 
-            // Getting flight details from command line argument
-            Flight flightDetails = createAndValidateFlight(flightNumber, src, depart, dst, arrive);
-            if (flightDetails == null) {
-                return;
+            // Add flight
+            if (flight != null) {
+                airline.addFlight(flight);
             }
-            airline.addFlight(flightDetails);
+
+            // Write flight
             try {
                 Writer w = new PrintWriter(fileName);
                 TextDumper textDumper = new TextDumper(w);
@@ -176,7 +162,7 @@ public class Options {
         } else {
             try {
                 // create empty airline object
-                Airline emptyAirline = new Airline(airlineName);
+                Airline emptyAirline = new Airline(airlineNameFromCmd);
                 // create file
                 file.createNewFile();
                 // write airline object contents
@@ -187,13 +173,12 @@ public class Options {
                 } catch (FileNotFoundException e) {
                     System.err.println("File does not exists!");
                 }
-
-
             } catch (IOException e) {
                 System.err.println("File have an issue with writing!");
             }
         }
 
+        return airline;
     }
 
     /**
