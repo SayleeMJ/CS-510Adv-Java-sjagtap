@@ -18,6 +18,36 @@ import static org.hamcrest.MatcherAssert.assertThat;
 class Project1Test {
 
   /**
+   * Validate airline name.
+   */
+  @Test
+  void validateMain() {
+    String[] args = new String[] {
+            "-README",
+    };
+    Project1.main(args);
+  }
+
+  /**
+   * Validate airline -print
+   */
+  @Test
+  void validateMainPrint() {
+    String[] args = new String[] {
+            "-print",
+            "Indigo",
+            "70",
+            "SCL",
+            "10/10/2023",
+            "1:30",
+            "SNN",
+            "10/10/2023",
+            "2:30",
+    };
+    Project1.main(args);
+  }
+
+  /**
    * Validate resource fetch.
    */
   @Test
@@ -37,7 +67,7 @@ class Project1Test {
    * Validate airline name.
    */
   @Test
-  void validateMain() {
+  void validateMainNoArgs() {
     String[] args = new String[0];
     Project1.main(args);
   }

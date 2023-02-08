@@ -28,8 +28,57 @@ public class OptionsTest {
         Flight flight1 = Options.createAndValidateFlightForPretty(
                 "3", "SNN", "01/01/2022 10:10 AM", "SNN", "01/01/2022 11:10 PM");
         assertThat(flight1 != null, is(true));
+
+        flight1 = Options.createAndValidateFlightForPretty(
+                "a", "SNN", "01/01/2022 10:10 AM", "SNN", "01/01/2022 11:10 PM");
+        assertThat(flight1 == null, is(true));
+
+        flight1 = Options.createAndValidateFlightForPretty(
+                "3", "abc", "01/01/2022 10:10 AM", "SNN", "01/01/2022 11:10 PM");
+        assertThat(flight1 == null, is(true));
+
+        flight1 = Options.createAndValidateFlightForPretty(
+                "3", "SNN", "01/01/2022 24:10 am", "SNN", "01/01/2022 11:10 PM");
+        assertThat(flight1 == null, is(true));
+
+        Flight flight = Options.createAndValidateFlightForPretty(
+                "3", "SNN", "01/01/2022 10:10 AM", "abc", "01/01/2022 11:10 PM");
+        assertThat(flight1 == null, is(true));
+
+        flight1 = Options.createAndValidateFlightForPretty(
+                "3", "SNN", "01/01/2022 10:10 AM", "SNN", "01/01/2022 24:10 PM");
+        assertThat(flight1 == null, is(true));
     }
 
+    /**
+     * Test ValidateGetFlight gets flight object for valid input.
+     */
+    @Test
+    void ValidateCreateAndValidateFlight() {
+        Flight flight1 = Options.createAndValidateFlight(
+                "3", "SNN", "01/01/2022 10:10", "SNN", "01/01/2022 11:10");
+        assertThat(flight1 != null, is(true));
+
+        flight1 = Options.createAndValidateFlight(
+                "a", "SNN", "01/01/2022 10:10", "SNN", "01/01/2022 11:10");
+        assertThat(flight1 == null, is(true));
+
+        flight1 = Options.createAndValidateFlight(
+                "3", "abc1", "01/01/2022 10:10", "SNN", "01/01/2022 11:10");
+        assertThat(flight1 == null, is(true));
+
+        flight1 = Options.createAndValidateFlight(
+                "3", "SNN", "01/01/2022 24:10", "SNN", "01/01/2022 11:10");
+        assertThat(flight1 == null, is(true));
+
+        Flight flight = Options.createAndValidateFlight(
+                "3", "SNN", "01/01/2022 10:10", "abc1", "01/01/2022 11:10");
+        assertThat(flight1 == null, is(true));
+
+        flight1 = Options.createAndValidateFlight(
+                "3", "SNN", "01/01/2022 10:10", "SNN", "01/01/2022 24:10");
+        assertThat(flight1 == null, is(true));
+    }
 
     /**
      * Test ValidateGetFlightPretty returns null when arrival time < departure time.

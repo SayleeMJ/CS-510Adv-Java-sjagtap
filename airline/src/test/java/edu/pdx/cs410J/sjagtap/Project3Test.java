@@ -7,36 +7,6 @@ import org.junit.jupiter.api.Test;
  */
 public class Project3Test {
     /**
-     * Validate airline name.
-     */
-    @Test
-    void validateMain() {
-        String[] args = new String[] {
-                "-README",
-        };
-        Project3.main(args);
-    }
-
-    /**
-     * Validate airline -print
-     */
-    @Test
-    void validateMainPrint() {
-        String[] args = new String[] {
-                "-print",
-                "Indigo",
-                "70",
-                "SCL",
-                "10/10/2023",
-                "1:30",
-                "SNN",
-                "10/10/2023",
-                "2:30",
-        };
-        Project3.main(args);
-    }
-
-    /**
      * Validate airline -pretty -
      */
     @Test

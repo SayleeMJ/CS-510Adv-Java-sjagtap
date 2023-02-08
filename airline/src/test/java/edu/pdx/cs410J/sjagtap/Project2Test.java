@@ -9,6 +9,7 @@ import java.io.InputStreamReader;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
 
 /**
  * A unit test for code in the <code>Project2</code> class.
@@ -56,5 +57,33 @@ public class Project2Test
     void validateMain() {
         String[] args = new String[0];
         Project2.main(args);
+    }
+
+    /**
+     * Validate airline -pretty -
+     */
+    @Test
+    void validateMainPretty() {
+        try {
+            String[] args = new String[]{
+                    "-textFile",
+                    "testingFile.txt",
+                    "Indigo",
+                    "70",
+                    "SCL",
+                    "10/10/2023",
+                    "1:30",
+                    "am",
+                    "SNN",
+                    "10/10/2023",
+                    "2:30",
+                    "am"
+            };
+            Project2.main(args);
+            Project2.main(args);
+            Project2.main(args);
+        } catch (Exception e) {
+            assertThat(true, equalTo("File write failures occurred"));
+        }
     }
 }
