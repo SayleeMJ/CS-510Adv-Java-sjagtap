@@ -129,4 +129,27 @@ public class FlightTest {
         assertThat(Flight.isValidDateAndTimeAndZone12Hour("1/1/2000 23:00"), is(false));
         assertThat(Flight.isValidDateAndTimeAndZone12Hour("01/01/2000 1:00"), is(false));
     }
+
+    /**
+     * Validate toStringPretty function.
+     */
+    @Test
+    void validateToStringPretty() {
+        Flight flight1 = Options.createAndValidateFlight(
+                "3", "SCL", "01/01/2022 10:10", "SNN", "01/01/2022 11:10");
+        String output = flight1.ToStringPretty();
+        assertThat(output.contains("Santiago de Chile, Chile"), is(true));
+        assertThat(output.contains("Shannon, Ireland"), is(true));
+    }
+
+    /**
+     * Validate flight duration.
+     */
+    @Test
+    void validateFlightDuration() {
+        Flight flight1 = Options.createAndValidateFlight(
+                "3", "SCL", "01/01/2022 10:00", "SNN", "01/01/2022 11:00");
+        long duration = flight1.durationOfFlight();
+        assertThat(duration == 60, is(true));
+    }
 }
