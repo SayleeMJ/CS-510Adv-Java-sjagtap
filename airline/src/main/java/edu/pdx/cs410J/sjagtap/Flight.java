@@ -7,6 +7,9 @@ import edu.pdx.cs410J.AirportNames;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * Flight class to hold information about flights.
+ */
 public class Flight extends AbstractFlight implements Comparable {
 
     private final int flightNumber;
@@ -15,7 +18,15 @@ public class Flight extends AbstractFlight implements Comparable {
     private final Date depart;
     private final Date arrive;
 
-
+    /**
+     * Parameterized constructor to initialize object with given values.
+     *
+     * @param flightNumber flight number.
+     * @param src          source airport.
+     * @param depart       departure datetime.
+     * @param dst          destination airport.
+     * @param arrive       arrival datetime.
+     */
     public Flight(int flightNumber, String src, Date depart, String dst, Date arrive) {
         this.flightNumber = flightNumber;
         this.src = src.toUpperCase();
@@ -24,6 +35,9 @@ public class Flight extends AbstractFlight implements Comparable {
         this.arrive = arrive;
     }
 
+    /**
+     * Sole constructor for testing.
+     */
     public Flight() {
         this.flightNumber = 12;
         this.src = "src";
@@ -32,7 +46,6 @@ public class Flight extends AbstractFlight implements Comparable {
         this.arrive = null; //TODO for now initialize with null
 
     }
-
 
 
     /**
@@ -183,8 +196,8 @@ public class Flight extends AbstractFlight implements Comparable {
 
         String zone = splitDateTimes[2];
 
-        if(!zone.equalsIgnoreCase("am") && !zone.equalsIgnoreCase("pm")){
-            return  false;
+        if (!zone.equalsIgnoreCase("am") && !zone.equalsIgnoreCase("pm")) {
+            return false;
         }
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm aa");
@@ -222,6 +235,11 @@ public class Flight extends AbstractFlight implements Comparable {
         return true;
     }
 
+    /**
+     * Generate pretty string to represent information in flight.
+     *
+     * @return pretty string to indicate flight.
+     */
     public String ToStringPretty() {
         int flightNumber = this.flightNumber;
 
@@ -236,7 +254,7 @@ public class Flight extends AbstractFlight implements Comparable {
         String arriveDate = this.getArrivalString();
         long duration = this.durationOfFlight();
 
-        String result =  "Flight " + flightNumber +
+        String result = "Flight " + flightNumber +
                 " departs " + departDate +
                 " at " + sourceAirport +
                 " arrives " + destinationAirport +
@@ -246,17 +264,27 @@ public class Flight extends AbstractFlight implements Comparable {
         return result;
     }
 
+    /**
+     * Get flight number.
+     */
     @Override
     public int getNumber() {
         return this.flightNumber;
     }
 
-
+    /**
+     * Get source airport.
+     */
     @Override
     public String getSource() {
         return this.src;
     }
 
+    /**
+     * Get departure date in pretty string format.
+     *
+     * @return string in required format.
+     */
     @Override
     public String getDepartureString() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("mm/dd/yyyy hh:mm aa");
@@ -264,11 +292,21 @@ public class Flight extends AbstractFlight implements Comparable {
         return departDateTime;
     }
 
+    /**
+     * Get destination string.
+     *
+     * @return string of destination.
+     */
     @Override
     public String getDestination() {
-        return  this.dst;
+        return this.dst;
     }
 
+    /**
+     * Get arrival date in string format.
+     *
+     * @return arrival date in required format.
+     */
     @Override
     public String getArrivalString() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("mm/dd/yyyy hh:mm aa");
@@ -276,22 +314,33 @@ public class Flight extends AbstractFlight implements Comparable {
         return arrivalDateTime;
     }
 
-    //TODO --> Fix this time difference
-    long durationOfFlight(){
+    /**
+     * Get duration of flight.
+     *
+     * @return Duration of flight in minutes.
+     */
+    long durationOfFlight() {
         Date departTime = this.depart;
         Date arriveTime = this.arrive;
         double differenceInMiliSec = arriveTime.getTime() - departTime.getTime();
         // Covert value from millisecond to minutes.
         double differenceInMinutes = (differenceInMiliSec / 1000) / 60;
-        return (long)differenceInMinutes;
+        return (long) differenceInMinutes;
     }
 
+    /**
+     * Compare two object and generate output to indicate result.
+     *
+     * @return 1 if first object greater.
+     * 0 if equal.
+     * -1 if second object is greater.
+     */
     @Override
     public int compareTo(Object o) {
-        Flight flight = (Flight)o;
-        if(this.src.equals(flight.src)){
+        Flight flight = (Flight) o;
+        if (this.src.equals(flight.src)) {
             // sort departure time
-            if(this.depart.equals(flight.depart)){
+            if (this.depart.equals(flight.depart)) {
                 return 0;
             } else if (this.depart.before(flight.depart)) {
                 return -1;
@@ -303,6 +352,4 @@ public class Flight extends AbstractFlight implements Comparable {
             return this.src.compareTo(flight.src);
         }
     }
-
-
 }

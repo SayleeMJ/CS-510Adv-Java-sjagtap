@@ -11,8 +11,17 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
+/**
+ * Options class to handle each operation passed as command line argument.
+ */
 public class Options {
 
+    /**
+     * Gets command line argument. Perform validation. Generate flight object and call appropriate
+     * function to perform further operations.
+     *
+     * @param args command line arguments.
+     */
     static void processArgs(String[] args) {
         // Validate length of args
         if (args.length == 0) {
@@ -127,10 +136,14 @@ public class Options {
             }
         }
     }
+
     /**
-     * Reading, creating new flight and write to text file.
+     * Read from file, creating new file and write to airline information text file.
      *
-     * @param args list of command line arguments.
+     * @param fileName name of file to write.
+     * @param airlineNameFromCmd airline name from user.
+     * @param flight flight object created from command line values.
+     * @return new Airline object.
      */
     static Airline readAndWrite(String fileName, String airlineNameFromCmd, Flight flight) {
         File file = new File(fileName);
@@ -214,15 +227,21 @@ public class Options {
     }
 
     /**
-     * Function for -print option for new parameters
-     * Creating a new flight and printing it to the command line
+     * Function for -print option for new parameters.
+     * Print flights to console.
      *
-     * @param args list of command line arguments.
+     * @param flight Flight information.
      */
     static void printUsingCommandLine(Flight flight) {
         System.out.println(flight.toString());
     }
 
+    /**
+     * Function for -pretty option. Dump information from airline object to file in nice format.
+     *
+     * @param fileName name of file.
+     * @param airline airline object to print in file.
+     */
     static void prettyPrint(String fileName, Airline airline) {
         // Check filename argument
         // if '-' then writer object will point to dump to print it on console
@@ -273,7 +292,7 @@ public class Options {
     }
 
     /**
-     * validating and creating a new flight
+     * Validating and creating a new flight for with project 2 objective.
      *
      * @param flightNumber provided flight number.
      * @param src          provided source.
@@ -329,7 +348,15 @@ public class Options {
         return flight;
     }
 
-
+    /**
+     * validating and creating a new flight for project 3 objective.
+     *
+     * @param flightNumber provided flight number.
+     * @param src          provided source.
+     * @param depart       provided departure time and date.
+     * @param dst          provided destination
+     * @param arrive       provided arriving time and date.
+     */
     static Flight createAndValidateFlightForPretty(String flightNumber, String src, String depart, String dst, String arrive) {
 
         // Validate flight number
@@ -346,10 +373,10 @@ public class Options {
             return null;
         }
 
-         src = src.toUpperCase();
+        src = src.toUpperCase();
 
         String source = AirportNames.getName(src);
-        if(source == null){
+        if (source == null) {
             System.err.println("The three-letter source airport code does not correspond to a known airport");
             return null;
         }
@@ -370,7 +397,7 @@ public class Options {
         dst = dst.toUpperCase();
 
         String destination = AirportNames.getName(dst);
-        if(destination == null){
+        if (destination == null) {
             System.err.println("The three-letter destination airport code does not correspond to a known airport");
             return null;
         }

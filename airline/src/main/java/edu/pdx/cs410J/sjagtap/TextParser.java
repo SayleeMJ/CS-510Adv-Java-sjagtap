@@ -16,10 +16,20 @@ import java.util.Date;
 public class TextParser implements AirlineParser<Airline> {
     private final Reader reader;
 
+    /**
+     * Constructor for TextParser.
+     *
+     * @param reader object pointing to source of data.
+     */
     public TextParser(Reader reader) {
         this.reader = reader;
     }
 
+    /**
+     * Parse data from file and create flight object.
+     *
+     * @return Airline object with information read from text file.
+     */
     @Override
     public Airline parse() throws ParserException {
         try (

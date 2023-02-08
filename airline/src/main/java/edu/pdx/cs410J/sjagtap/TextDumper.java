@@ -23,12 +23,20 @@ import java.util.Iterator;
 public class TextDumper implements AirlineDumper<Airline> {
     private final Writer writer;
 
-    // create a new file
-    // path?
+    /**
+     * Constructor for TextDumper.
+     *
+     * @param writer object pointing to destination of data.
+     */
     public TextDumper(Writer writer) { // did not understand.
         this.writer = writer;
     }
 
+    /**
+     * Dump data to destination.
+     *
+     * @param airline object with information that needs to be dumped.
+     */
     @Override
     public void dump(Airline airline) {
         try (

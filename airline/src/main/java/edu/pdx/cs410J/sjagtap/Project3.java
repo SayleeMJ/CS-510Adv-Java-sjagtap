@@ -13,7 +13,7 @@ import static edu.pdx.cs410J.sjagtap.Options.processArgs;
 public class Project3 {
 
     /**
-     * Main entry point of program.
+     * Main entry point of program for project 3.
      *
      * @param args list of command line arguments.
      */

@@ -22,10 +22,18 @@ import java.util.Iterator;
 public class PrettyPrinter implements AirlineDumper<Airline> {
     private final Writer writer;
 
+    /**
+     * Constructor for print pretty class.
+     * @param writer object pointing to destination for writes.
+     */
     public PrettyPrinter(Writer writer) { // did not understand.
         this.writer = writer;
     }
 
+    /**
+     * Dump data to destination pointed by writer.
+     * @param airline object containing information to dump.
+     */
     @Override
     public void dump(Airline airline) {
         PrintWriter pw = new PrintWriter(this.writer);
