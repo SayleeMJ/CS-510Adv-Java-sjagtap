@@ -2,6 +2,7 @@ package edu.pdx.cs410J.sjagtap;
 
 import com.google.common.annotations.VisibleForTesting;
 import edu.pdx.cs410J.AbstractAirline;
+import edu.pdx.cs410J.AirportNames;
 
 import java.util.*;
 
@@ -32,6 +33,7 @@ public class Airline extends AbstractAirline<Flight> {
         List covertedArrayList = Arrays.asList(flightArray);
         return covertedArrayList;
     }
+
 
     /**
      * Validate airline name to be alphanumeric.

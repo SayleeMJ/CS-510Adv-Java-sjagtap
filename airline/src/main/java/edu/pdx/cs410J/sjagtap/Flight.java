@@ -2,6 +2,7 @@ package edu.pdx.cs410J.sjagtap;
 
 import com.google.common.annotations.VisibleForTesting;
 import edu.pdx.cs410J.AbstractFlight;
+import edu.pdx.cs410J.AirportNames;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -219,6 +220,30 @@ public class Flight extends AbstractFlight implements Comparable {
         }
 
         return true;
+    }
+
+    public String ToStringPretty() {
+        int flightNumber = this.flightNumber;
+
+        String src = this.getSource();
+        String sourceAirport = AirportNames.getName(src);
+
+        String departDate = this.getDepartureString();
+
+        String dst = this.getDestination();
+        String destinationAirport = AirportNames.getName(dst);
+
+        String arriveDate = this.getArrivalString();
+        long duration = this.durationOfFlight();
+
+        String result =  "Flight " + flightNumber +
+                " departs " + departDate +
+                " at " + sourceAirport +
+                " arrives " + destinationAirport +
+                " at " + arriveDate +
+                ". Total flight duration in minutes " + duration;
+
+        return result;
     }
 
     @Override

@@ -32,30 +32,13 @@ public class PrettyPrinter implements AirlineDumper<Airline> {
 
         Collection<Flight> flight1 = airline.getFlights();
         Iterator<Flight> iterator = flight1.iterator();
-        pw.println(airline.getName());
+        String airlineName = airline.getName();
+        pw.println("AirlineName " + airlineName);
 
         while (iterator.hasNext()) {
-            Flight details = iterator.next();
-            int flightNumber = details.getNumber();
-            pw.println(flightNumber);
-
-            String src = details.getSource();
-            String source = AirportNames.getName(src);
-            pw.println(source);
-
-            String depart = details.getDepartureString();
-            pw.println(depart);
-
-            String dst = details.getDestination();
-            String destination = AirportNames.getName(dst);
-            pw.println(destination);
-
-            String arrive = details.getArrivalString();
-            pw.println(arrive);
-
-            long duration = details.durationOfFlight();
-            pw.println( "Duration of flight: " + duration);
-
+            Flight flightObject = iterator.next();
+            String flightDetails = flightObject.ToStringPretty();
+            pw.println(flightDetails);
         }
         pw.flush();
     }
