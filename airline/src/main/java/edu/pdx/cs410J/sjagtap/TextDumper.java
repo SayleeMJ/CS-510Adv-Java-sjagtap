@@ -28,7 +28,7 @@ public class TextDumper implements AirlineDumper<Airline> {
      *
      * @param writer object pointing to destination of data.
      */
-    public TextDumper(Writer writer) { // did not understand.
+    public TextDumper(Writer writer) {
         this.writer = writer;
     }
 

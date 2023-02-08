@@ -26,7 +26,7 @@ public class PrettyPrinter implements AirlineDumper<Airline> {
      * Constructor for print pretty class.
      * @param writer object pointing to destination for writes.
      */
-    public PrettyPrinter(Writer writer) { // did not understand.
+    public PrettyPrinter(Writer writer) {
         this.writer = writer;
     }
 
