@@ -187,11 +187,12 @@ public class Options {
             try {
 
                 // Read airline info.
-                Reader r = new FileReader(xmlFileName);
-                // ToDo: Call code to parse the xml.
+                InputStream is = new FileInputStream(file);
+                XmlParser xmlParser = new XmlParser(is);
+                xmlParser.parse();
             }
             catch (Exception e) {
-                System.err.println("Error while file reading xml file.");
+                System.err.println("Error while file reading xml file." + e.getMessage());
             }
         } else {
             // Create empty file
