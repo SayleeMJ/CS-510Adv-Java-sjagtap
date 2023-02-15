@@ -31,9 +31,11 @@ public class Options {
         boolean optionPrint = false;
         boolean optionTextFile = false;
         boolean optionPretty = false;
+        boolean optionXmlPrint = false;
 
         String textFileName = null;
         String prettyFile = null;
+        String xmlFile = null;
 
         int i = 0;
         while (i < args.length) {
@@ -75,7 +77,26 @@ public class Options {
                 continue;
             }
 
+            if (args[i].equals("-xmlFile")) {
+                optionXmlPrint = true;
+
+                if (i + 1 >= args.length) {
+                    System.err.println("Invalid argument. Please provide text file name to write xml information.");
+                    return;
+                }
+
+                xmlFile = args[i + 1];
+                i = i + 2;
+                continue;
+            }
+
             break;
+        }
+
+        // Check if both option are passed and error out.
+        if (optionXmlPrint == true && optionTextFile == true) {
+            System.err.println("Do not specify -xmlFile along with -textFile");
+            return;
         }
 
         String airlineName = null;
@@ -133,6 +154,22 @@ public class Options {
                 System.out.println(flightObject.ToStringPretty());
             }
         }
+
+        if (optionXmlPrint) {
+            readAndWriteToXmlFile(textFileName, airlineName, flightObject);
+        }
+    }
+
+    /**
+     * Create file in not present. Read airline from xml file, add new flight and write to xml file.
+     *
+     * @param xmlFileNmae File path of xml file.
+     * @param airlineName name of airline.
+     * @param flightObject flight object to add to airline.
+     * @return new Airline object.
+     */
+    private static void readAndWriteToXmlFile(String xmlFileNmae, String airlineName, Flight flightObject) {
+        return; // Temporary arrangement to keep code running.
     }
 
     /**
