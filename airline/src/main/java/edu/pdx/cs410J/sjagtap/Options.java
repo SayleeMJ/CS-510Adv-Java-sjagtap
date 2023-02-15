@@ -155,21 +155,54 @@ public class Options {
             }
         }
 
+        // ToDo: Step 1 xml option
         if (optionXmlPrint) {
-            readAndWriteToXmlFile(textFileName, airlineName, flightObject);
+            readAndWriteToXmlFile(xmlFile, airlineName, flightObject);
         }
     }
 
     /**
      * Create file in not present. Read airline from xml file, add new flight and write to xml file.
      *
-     * @param xmlFileNmae File path of xml file.
+     * @param xmlFileName File path of xml file.
      * @param airlineName name of airline.
      * @param flightObject flight object to add to airline.
      * @return new Airline object.
      */
-    private static void readAndWriteToXmlFile(String xmlFileNmae, String airlineName, Flight flightObject) {
-        return; // Temporary arrangement to keep code running.
+    private static void readAndWriteToXmlFile(String xmlFileName, String airlineName, Flight flightObject) {
+        // ToDO: step 2: Read from xml file
+        // Setup for my code validation:
+        // create xml file in D: and copy content from prof file in resource. Write code to read from xml file if present.
+        // Input to this code : file name
+        // Output of this code : airline object with information from xml file.
+        // main logic:
+        // Check if file present. If present read from file. Create parser class to read airline object.
+        // if file not present then create empty file to write data.
+
+        // Step 2.1: Check if file represent else create file
+
+        File file = new File(xmlFileName);
+        Airline airline = null;
+        if (file.exists()) {
+            try {
+
+                // Read airline info.
+                Reader r = new FileReader(xmlFileName);
+                // ToDo: Call code to parse the xml.
+            }
+            catch (Exception e) {
+                System.err.println("Error while file reading xml file.");
+            }
+        } else {
+            // Create empty file
+            try {
+                boolean newFile = file.createNewFile();
+            } catch (IOException e) {
+                System.err.println("Enable to create file since its not present.");
+            }
+        }
+
+        // ToDo: Step 3: Write to file.
     }
 
     /**
