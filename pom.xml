@@ -55,6 +55,7 @@ accordingly
 
     
     <module>airline</module>
+    <module>airline-web</module>
       
   </modules>
       
