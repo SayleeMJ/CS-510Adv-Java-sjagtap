@@ -55,7 +55,7 @@ public class XmlParser implements AirlineParser<Airline> {
             doc = builder.parse(reader);
             doc.getDocumentElement().normalize();
         } catch (SAXException | IOException e) {
-            throw new ParserException("File is not in required DTD format.");
+            throw new ParserException("File is not in required DTD format." + e.getMessage());
         }
 
         System.out.println("Root = " + doc.getDocumentElement().getNodeName());

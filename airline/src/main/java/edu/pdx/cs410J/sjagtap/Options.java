@@ -189,7 +189,7 @@ public class Options {
                 // Read airline info.
                 InputStream is = new FileInputStream(file);
                 XmlParser xmlParser = new XmlParser(is);
-                xmlParser.parse();
+                airline = xmlParser.parse();
             }
             catch (Exception e) {
                 System.err.println("Error while file reading xml file." + e.getMessage());
@@ -203,7 +203,16 @@ public class Options {
             }
         }
 
-        // ToDo: Step 3: Write to file.
+        // add new object.
+        airline.addFlight(flightObject);
+
+        try {
+            OutputStream os = new FileOutputStream(file);
+            XmlDumper xmlDumper = new XmlDumper(os);
+            xmlDumper.dump(airline);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**

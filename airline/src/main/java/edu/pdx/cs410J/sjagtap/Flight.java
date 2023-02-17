@@ -274,6 +274,23 @@ public class Flight extends AbstractFlight implements Comparable {
     }
 
     /**
+     * Get departure datetime.
+     */
+    @Override
+    public Date getDeparture() {
+        return this.depart;
+    }
+
+
+    /**
+     * Get arrival datetime.
+     */
+    @Override
+    public Date getArrival() {
+        return this.arrive;
+    }
+
+    /**
      * Get source airport.
      */
     @Override
