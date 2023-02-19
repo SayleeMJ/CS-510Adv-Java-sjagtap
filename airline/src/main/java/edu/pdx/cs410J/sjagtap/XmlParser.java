@@ -23,6 +23,13 @@ public class XmlParser implements AirlineParser {
     public XmlParser(InputStream reader) {
         this.reader = reader;
     }
+
+    /**
+     * This function parse the data from xml file and creates an airline object.
+     *
+     * @return This will return the Airline object which contains information
+     * of airline and flight from the xml file.
+     */
     @Override
     public Airline parse() throws ParserException {
         AirlineXmlHelper helper = new AirlineXmlHelper();
@@ -66,6 +73,15 @@ public class XmlParser implements AirlineParser {
         return airline;
     }
 
+
+    /**
+     * This function parse the data of flight from xml file and creates a flight object.
+     *
+     * @param node nodelist of flight
+     *
+     * @return This will return the Flight object which contains information
+     * of flight from the xml file.
+     */
     private Flight createFlight(Node node) {
         Element element = (Element) node;
         String flightNumber = element.getElementsByTagName("number").item(0).getTextContent();
@@ -83,6 +99,14 @@ public class XmlParser implements AirlineParser {
         return flight;
     }
 
+
+    /**
+     * This function parse the date and time from xml file.
+     *
+     * @param departureTimeDate node of which contains departure and arrival time date
+     *
+     * @return Date and time string in required format to read from xml file
+     */
     private String getDateTime(Node departureTimeDate) {
         Element element = (Element) departureTimeDate;
         NamedNodeMap date = element.getElementsByTagName("date").item(0).getAttributes();
