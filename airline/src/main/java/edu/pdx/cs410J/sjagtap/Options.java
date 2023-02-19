@@ -31,9 +31,11 @@ public class Options {
         boolean optionPrint = false;
         boolean optionTextFile = false;
         boolean optionPretty = false;
+        boolean optionXmlFile = false;
 
         String textFileName = null;
         String prettyFile = null;
+        String xmlFileName = null;
 
         int i = 0;
         while (i < args.length) {
@@ -75,7 +77,25 @@ public class Options {
                 continue;
             }
 
+            if (args[i].equals("-xmlFile")) {
+                optionXmlFile = true;
+
+                if (i + 1 >= args.length) {
+                    System.err.println("Invalid argument. Please provide text file name to write pretty flight information.");
+                    return;
+                }
+
+                xmlFileName = args[i + 1];
+                i = i + 2;
+                continue;
+            }
+
             break;
+        }
+
+        if(optionTextFile == true && optionXmlFile == true){
+            System.err.println("-textFile and -xmlFile options should not be pass together.");
+            return;
         }
 
         String airlineName = null;
@@ -133,14 +153,51 @@ public class Options {
                 System.out.println(flightObject.ToStringPretty());
             }
         }
+
+        if (optionXmlFile){
+            Options.readAndWriteToXmlFile(xmlFileName, airlineName, flightObject);
+        }
+    }
+
+    /**
+     * Read from file, creating new file and write to airline information xml file.
+     *
+     * @param xmlFileName           name of xml file to write.
+     * @param airlineName           airline name from user.
+     * @param flightObject          flight object created from command line values.
+     * @return new Airline object.
+     */
+
+    private static void readAndWriteToXmlFile(String xmlFileName, String airlineName, Flight flightObject) {
+        File file = new File(xmlFileName);
+        Airline airline = null;
+        if(file.exists()){
+            try {
+                // Read airline info.
+                InputStream inputStream = new FileInputStream(file);
+                XmlParser xmlParser = new XmlParser(inputStream);
+                airline = xmlParser.parse();
+                System.out.println("read successfully!");
+            } catch (Exception e) {
+                System.err.println("Error While Reading" + e.getMessage());
+            }
+        } else {
+            try {
+                boolean newFile = file.createNewFile();
+            } catch (IOException e) {
+                System.err.println("Enable to create file since its not present.");
+            }
+        }
+//        airline.addFlight(flightObject);
+
     }
 
     /**
      * Read from file, creating new file and write to airline information text file.
      *
-     * @param fileName name of file to write.
+     * @param fileName           name of file to write.
      * @param airlineNameFromCmd airline name from user.
-     * @param flight flight object created from command line values.
+     * @param flight             flight object created from command line values.
      * @return new Airline object.
      */
     static Airline readAndWrite(String fileName, String airlineNameFromCmd, Flight flight) {
@@ -238,7 +295,7 @@ public class Options {
      * Function for -pretty option. Dump information from airline object to file in nice format.
      *
      * @param fileName name of file.
-     * @param airline airline object to print in file.
+     * @param airline  airline object to print in file.
      */
     static void prettyPrint(String fileName, Airline airline) {
         try {
