@@ -11,7 +11,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class XmlParser implements AirlineParser {
+public class XmlParser implements AirlineParser<Airline> {
 
     private final InputStream reader;
 
@@ -56,7 +56,7 @@ public class XmlParser implements AirlineParser {
             throw new ParserException("File format is not according to DTD format" + e.getMessage());
         }
 
-        System.out.println("Root =" + document.getDocumentElement().getNodeName());
+        System.out.println("Root = " + document.getDocumentElement().getNodeName());
         String airlineName = document.getElementsByTagName("name").item(0).getTextContent();
         Airline airline = new Airline(airlineName);
 
@@ -84,16 +84,23 @@ public class XmlParser implements AirlineParser {
      */
     private Flight createFlight(Node node) {
         Element element = (Element) node;
+
         String flightNumber = element.getElementsByTagName("number").item(0).getTextContent();
+        System.out.println("Flight Number = " + flightNumber);
         String src = element.getElementsByTagName("src").item(0).getTextContent();
+        System.out.println("Flight Source = " + src);
 
         Node departureTimeDate = element.getElementsByTagName("depart").item(0);
         String departDate = getDateTime(departureTimeDate);
+        System.out.println("Departure Date = " + departDate);
 
         String dst = element.getElementsByTagName("dest").item(0).getTextContent();
+        System.out.println("Flight Destination = " + dst);
 
         Node arrivalTimeDate = element.getElementsByTagName("arrive").item(0);
         String arriveDate = getDateTime(arrivalTimeDate);
+        System.out.println("Arrival Date = " + arriveDate);
+        System.out.println("\n");
 
         Flight flight = Options.createAndValidateFlight(flightNumber, src, departDate, dst, arriveDate);
         return flight;

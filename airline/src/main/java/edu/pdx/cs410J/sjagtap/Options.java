@@ -183,12 +183,33 @@ public class Options {
             }
         } else {
             try {
-                boolean newFile = file.createNewFile();
+                Airline emptyAirline = new Airline(airlineName);
+//                boolean newFile = file.createNewFile();
+                file.createNewFile();
+                // write airline object contents
+                try {
+                    OutputStream outputStream = new FileOutputStream(file);
+                    XmlDumper xmlDumper = new XmlDumper(outputStream);
+                    xmlDumper.dump(emptyAirline);
+                } catch (FileNotFoundException e) {
+                    System.err.println("File does not exists!");
+                }
             } catch (IOException e) {
                 System.err.println("Enable to create file since its not present.");
             }
         }
-//        airline.addFlight(flightObject);
+
+        //add new flight object to airline
+        airline.addFlight(flightObject);
+
+        try {
+            OutputStream outputStream = new FileOutputStream(file);
+            XmlDumper xmlDumper = new XmlDumper(outputStream);
+            xmlDumper.dump(airline);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
 
     }
 
