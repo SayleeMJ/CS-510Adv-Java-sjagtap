@@ -418,7 +418,7 @@ public class Options {
         // Covert string to date
         Date arriveDate;
         Date departDate;
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm");
         try {
             departDate = simpleDateFormat.parse(depart);
             arriveDate = simpleDateFormat.parse(arrive);
