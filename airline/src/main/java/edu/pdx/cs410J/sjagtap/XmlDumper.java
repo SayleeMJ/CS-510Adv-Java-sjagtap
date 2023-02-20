@@ -149,7 +149,7 @@ public class XmlDumper implements AirlineDumper<Airline> {
      *
      */
     private void addDateAndTime(Date departureDate, Document document, Element parentElement) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm");
 
         // Converting Date and Time into String format
         String dateAndTime = dateFormat.format(departureDate);
