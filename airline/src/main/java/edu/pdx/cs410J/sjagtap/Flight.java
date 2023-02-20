@@ -282,6 +282,16 @@ public class Flight extends AbstractFlight implements Comparable {
     }
 
     /**
+     * Get departure date.
+     *
+     * @return departure date in Date format.
+     */
+    @Override
+    public Date getDeparture() {
+        return this.depart;
+    }
+
+    /**
      * Get departure date in pretty string format.
      *
      * @return string in required format.
@@ -301,6 +311,16 @@ public class Flight extends AbstractFlight implements Comparable {
     @Override
     public String getDestination() {
         return this.dst;
+    }
+
+    /**
+     * Get Arrival date .
+     *
+     * @return arrival date in Date format.
+     */
+    @Override
+    public Date getArrival() {
+        return this.arrive;
     }
 
     /**
@@ -354,3 +374,5 @@ public class Flight extends AbstractFlight implements Comparable {
         }
     }
 }
+
+
