@@ -93,7 +93,7 @@ public class Options {
             break;
         }
 
-        if(optionTextFile == true && optionXmlFile == true){
+        if (optionTextFile == true && optionXmlFile == true) {
             System.err.println("-textFile and -xmlFile options should not be pass together.");
             return;
         }
@@ -154,7 +154,7 @@ public class Options {
             }
         }
 
-        if (optionXmlFile){
+        if (optionXmlFile) {
             Options.readAndWriteToXmlFile(xmlFileName, airlineName, flightObject);
         }
     }
@@ -162,24 +162,42 @@ public class Options {
     /**
      * Read from file, creating new file and write to airline information xml file.
      *
-     * @param xmlFileName           name of xml file to write.
-     * @param airlineName           airline name from user.
-     * @param flightObject          flight object created from command line values.
+     * @param xmlFileName  name of xml file to write.
+     * @param airlineName  airline name from user.
+     * @param flightObject flight object created from command line values.
      * @return new Airline object.
      */
 
     private static void readAndWriteToXmlFile(String xmlFileName, String airlineName, Flight flightObject) {
         File file = new File(xmlFileName);
         Airline airline = null;
-        if(file.exists()){
+        if (file.exists()) {
             try {
                 // Read airline info.
                 InputStream inputStream = new FileInputStream(file);
                 XmlParser xmlParser = new XmlParser(inputStream);
                 airline = xmlParser.parse();
-                System.out.println("read successfully!");
+
+                // Name not matching.
+                String existingAirlineName = airline.getName();
+                if (!existingAirlineName.equals(airlineName)) {
+                    System.err.println("Airline name is different!");
+                    return;
+                }
             } catch (Exception e) {
                 System.err.println("Error While Reading" + e.getMessage());
+            }
+
+            //add new flight object to airline
+            airline.addFlight(flightObject);
+
+            // write to xml file
+            try {
+                OutputStream outputStream = new FileOutputStream(file);
+                XmlDumper xmlDumper = new XmlDumper(outputStream);
+                xmlDumper.dump(airline);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             }
         } else {
             try {
@@ -198,18 +216,6 @@ public class Options {
                 System.err.println("Enable to create file since its not present.");
             }
         }
-
-        //add new flight object to airline
-        airline.addFlight(flightObject);
-
-        try {
-            OutputStream outputStream = new FileOutputStream(file);
-            XmlDumper xmlDumper = new XmlDumper(outputStream);
-            xmlDumper.dump(airline);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
 
     }
 
