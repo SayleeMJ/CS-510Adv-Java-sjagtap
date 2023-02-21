@@ -396,6 +396,11 @@ public class Options {
             System.err.println("Invalid source airport code.");
             return null;
         }
+//        String source = AirportNames.getName(src);
+//        if (source == null) {
+//            System.err.println("The three-letter source airport code does not correspond to a known airport");
+//            return null;
+//        }
 
         // validate depart
         if (!Flight.isValidDateAndTime24Hours(depart)) {

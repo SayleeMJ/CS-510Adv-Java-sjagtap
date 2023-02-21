@@ -22,6 +22,6 @@ public class Project4Test {
                 "2:30",
                 "am"
         };
-        Project3.main(args);
+        Project4.main(args);
     }
 }
