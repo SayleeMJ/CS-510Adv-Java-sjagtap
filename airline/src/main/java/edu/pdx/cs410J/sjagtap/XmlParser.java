@@ -56,7 +56,6 @@ public class XmlParser implements AirlineParser<Airline> {
             throw new ParserException("The XML file does not conform to the DTD. " + e.getMessage());
         }
 
-        System.out.println("Root = " + document.getDocumentElement().getNodeName());
         String airlineName = document.getElementsByTagName("name").item(0).getTextContent();
         Airline airline = new Airline(airlineName);
 
@@ -83,31 +82,21 @@ public class XmlParser implements AirlineParser<Airline> {
      * of flight from the xml file.
      */
     private Flight createFlight(Node node) throws ParserException {
-        try {
             Element element = (Element) node;
 
             String flightNumber = element.getElementsByTagName("number").item(0).getTextContent();
-            System.out.println("Flight Number = " + flightNumber);
             String src = element.getElementsByTagName("src").item(0).getTextContent();
-            System.out.println("Flight Source = " + src);
 
             Node departureTimeDate = element.getElementsByTagName("depart").item(0);
             String departDate = getDateTime(departureTimeDate);
-            System.out.println("Departure Date = " + departDate);
 
             String dst = element.getElementsByTagName("dest").item(0).getTextContent();
-            System.out.println("Flight Destination = " + dst);
 
             Node arrivalTimeDate = element.getElementsByTagName("arrive").item(0);
             String arriveDate = getDateTime(arrivalTimeDate);
-            System.out.println("Arrival Date = " + arriveDate);
-            System.out.println("\n");
 
             Flight flight = Options.createAndValidateFlight(flightNumber, src, departDate, dst, arriveDate);
             return flight;
-        } catch (Exception e) {
-            throw new ParserException("Hi");
-        }
     }
 
 
