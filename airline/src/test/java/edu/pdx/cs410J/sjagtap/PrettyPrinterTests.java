@@ -21,7 +21,7 @@ public class PrettyPrinterTests {
         PrettyPrinter p = new PrettyPrinter(sw);
 
         Flight flight1 = Options.createAndValidateFlight(
-                "3", "SNN", "01/01/2022 10:10", "ABC", "01/01/2022 11:10");
+                "3", "SNN", "01/01/2022 10:10", "BJX", "01/01/2022 11:10");
         Airline airline = new Airline("Testing");
         airline.addFlight(flight1);
 

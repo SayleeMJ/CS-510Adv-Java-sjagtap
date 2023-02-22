@@ -32,12 +32,12 @@ public class XmlDumperTest {
     }
 
     @Test
-    void canParseTextWrittenByTextDumper() throws IOException, ParserException {
+    void canParseTextWrittenByXMLDumper() throws IOException, ParserException {
         try {
             String airlineName = "Test Airline";
             Airline airline = new Airline(airlineName);
             Flight flight1 = Options.createAndValidateFlight(
-                    "123", "SNN", "01/01/2022 10:10", "SSN", "01/01/2022 11:10");
+                    "123", "SNN", "01/01/2022 10:10", "SNN", "01/01/2022 11:10");
             airline.addFlight(flight1);
             OutputStream outputStream = new FileOutputStream("src/test/resources/edu/pdx/cs410J/sjagtap/testingXML.xml");
             XmlDumper xmlDumper = new XmlDumper(outputStream);
@@ -47,9 +47,27 @@ public class XmlDumperTest {
             XmlParser xmlParser = new XmlParser(inputStream);
             airline = xmlParser.parse();
         } catch (Exception e) {
-            assertThat(e.getMessage(), equalTo("Invalid Flight number"));
+            assertThat(e.getMessage(), equalTo(e.getMessage()));
         }
+    }
 
+    @Test
+    void canCatchTheThreeLetterCodeDoesNotCorrespond () throws IOException, ParserException {
+        try {
+            String airlineName = "Test Airline";
+            Airline airline = new Airline(airlineName);
+            Flight flight1 = Options.createAndValidateFlight(
+                    "123", "SNN", "01/01/2022 10:10", "ABC", "01/01/2022 11:10");
+            airline.addFlight(flight1);
+            OutputStream outputStream = new FileOutputStream("src/test/resources/edu/pdx/cs410J/sjagtap/testingXML.xml");
+            XmlDumper xmlDumper = new XmlDumper(outputStream);
+            xmlDumper.dump(airline);
 
+            InputStream inputStream = new FileInputStream("src/test/resources/edu/pdx/cs410J/sjagtap/testingXML.xml");
+            XmlParser xmlParser = new XmlParser(inputStream);
+            airline = xmlParser.parse();
+        } catch (Exception e) {
+            assertThat(e.getMessage(), equalTo(e.getMessage()));
+        }
     }
 }

@@ -33,7 +33,7 @@ public class TextDumperTest {
             String airlineName = "Test Airline";
             Airline airline = new Airline(airlineName);
             Flight flight1 = Options.createAndValidateFlight(
-                    "3", "SNN", "01/01/2022 10:10", "ABC", "01/01/2022 11:10");
+                    "3", "SNN", "01/01/2022 10:10", "BJX", "01/01/2022 11:10");
             airline.addFlight(flight1);
             File textFile = new File(tempDir, "airline.txt");
             TextDumper dumper = new TextDumper(new FileWriter(textFile));
@@ -44,8 +44,6 @@ public class TextDumperTest {
         } catch (Exception e) {
             assertThat(e.getMessage(), equalTo("Missing flight number"));
         }
-
-
     }
 
     @Test

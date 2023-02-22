@@ -53,7 +53,7 @@ public class XmlParser implements AirlineParser<Airline> {
             document = builder.parse(reader);
             document.getDocumentElement().normalize();
         } catch (IOException | SAXException e) {
-            throw new ParserException("File format is not according to DTD format" + e.getMessage());
+            throw new ParserException("The XML file does not conform to the DTD. " + e.getMessage());
         }
 
         System.out.println("Root = " + document.getDocumentElement().getNodeName());
@@ -82,28 +82,32 @@ public class XmlParser implements AirlineParser<Airline> {
      * @return This will return the Flight object which contains information
      * of flight from the xml file.
      */
-    private Flight createFlight(Node node) {
-        Element element = (Element) node;
+    private Flight createFlight(Node node) throws ParserException {
+        try {
+            Element element = (Element) node;
 
-        String flightNumber = element.getElementsByTagName("number").item(0).getTextContent();
-        System.out.println("Flight Number = " + flightNumber);
-        String src = element.getElementsByTagName("src").item(0).getTextContent();
-        System.out.println("Flight Source = " + src);
+            String flightNumber = element.getElementsByTagName("number").item(0).getTextContent();
+            System.out.println("Flight Number = " + flightNumber);
+            String src = element.getElementsByTagName("src").item(0).getTextContent();
+            System.out.println("Flight Source = " + src);
 
-        Node departureTimeDate = element.getElementsByTagName("depart").item(0);
-        String departDate = getDateTime(departureTimeDate);
-        System.out.println("Departure Date = " + departDate);
+            Node departureTimeDate = element.getElementsByTagName("depart").item(0);
+            String departDate = getDateTime(departureTimeDate);
+            System.out.println("Departure Date = " + departDate);
 
-        String dst = element.getElementsByTagName("dest").item(0).getTextContent();
-        System.out.println("Flight Destination = " + dst);
+            String dst = element.getElementsByTagName("dest").item(0).getTextContent();
+            System.out.println("Flight Destination = " + dst);
 
-        Node arrivalTimeDate = element.getElementsByTagName("arrive").item(0);
-        String arriveDate = getDateTime(arrivalTimeDate);
-        System.out.println("Arrival Date = " + arriveDate);
-        System.out.println("\n");
+            Node arrivalTimeDate = element.getElementsByTagName("arrive").item(0);
+            String arriveDate = getDateTime(arrivalTimeDate);
+            System.out.println("Arrival Date = " + arriveDate);
+            System.out.println("\n");
 
-        Flight flight = Options.createAndValidateFlight(flightNumber, src, departDate, dst, arriveDate);
-        return flight;
+            Flight flight = Options.createAndValidateFlight(flightNumber, src, departDate, dst, arriveDate);
+            return flight;
+        } catch (Exception e) {
+            throw new ParserException("Hi");
+        }
     }
 
 

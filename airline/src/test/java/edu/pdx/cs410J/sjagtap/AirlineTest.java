@@ -25,11 +25,11 @@ public class AirlineTest {
     @Test
     void ValidateFlightsAreSorted() {
         Flight flight1 = Options.createAndValidateFlight(
-                "3", "BCD", "01/01/2022 10:10", "ABC", "01/01/2022 11:10");
+                "3", "JNB", "01/01/2022 10:10", "JNB", "01/01/2022 11:10");
         Flight flight2 = Options.createAndValidateFlight(
-                "2", "ABC", "01/03/2022 10:10", "ABC", "01/01/2022 11:10");
+                "2", "BJX", "01/03/2022 10:10", "JNB", "01/01/2022 11:10");
         Flight flight3 = Options.createAndValidateFlight(
-                "1", "ABC", "01/01/2022 10:10", "ABC", "01/01/2022 11:10");
+                "1", "BJX", "01/01/2022 10:10", "JNB", "01/01/2022 11:10");
         Airline airline = new Airline("Testing");
         airline.addFlight(flight1);
         airline.addFlight(flight2);
