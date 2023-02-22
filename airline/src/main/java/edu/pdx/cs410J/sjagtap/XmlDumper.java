@@ -82,8 +82,8 @@ public class XmlDumper implements AirlineDumper<Airline> {
 
             DOMSource source = new DOMSource(document);
 
-            StreamResult console = new StreamResult(System.out);
-            transformer.transform(source, console);
+//            StreamResult console = new StreamResult(System.out);
+//            transformer.transform(source, console);
 
             StreamResult file = new StreamResult(this.writer);
             transformer.transform(source, file);
