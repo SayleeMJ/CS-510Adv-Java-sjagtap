@@ -15,7 +15,7 @@
 
 <h1>
 
-    This page contains a couple of HTML forms that GET and POST to the
+   BLAH... This page contains a couple of HTML forms that GET and POST to the
     REST API provided by your project.  These forms are <b>not</b>
     submitted as part of the project.  You do <b>not</b> have to update
     them.
@@ -30,21 +30,34 @@
 
 <div>
     <form method="get" action="flights">
-        List all word/definition pairs <input type="submit" definition="Submit"/>
+        List all airlines <input type="submit" definition="Submit"/>
     </form>
 </div>
 
 <div>
     <form method="get" action="flights">
-        List definition for word <input name="word" type="text" size="10" title="word"/>
+        List definition for airline <input name="airline" type="text" size="10" title="airline"/>
+        <input type="submit" definition="Submit"/>
+    </form>
+</div>
+
+<div>
+    <form method="get" action="flights">
+        List definition for airline <input name="airline" type="text" size="10" title="airline"/>
+        from source <input name="src" type="text" size="10" title="src"/>
+        to destination <input name="dest" type="text" size="10" title="dest"/> /
         <input type="submit" definition="Submit"/>
     </form>
 </div>
 
 <div>
     <form method="post" action="flights">
-        Create a new word/definition pair <input name="word" type="text" size="10" title="word"/> /
-        <input name="definition" type="text" size="10" title="definition"/>
+        Create a new flight <input name="airline" type="text" size="10" title="airline"/> /
+        <input name="flightNumber" type="text" size="10" title="flightNumber"/> /
+        <input name="src" type="text" size="10" title="src"/> /
+        <input name="depart" type="text" size="10" title="depart"/> /
+        <input name="dest" type="text" size="10" title="dest"/> /
+        <input name="arrive" type="text" size="10" title="arrive"/> /
         <input type="submit" definition="Submit"/>
     </form>
 </div>

@@ -1,12 +1,16 @@
 package edu.pdx.cs410J.sjagtap;
 
 import com.google.common.annotations.VisibleForTesting;
+import edu.pdx.cs410J.web.HttpRequestHelper;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,10 +21,19 @@ import java.util.Map;
  * and their definitions.
  */
 public class AirlineServlet extends HttpServlet {
-  static final String WORD_PARAMETER = "word";
-  static final String DEFINITION_PARAMETER = "definition";
+  static final String AIRLINE_PARAMETER = "airline";
 
-  private final Map<String, String> dictionary = new HashMap<>();
+  static final String SOURCE_PARAMETER = "src";
+
+  static final String DEST_PARAMETER = "dest";
+
+  static final String DEPART_PARAMETER = "depart";
+
+  static final String ARRIVE_PARAMETER = "arrive";
+
+  static final String FLIGHTNUMBER_PARAMETER = "flightNumber";
+
+  private final Map<String, Airline> airlineDictionary = new HashMap<>();
 
   /**
    * Handles an HTTP GET request from a client by writing the definition of the
@@ -31,14 +44,19 @@ public class AirlineServlet extends HttpServlet {
   @Override
   protected void doGet( HttpServletRequest request, HttpServletResponse response ) throws IOException
   {
-      response.setContentType( "text/plain" );
+      response.setContentType( "text/xml" );
 
-      String word = getParameter( WORD_PARAMETER, request );
-      if (word != null) {
-          writeDefinition(word, response);
+      String airline = getParameter(AIRLINE_PARAMETER, request );
+      String src = getParameter(SOURCE_PARAMETER, request);
+      String dest = getParameter(DEST_PARAMETER, request);
 
-      } else {
-          writeAllDictionaryEntries(response);
+      // what happens if airline is null
+      if (airline != null) {
+          writeAirline(airline, src, dest, response);
+      }
+      else
+      {
+          writeAllAirlineEntries(response);
       }
   }
 
@@ -52,22 +70,75 @@ public class AirlineServlet extends HttpServlet {
   {
       response.setContentType( "text/plain" );
 
-      String word = getParameter(WORD_PARAMETER, request );
-      if (word == null) {
-          missingRequiredParameter(response, WORD_PARAMETER);
+      String airline = getParameter(AIRLINE_PARAMETER, request );
+      if ( airline == null) {
+          missingRequiredParameter(response, AIRLINE_PARAMETER);
           return;
       }
 
-      String definition = getParameter(DEFINITION_PARAMETER, request );
-      if ( definition == null) {
-          missingRequiredParameter( response, DEFINITION_PARAMETER );
+      String source = getParameter(SOURCE_PARAMETER, request );
+      if ( source == null) {
+          missingRequiredParameter( response, SOURCE_PARAMETER );
           return;
       }
 
-      this.dictionary.put(word, definition);
+      String dest = getParameter(DEST_PARAMETER, request );
+      if ( dest == null) {
+          missingRequiredParameter( response, DEST_PARAMETER );
+          return;
+      }
+
+      String depart = getParameter(DEPART_PARAMETER, request );
+      if ( depart == null) {
+          missingRequiredParameter( response, DEPART_PARAMETER );
+          return;
+      }
+
+      String arrive = getParameter(ARRIVE_PARAMETER, request );
+      if ( arrive == null) {
+          missingRequiredParameter( response, ARRIVE_PARAMETER );
+          return;
+      }
+
+      String flightNumberString = getParameter(FLIGHTNUMBER_PARAMETER, request );
+      if ( flightNumberString == null) {
+          missingRequiredParameter( response, FLIGHTNUMBER_PARAMETER );
+          return;
+      }
+
+      Date departDate;
+      try {
+          departDate = new SimpleDateFormat("MM/dd/yyyy HH:mm a").parse(depart);
+      }
+      catch(Exception e)
+      {
+          return;
+      }
+
+      Date arriveDate;
+      try {
+          arriveDate = new SimpleDateFormat("MM/dd/yyyy HH:mm a").parse(arrive);
+      }
+      catch(Exception e)
+      {
+          return;
+      }
+
+      Airline airlineObject = new Airline(airline);
+      SimpleDateFormat date24Format = new SimpleDateFormat("MM/dd/yyyy HH:mm");
+      Flight flight = new Flight(Integer.parseInt(flightNumberString), source, new Date(date24Format.format(departDate)), dest, new Date(date24Format.format(arriveDate)));
+      airlineObject.addFlight(flight);
+      if (this.airlineDictionary.containsKey(airline))
+      {
+          this.airlineDictionary.get(airline).addFlight(flight);
+      }
+      else
+      {
+          this.airlineDictionary.put(airline, airlineObject);
+      }
 
       PrintWriter pw = response.getWriter();
-      pw.println(Messages.definedWordAs(word, definition));
+      pw.println(Messages.definedAirlineAs(airline, flight));
       pw.flush();
 
       response.setStatus( HttpServletResponse.SC_OK);
@@ -82,7 +153,7 @@ public class AirlineServlet extends HttpServlet {
   protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws IOException {
       response.setContentType("text/plain");
 
-      this.dictionary.clear();
+      this.airlineDictionary.clear();
 
       PrintWriter pw = response.getWriter();
       pw.println(Messages.allDictionaryEntriesDeleted());
@@ -109,20 +180,46 @@ public class AirlineServlet extends HttpServlet {
    *
    * The text of the message is formatted with {@link TextDumper}
    */
-  private void writeDefinition(String word, HttpServletResponse response) throws IOException {
-    String definition = this.dictionary.get(word);
+  private void writeAirline(String airline, String src, String dest, HttpServletResponse response) throws IOException {
+    Airline airlineDefinition = this.airlineDictionary.get(airline);
 
-    if (definition == null) {
-      response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+    if (airlineDefinition == null) {
+        response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+    }
 
-    } else {
-      PrintWriter pw = response.getWriter();
+    else {
+        OutputStream ow = response.getOutputStream();
+        XmlDumper dumper = new XmlDumper(ow);
 
-      Map<String, String> wordDefinition = Map.of(word, definition);
-      TextDumper dumper = new TextDumper(pw);
-      dumper.dump(wordDefinition);
+        if ( src == null && dest != null )
+        {
+            missingRequiredParameter(response, SOURCE_PARAMETER);
+        }
+        else if ( src != null && dest == null)
+        {
+            missingRequiredParameter(response, DEST_PARAMETER);
+        }
+        else if (src != null && dest != null) {
+            Airline newAirlineDefinition = new Airline(airlineDefinition.getName());
+            for (Flight f : airlineDefinition.getFlights()) {
+                // add ignore case here
+                if (f.getSource().equals(src) && f.getDestination().equals(dest)) {
+                    newAirlineDefinition.addFlight(f);
+                }
+            }
 
-      response.setStatus(HttpServletResponse.SC_OK);
+            if (newAirlineDefinition.getFlights().size() == 0)
+            {
+                response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            }
+            else {
+                dumper.dump(newAirlineDefinition);
+            }
+        } else {
+            dumper.dump(airlineDefinition);
+        }
+
+        response.setStatus(HttpServletResponse.SC_OK);
     }
   }
 
@@ -131,11 +228,15 @@ public class AirlineServlet extends HttpServlet {
    *
    * The text of the message is formatted with {@link TextDumper}
    */
-  private void writeAllDictionaryEntries(HttpServletResponse response ) throws IOException
+  private void writeAllAirlineEntries(HttpServletResponse response ) throws IOException
   {
-      PrintWriter pw = response.getWriter();
-      TextDumper dumper = new TextDumper(pw);
-      dumper.dump(dictionary);
+      OutputStream ow = response.getOutputStream();
+      XmlDumper dumper = new XmlDumper(ow);
+
+      for (Airline a : this.airlineDictionary.values())
+      {
+          dumper.dump(a);
+      }
 
       response.setStatus( HttpServletResponse.SC_OK );
   }
@@ -156,8 +257,8 @@ public class AirlineServlet extends HttpServlet {
     }
   }
 
-  @VisibleForTesting
-  String getDefinition(String word) {
-      return this.dictionary.get(word);
-  }
+//  @VisibleForTesting
+//  String getDefinition(String word) {
+//      return this.dictionary.get(word);
+//  }
 }

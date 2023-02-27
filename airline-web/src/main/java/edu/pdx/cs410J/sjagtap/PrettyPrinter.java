@@ -1,46 +1,53 @@
 package edu.pdx.cs410J.sjagtap;
 
-import com.google.common.annotations.VisibleForTesting;
+import edu.pdx.cs410J.AirlineDumper;
+import edu.pdx.cs410J.AirportNames;
 
 import java.io.PrintWriter;
 import java.io.Writer;
-import java.util.Map;
+import java.util.Collection;
+import java.util.Iterator;
 
-public class PrettyPrinter {
+/**
+ * A skeletal implementation of the <code>TextDumper</code> class for Project 2.
+ */
+
+/**
+ * Writer class represents a stream of characters
+ * implements appendable, closeable, flushable
+ * PrintWriter class writes any type of data e.g. int, float, double, string
+ * or object in the form of text either on the console or in a file in java
+ */
+
+public class PrettyPrinter implements AirlineDumper<Airline> {
   private final Writer writer;
 
-  @VisibleForTesting
-  static String formatWordCount(int count )
-  {
-    return String.format( "Dictionary on server contains %d words", count );
-  }
-
-  @VisibleForTesting
-  static String formatDictionaryEntry(String word, String definition )
-  {
-    return String.format("  %s -> %s", word, definition);
-  }
-
-
+  /**
+   * Constructor for print pretty class.
+   * @param writer object pointing to destination for writes.
+   */
   public PrettyPrinter(Writer writer) {
     this.writer = writer;
   }
 
-  public void dump(Map<String, String> dictionary) {
-    try (
-      PrintWriter pw = new PrintWriter(this.writer)
-    ) {
+  /**
+   * Dump data to destination pointed by writer.
+   * @param airline object containing information to dump.
+   */
+  @Override
+  public void dump(Airline airline) {
+    PrintWriter pw = new PrintWriter(this.writer);
 
-      pw.println(formatWordCount(dictionary.size()));
+    String airlineName = airline.getName();
+    pw.println("AirlineName " + airlineName);
 
-      for (Map.Entry<String, String> entry : dictionary.entrySet()) {
-        String word = entry.getKey();
-        String definition = entry.getValue();
-        pw.println(formatDictionaryEntry(word, definition));
-      }
-
-      pw.flush();
+    Collection<Flight> flight1 = airline.getFlights();
+    Iterator<Flight> iterator = flight1.iterator();
+    while (iterator.hasNext()) {
+      Flight flightObject = iterator.next();
+      String flightDetails = flightObject.ToStringPretty();
+      pw.println(flightDetails);
     }
-
+    pw.flush();
   }
 }

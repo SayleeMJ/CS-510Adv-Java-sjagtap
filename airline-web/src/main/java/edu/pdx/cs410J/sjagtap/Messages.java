@@ -16,6 +16,16 @@ public class Messages
         return String.format( "Defined %s as %s", word, definition );
     }
 
+    public static String definedAirlineAs(String Airline, Flight flight )
+    {
+        return String.format( "Airline: %s Flight: %s added to the dictionary", Airline, flight.getNumber());
+    }
+
+    public static String definedAirlineAs(String Airline, String flightNumber )
+    {
+        return String.format( "Airline: %s Flight: %s added to the dictionary", Airline, flightNumber);
+    }
+
     public static String allDictionaryEntriesDeleted() {
         return "All dictionary entries have been deleted";
     }

@@ -4,8 +4,12 @@ import com.google.common.annotations.VisibleForTesting;
 import edu.pdx.cs410J.ParserException;
 import edu.pdx.cs410J.web.HttpRequestHelper;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.StringReader;
+import java.nio.charset.Charset;
+import java.util.List;
 import java.util.Map;
 
 import static edu.pdx.cs410J.web.HttpRequestHelper.Response;
@@ -40,33 +44,59 @@ public class AirlineRestClient
       this.http = http;
     }
 
-  /**
-   * Returns all dictionary entries from the server
-   */
-  public Map<String, String> getAllDictionaryEntries() throws IOException, ParserException {
-    Response response = http.get(Map.of());
-    throwExceptionIfNotOkayHttpStatus(response);
+//  /**
+//   * Returns all dictionary entries from the server
+//   */
+//  public List<Airline> getAllDictionaryEntries() throws IOException, ParserException {
+//    Response response = http.get(Map.of());
+//    throwExceptionIfNotOkayHttpStatus(response);
+//
+//
+//    InputStream stream = new ByteArrayInputStream(response.getContent().getBytes
+//              (Charset.forName("UTF-8")));
+//    XmlParser parser = new XmlParser(stream);
+//    return parser.parse();
+//  }
 
-    TextParser parser = new TextParser(new StringReader(response.getContent()));
-    return parser.parse();
-  }
+    /**
+     * Returns the flights for the given airline
+     */
+    public Airline getFlights(String airline) throws IOException, ParserException {
+        Response response = http.get(Map.of(AirlineServlet.AIRLINE_PARAMETER, airline));
+        throwExceptionIfNotOkayHttpStatus(response);
+        String content = response.getContent();
 
-  /**
-   * Returns the definition for the given word
-   */
-  public String getDefinition(String word) throws IOException, ParserException {
-    Response response = http.get(Map.of(AirlineServlet.WORD_PARAMETER, word));
-    throwExceptionIfNotOkayHttpStatus(response);
-    String content = response.getContent();
+        InputStream stream = new ByteArrayInputStream(content.getBytes
+                (Charset.forName("UTF-8")));
 
-    TextParser parser = new TextParser(new StringReader(content));
-    return parser.parse().get(word);
-  }
+        XmlParser parser = new XmlParser(stream);
+        return parser.parse();
+    }
 
-  public void addDictionaryEntry(String word, String definition) throws IOException {
-    Response response = http.post(Map.of(AirlineServlet.WORD_PARAMETER, word, AirlineServlet.DEFINITION_PARAMETER, definition));
-    throwExceptionIfNotOkayHttpStatus(response);
-  }
+    /**
+     * Returns the flights for the given airline going from specific source to destination
+     */
+    public Airline getFlightsFromSrcDestination(String airline, String src, String dest) throws IOException, ParserException
+    {
+        Response response = http.get(Map.of(AirlineServlet.AIRLINE_PARAMETER, airline, AirlineServlet.SOURCE_PARAMETER, src, AirlineServlet.DEST_PARAMETER, dest));
+        throwExceptionIfNotOkayHttpStatus(response);
+        String content = response.getContent();
+
+        InputStream stream = new ByteArrayInputStream(content.getBytes
+                (Charset.forName("UTF-8")));
+
+        XmlParser parser = new XmlParser(stream);
+        return parser.parse();
+    }
+
+    /**
+    * Adds flight entry */
+    public void addFlightEntry(String airlineName, String flightNo, String src, String departDate, String dest, String arriveDate) throws IOException, ParserException
+    {
+        Response response = http.post(Map.of(AirlineServlet.AIRLINE_PARAMETER, airlineName, AirlineServlet.FLIGHTNUMBER_PARAMETER, flightNo, AirlineServlet.SOURCE_PARAMETER, src,
+                AirlineServlet.DEPART_PARAMETER, departDate, AirlineServlet.DEST_PARAMETER, dest, AirlineServlet.ARRIVE_PARAMETER, arriveDate));
+        throwExceptionIfNotOkayHttpStatus(response);
+    }
 
   public void removeAllDictionaryEntries() throws IOException {
     Response response = http.delete(Map.of());
