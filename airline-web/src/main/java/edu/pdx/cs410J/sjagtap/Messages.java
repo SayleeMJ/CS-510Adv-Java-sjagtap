@@ -20,4 +20,7 @@ public class Messages
         return "All dictionary entries have been deleted";
     }
 
+    public static String definedAirlineAs(String Airline, Flight flight) {
+        return String.format( "Airline: %s Flight: %s added to the dictionary", Airline, flight.getNumber());
+    }
 }

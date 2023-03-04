@@ -21,6 +21,7 @@ public class Project5 {
         String word = null;
         String definition = null;
 
+
         for (String arg : args) {
             if (hostName == null) {
                 hostName = arg;
