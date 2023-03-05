@@ -1,25 +1,64 @@
 package edu.pdx.cs410J.sjagtap;
 
+import edu.pdx.cs410J.AirlineDumper;
+
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Writer;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 
-public class TextDumper {
-  private final Writer writer;
+/**
+ * A skeletal implementation of the <code>TextDumper</code> class for Project 2.
+ */
 
-  public TextDumper(Writer writer) {
-    this.writer = writer;
-  }
+/**
+ * Writer class represents a stream of characters
+ * implements appendable, closeable, flushable
+ * PrintWriter class writes any type of data e.g. int, float, double, string
+ * or object in the form of text either on the console or in a file in java
+ */
 
-  public void dump(Map<String, String> dictionary) {
-    try (
-      PrintWriter pw = new PrintWriter(this.writer)
-    ){
-      for (Map.Entry<String, String> entry : dictionary.entrySet()) {
-        pw.println(entry.getKey() + " : " + entry.getValue());
-      }
+public class TextDumper implements AirlineDumper<Airline> {
+    private final Writer writer;
 
-      pw.flush();
+    /**
+     * Constructor for TextDumper.
+     *
+     * @param writer object pointing to destination of data.
+     */
+    public TextDumper(Writer writer) {
+        this.writer = writer;
     }
-  }
+
+    /**
+     * Dump data to destination.
+     *
+     * @param airline object with information that needs to be dumped.
+     */
+    @Override
+    public void dump(Airline airline) {
+        try (
+                PrintWriter pw = new PrintWriter(this.writer)
+        ) {
+            Collection<Flight> flight1 = airline.getFlights();
+            Iterator<Flight> iterator = flight1.iterator();
+            pw.println(airline.getName());
+            while (iterator.hasNext()) {
+                Flight details = iterator.next();
+                int flightNumber = details.getNumber();
+                pw.println(flightNumber);
+                String src = details.getSource();
+                pw.println(src);
+                String depart = details.getDepartureString();
+                pw.println(depart);
+                String dst = details.getDestination();
+                pw.println(dst);
+                String arrive = details.getArrivalString();
+                pw.println(arrive);
+            }
+            pw.flush();
+        }
+    }
 }

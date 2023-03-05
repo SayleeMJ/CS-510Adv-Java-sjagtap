@@ -20,34 +20,34 @@ import java.util.Iterator;
  */
 
 public class PrettyPrinter implements AirlineDumper<Airline> {
-  private final Writer writer;
+    private final Writer writer;
 
-  /**
-   * Constructor for print pretty class.
-   * @param writer object pointing to destination for writes.
-   */
-  public PrettyPrinter(Writer writer) {
-    this.writer = writer;
-  }
-
-  /**
-   * Dump data to destination pointed by writer.
-   * @param airline object containing information to dump.
-   */
-  @Override
-  public void dump(Airline airline) {
-    PrintWriter pw = new PrintWriter(this.writer);
-
-    String airlineName = airline.getName();
-    pw.println("AirlineName " + airlineName);
-
-    Collection<Flight> flight1 = airline.getFlights();
-    Iterator<Flight> iterator = flight1.iterator();
-    while (iterator.hasNext()) {
-      Flight flightObject = iterator.next();
-      String flightDetails = flightObject.ToStringPretty();
-      pw.println(flightDetails);
+    /**
+     * Constructor for print pretty class.
+     * @param writer object pointing to destination for writes.
+     */
+    public PrettyPrinter(Writer writer) {
+        this.writer = writer;
     }
-    pw.flush();
-  }
+
+    /**
+     * Dump data to destination pointed by writer.
+     * @param airline object containing information to dump.
+     */
+    @Override
+    public void dump(Airline airline) {
+        PrintWriter pw = new PrintWriter(this.writer);
+
+        String airlineName = airline.getName();
+        pw.println("AirlineName " + airlineName);
+
+        Collection<Flight> flight1 = airline.getFlights();
+        Iterator<Flight> iterator = flight1.iterator();
+        while (iterator.hasNext()) {
+            Flight flightObject = iterator.next();
+            String flightDetails = flightObject.ToStringPretty();
+            pw.println(flightDetails);
+        }
+        pw.flush();
+    }
 }
