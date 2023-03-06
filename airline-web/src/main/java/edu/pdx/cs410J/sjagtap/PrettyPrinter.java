@@ -4,6 +4,8 @@ import com.google.common.annotations.VisibleForTesting;
 
 import java.io.PrintWriter;
 import java.io.Writer;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.Map;
 
 public class PrettyPrinter {
@@ -26,21 +28,21 @@ public class PrettyPrinter {
     this.writer = writer;
   }
 
-  public void dump(Map<String, String> dictionary) {
-    try (
-      PrintWriter pw = new PrintWriter(this.writer)
-    ) {
+  public void dump(Airline airline) {
+    PrintWriter printWriter = new PrintWriter(this.writer);
+    String airlineName = airline.getName();
+    printWriter.println("Flights for airline " + airlineName);
+    printWriter.println("---------------------------------------------");
 
-      pw.println(formatWordCount(dictionary.size()));
-
-      for (Map.Entry<String, String> entry : dictionary.entrySet()) {
-        String word = entry.getKey();
-        String definition = entry.getValue();
-        pw.println(formatDictionaryEntry(word, definition));
-      }
-
-      pw.flush();
+    Collection<Flight> flights = airline.getFlights();
+    Iterator<Flight> iterator = flights.iterator();
+    int i = 1;
+    while (iterator.hasNext()){
+      Flight flight = iterator.next();
+      String flightDetails = flight.ToStringPretty();
+      printWriter.println(i+". " + flightDetails +"\n");
+      i++;
     }
-
+    printWriter.flush();
   }
 }

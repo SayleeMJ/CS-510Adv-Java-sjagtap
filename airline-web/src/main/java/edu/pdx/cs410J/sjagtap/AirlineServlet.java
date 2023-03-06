@@ -52,6 +52,7 @@ public class AirlineServlet extends HttpServlet {
         if (airline != null) {
             writeAirline(airline, src, dest, response);
         } else {
+            //TODO remove and handle an error when airline is null
             writeAllAirlineEntries(response);
         }
     }
