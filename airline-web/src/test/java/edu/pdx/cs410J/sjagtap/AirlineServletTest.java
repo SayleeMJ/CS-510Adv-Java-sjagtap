@@ -37,36 +37,36 @@
 //    verify(response).setStatus(HttpServletResponse.SC_OK);
 //  }
 //
-//  @Test
-//  void addOneWordToDictionary() throws IOException {
-//    AirlineServlet servlet = new AirlineServlet();
-//
-//    String word = "TEST WORD";
-//    String definition = "TEST DEFINITION";
-//
-//    HttpServletRequest request = mock(HttpServletRequest.class);
-//    when(request.getParameter(AirlineServlet.WORD_PARAMETER)).thenReturn(word);
-//    when(request.getParameter(AirlineServlet.DEFINITION_PARAMETER)).thenReturn(definition);
-//
-//    HttpServletResponse response = mock(HttpServletResponse.class);
-//
-//    // Use a StringWriter to gather the text from multiple calls to println()
-//    StringWriter stringWriter = new StringWriter();
-//    PrintWriter pw = new PrintWriter(stringWriter, true);
-//
-//    when(response.getWriter()).thenReturn(pw);
-//
-//    servlet.doPost(request, response);
-//
-//    assertThat(stringWriter.toString(), containsString(Messages.definedWordAs(word, definition)));
-//
-//    // Use an ArgumentCaptor when you want to make multiple assertions against the value passed to the mock
-//    ArgumentCaptor<Integer> statusCode = ArgumentCaptor.forClass(Integer.class);
-//    verify(response).setStatus(statusCode.capture());
-//
-//    assertThat(statusCode.getValue(), equalTo(HttpServletResponse.SC_OK));
-//
-//    assertThat(servlet.getDefinition(word), equalTo(definition));
-//  }
+////  @Test
+////  void addOneWordToDictionary() throws IOException {
+////    AirlineServlet servlet = new AirlineServlet();
+////
+////    String word = "TEST WORD";
+////    String definition = "TEST DEFINITION";
+////
+////    HttpServletRequest request = mock(HttpServletRequest.class);
+////    when(request.getParameter(AirlineServlet.WORD_PARAMETER)).thenReturn(word);
+////    when(request.getParameter(AirlineServlet.DEFINITION_PARAMETER)).thenReturn(definition);
+////
+////    HttpServletResponse response = mock(HttpServletResponse.class);
+////
+////    // Use a StringWriter to gather the text from multiple calls to println()
+////    StringWriter stringWriter = new StringWriter();
+////    PrintWriter pw = new PrintWriter(stringWriter, true);
+////
+////    when(response.getWriter()).thenReturn(pw);
+////
+////    servlet.doPost(request, response);
+////
+////    assertThat(stringWriter.toString(), containsString(Messages.definedWordAs(word, definition)));
+////
+////    // Use an ArgumentCaptor when you want to make multiple assertions against the value passed to the mock
+////    ArgumentCaptor<Integer> statusCode = ArgumentCaptor.forClass(Integer.class);
+////    verify(response).setStatus(statusCode.capture());
+////
+////    assertThat(statusCode.getValue(), equalTo(HttpServletResponse.SC_OK));
+////
+////    assertThat(servlet.getDefinition(word), equalTo(definition));
+////  }
 //
 //}
