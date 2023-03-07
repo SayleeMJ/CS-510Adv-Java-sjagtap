@@ -28,12 +28,6 @@ class AirlineRestClientIT {
     }
 
     @Test
-    void test0RemoveAllDictionaryEntries() throws IOException {
-        AirlineRestClient client = newAirlineRestClient();
-        client.removeAllDictionaryEntries();
-    }
-
-    @Test
     void test1EmptyServerContainsNoDictionaryEntries() throws IOException, ParserException {
         AirlineRestClient client = newAirlineRestClient();
 

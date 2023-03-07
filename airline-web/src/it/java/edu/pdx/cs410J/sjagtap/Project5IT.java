@@ -29,12 +29,6 @@ class Project5IT extends InvokeMainTestCase {
     private static final String PORT = System.getProperty("http.port", "8080");
 
     @Test
-    void test0RemoveAllMappings() throws IOException {
-      AirlineRestClient client = new AirlineRestClient(HOSTNAME, Integer.parseInt(PORT));
-      client.removeAllDictionaryEntries();
-    }
-
-    @Test
     void test1NoCommandLineArguments() {
         MainMethodResult result = invokeMain( Project5.class );
         assertThat(result.getTextWrittenToStandardError(), containsString("Missing command line arguments. Please provide argument as explained below."));
@@ -44,7 +38,7 @@ class Project5IT extends InvokeMainTestCase {
     void test2EmptyServer() {
         MainMethodResult result = invokeMain( Project5.class, "-host", HOSTNAME, "-port", PORT, "airline");
 
-        assertThat(result.getTextWrittenToStandardError(), equalTo("** 404Airline airline not found in the dictionary."));
+        assertThat(result.getTextWrittenToStandardError(), equalTo("** 404Airline airline not found in the dictionary\r\n"));
 
     }
 

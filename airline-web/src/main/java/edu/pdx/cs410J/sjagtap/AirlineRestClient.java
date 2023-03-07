@@ -80,12 +80,7 @@ public class AirlineRestClient
                 AirlineServlet.DEPART_PARAMETER, departDate, AirlineServlet.DEST_PARAMETER, dest, AirlineServlet.ARRIVE_PARAMETER, arriveDate));
         throwExceptionIfNotOkayHttpStatus(response);
     }
-
-  public void removeAllDictionaryEntries() throws IOException {
-    Response response = http.delete(Map.of());
-    throwExceptionIfNotOkayHttpStatus(response);
-  }
-
+    
   private void throwExceptionIfNotOkayHttpStatus(Response response) {
     int code = response.getHttpStatusCode();
     if (code != HTTP_OK) {

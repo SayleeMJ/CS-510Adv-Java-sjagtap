@@ -148,25 +148,6 @@ public class AirlineServlet extends HttpServlet {
   }
 
   /**
-   * Handles an HTTP DELETE request by removing all dictionary entries.  This
-   * behavior is exposed for testing purposes only.  It's probably not
-   * something that you'd want a real application to expose.
-   */
-  @Override
-  protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws IOException {
-      response.setContentType("text/plain");
-
-      this.airlineDictionary.clear();
-
-      PrintWriter pw = response.getWriter();
-      pw.println(Messages.allDictionaryEntriesDeleted());
-      pw.flush();
-
-      response.setStatus(HttpServletResponse.SC_OK);
-
-  }
-
-  /**
    * Writes an error message about a missing parameter to the HTTP response.
    * The text of the error message is created by {@link Messages#missingRequiredParameter(String)}
    */
