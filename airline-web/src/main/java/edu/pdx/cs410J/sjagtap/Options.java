@@ -40,10 +40,6 @@ public class Options {
         int i = 0;
         while (i < args.length) {
 
-//            if (args[i].equals("-README")) {
-//                Options.printReadMeFile(args);
-//                return;
-//            }
 
             if (args[i].equals("-README")) {
                 Options.printReadMeFile(args);
@@ -107,7 +103,7 @@ public class Options {
         String flightNumber = null;
         String departDate = null;
         String arriveDate = null;
-        Flight flightObject;
+        Flight flightObject = null;
         int remainingNumberOfArgument = args.length - i;
         if (remainingNumberOfArgument == 1) {
             airlineName = args[i];
@@ -129,7 +125,9 @@ public class Options {
             dstAirport = args[i + 6];
             arriveDate = args[i + 7] + " " + args[i + 8] + " " + args[i + 9];
             optionPost = true;
-            validateInputParameters(flightNumber, srcAirport, departDate, dstAirport, arriveDate);
+            flightObject = createAndValidateFlightForPretty(flightNumber, srcAirport, departDate, dstAirport, arriveDate);
+//            validateInputParameters(flightNumber, srcAirport, departDate, dstAirport, arriveDate);
+
         } else {
             usage("Invalid number of argument present. Please check readme.");
             return;
@@ -139,6 +137,20 @@ public class Options {
             usage("Invalid Airline Name");
             return;
         }
+
+        if(optionPrint){
+            if (flightObject != null) {
+                Options.printUsingCommandLine(flightObject);
+            }
+        }
+
+        /**
+         * Function for -print option for new parameters.
+         * Print flights to console.
+         *
+         * @param flight Flight information.
+         */
+
 
         AirlineRestClient client = new AirlineRestClient(hostName, port);
 
@@ -175,6 +187,10 @@ public class Options {
         }
 
         System.out.println(message);
+    }
+
+    private static void printUsingCommandLine(Flight flightObject) {
+        System.out.println(flightObject.toString());
     }
 
     /**
@@ -262,77 +278,6 @@ public class Options {
     }
 
     /**
-     * Validating and creating a new flight for with project 2 objective.
-     *
-     * @param flightNumber provided flight number.
-     * @param src          provided source.
-     * @param depart       provided departure time and date.
-     * @param dst          provided destination
-     * @param arrive       provided arriving time and date.
-     */
-    static Flight createAndValidateFlight(String flightNumber, String src, String depart, String dst, String arrive) {
-
-        // Validate flight number
-        if (!Flight.isValidFlightNumber(flightNumber)) {
-            System.err.println("Invalid flight number");
-            return null;
-        }
-
-        int flightNum = Integer.parseInt(flightNumber);
-
-        // validate src
-        if (!Flight.isValidSrcAndDest(src)) {
-            System.err.println("Invalid source airport code.");
-            return null;
-        }
-        src = src.toUpperCase();
-        String source = AirportNames.getName(src);
-        if (source == null) {
-            System.err.println("The three-letter source airport code does not correspond to a known airport");
-            return null;
-        }
-
-        // validate depart
-        if (!Flight.isValidDateAndTime24Hours(depart)) {
-            System.err.println("Invalid departure date-time format.");
-            return null;
-        }
-
-        // validate dest
-        if (!Flight.isValidSrcAndDest(dst)) {
-            System.err.println("Invalid destination airport code.");
-            return null;
-        }
-
-        dst = dst.toUpperCase();
-
-        String destination = AirportNames.getName(dst);
-        if (destination == null) {
-            System.err.println("The three-letter destination airport code does not correspond to a known airport");
-            return null;
-        }
-
-        // validate arrive
-        if (!Flight.isValidDateAndTime24Hours(arrive)) {
-            System.err.println("Invalid arrival date-time format.");
-            return null;
-        }
-
-        // Covert string to date
-        Date arriveDate;
-        Date departDate;
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm");
-        try {
-            departDate = simpleDateFormat.parse(depart);
-            arriveDate = simpleDateFormat.parse(arrive);
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }
-        Flight flight = new Flight(flightNum, src, departDate, dst, arriveDate);
-        return flight;
-    }
-
-    /**
      * validating and creating a new flight for project 3 objective.
      *
      * @param flightNumber provided flight number.
@@ -412,7 +357,67 @@ public class Options {
         Flight flight = new Flight(flightNum, src, departDate, dst, arriveDate);
         return flight;
     }
+    static Flight createAndValidateFlight(String flightNumber, String src, String depart, String dst, String arrive) {
 
+        // Validate flight number
+        if (!Flight.isValidFlightNumber(flightNumber)) {
+            System.err.println("Invalid flight number");
+            return null;
+        }
+
+        int flightNum = Integer.parseInt(flightNumber);
+
+        // validate src
+        if (!Flight.isValidSrcAndDest(src)) {
+            System.err.println("Invalid source airport code.");
+            return null;
+        }
+        src = src.toUpperCase();
+        String source = AirportNames.getName(src);
+        if (source == null) {
+            System.err.println("The three-letter source airport code does not correspond to a known airport");
+            return null;
+        }
+
+        // validate depart
+        if (!Flight.isValidDateAndTime24Hours(depart)) {
+            System.err.println("Invalid departure date-time format.");
+            return null;
+        }
+
+        // validate dest
+        if (!Flight.isValidSrcAndDest(dst)) {
+            System.err.println("Invalid destination airport code.");
+            return null;
+        }
+
+        dst = dst.toUpperCase();
+
+        String destination = AirportNames.getName(dst);
+        if (destination == null) {
+            System.err.println("The three-letter destination airport code does not correspond to a known airport");
+            return null;
+        }
+
+        // validate arrive
+        if (!Flight.isValidDateAndTime24Hours(arrive)) {
+            System.err.println("Invalid arrival date-time format.");
+            return null;
+        }
+
+        // Covert string to date
+        Date arriveDate;
+        Date departDate;
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm");
+        try {
+            departDate = simpleDateFormat.parse(depart);
+            arriveDate = simpleDateFormat.parse(arrive);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+        Flight flight = new Flight(flightNum, src, departDate, dst, arriveDate);
+        return flight;
+    }
 
     /**
      * Read and print read me file.
@@ -431,7 +436,7 @@ public class Options {
                 System.err.println("Unable to read README.md");
             }
         } else {
-            usage("Missing something");
+            usage("Invalid number of argument present.");
         }
     }
 

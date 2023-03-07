@@ -11,20 +11,32 @@ public class Messages
         return String.format("The required parameter \"%s\" is missing", parameterName);
     }
 
-    public static String definedWordAs(String word, String definition )
+    public static String definedAirlineAs(String Airline, Flight flight )
     {
-        return String.format( "Defined %s as %s", word, definition );
+        return String.format( "Airline: %s Flight: %s added to the dictionary", Airline, flight.getNumber());
+    }
+
+    public static String definedAirlineAs(String Airline, String flightNumber )
+    {
+        return String.format( "Airline: %s Flight: %s added to the dictionary", Airline, flightNumber);
     }
 
     public static String allDictionaryEntriesDeleted() {
         return "All dictionary entries have been deleted";
     }
 
-    public static String definedAirlineAs(String Airline, Flight flight) {
-        return String.format( "Airline: %s Flight: %s added to the dictionary", Airline, flight.getNumber());
+    public static String invalidDateFormat( String parameterName )
+    {
+        return String.format("The required parameter \"%s\" is in invalid format, excepted format MM/dd/yyyy HH:mm a", parameterName);
     }
 
-    public static String definedAirlineAs(String Airline, String flightNumber) {
-        return String.format( "Airline: %s Flight: %s added to the dictionary", Airline, flightNumber);
+    public static String airlineNotFound( String airline )
+    {
+        return String.format("Airline %s not found in the dictionary", airline);
+    }
+
+    public static String flightsNotFound( String airline, String src, String dest)
+    {
+        return String.format("No matching flights found in the dictionary for %s from %s to %s", airline, src, dest);
     }
 }

@@ -53,7 +53,7 @@ public class AirlineServlet extends HttpServlet {
             writeAirline(airline, src, dest, response);
         } else {
             //TODO remove and handle an error when airline is null
-            writeAllAirlineEntries(response);
+            missingRequiredParameter(response, AIRLINE_PARAMETER);
         }
     }
 
@@ -175,7 +175,8 @@ public class AirlineServlet extends HttpServlet {
         Airline airlineDefinition = this.airlineDictionary.get(airline);
 
         if (airlineDefinition == null) {
-            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            String message = Messages.airlineNotFound(airline);
+            response.sendError(HttpServletResponse.SC_NOT_FOUND, message);
         } else {
             OutputStream ow = response.getOutputStream();
             XmlDumper dumper = new XmlDumper(ow);
@@ -239,7 +240,7 @@ public class AirlineServlet extends HttpServlet {
     }
 
 //    @VisibleForTesting
-//    String getDefinition(String word) {
-//        return this.dictionary.get(word);
+//    Airline getDefinition(String word) {
+//        return this.airlineDictionary.get(word);
 //    }
 }
