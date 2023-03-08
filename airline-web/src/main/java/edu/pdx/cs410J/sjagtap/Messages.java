@@ -21,10 +21,6 @@ public class Messages
         return String.format( "Airline: %s Flight: %s added to the dictionary", Airline, flightNumber);
     }
 
-    public static String allDictionaryEntriesDeleted() {
-        return "All dictionary entries have been deleted";
-    }
-
     public static String invalidDateFormat( String parameterName )
     {
         return String.format("The required parameter \"%s\" is in invalid format, excepted format MM/dd/yyyy HH:mm a", parameterName);
