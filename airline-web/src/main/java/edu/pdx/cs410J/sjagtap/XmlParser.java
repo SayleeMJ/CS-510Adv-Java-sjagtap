@@ -42,7 +42,7 @@ public class XmlParser implements AirlineParser<Airline> {
         try {
             builder = documentBuilderFactory.newDocumentBuilder();
         } catch (ParserConfigurationException e) {
-            throw  new RuntimeException(e);
+            throw new RuntimeException(e);
         }
         builder.setErrorHandler(helper);
         builder.setEntityResolver(helper);
@@ -61,10 +61,10 @@ public class XmlParser implements AirlineParser<Airline> {
 
         NodeList nodeList = document.getElementsByTagName("flight");
 
-        for(int i =0; i < nodeList.getLength(); i++){
+        for (int i = 0; i < nodeList.getLength(); i++) {
             Node node = nodeList.item(i);
 
-            if(node.getNodeType() == Node.ELEMENT_NODE){
+            if (node.getNodeType() == Node.ELEMENT_NODE) {
                 Flight flight = createFlight(node);
                 airline.addFlight(flight);
             }
@@ -77,7 +77,6 @@ public class XmlParser implements AirlineParser<Airline> {
      * This function parse the data of flight from xml file and creates a flight object.
      *
      * @param node nodelist of flight
-     *
      * @return This will return the Flight object which contains information
      * of flight from the xml file.
      */
@@ -104,7 +103,6 @@ public class XmlParser implements AirlineParser<Airline> {
      * This function parse the date and time from xml file.
      *
      * @param departureTimeDate node of which contains departure and arrival time date
-     *
      * @return Date and time string in required format to read from xml file
      */
     private String getDateTime(Node departureTimeDate) {
@@ -118,7 +116,7 @@ public class XmlParser implements AirlineParser<Airline> {
         String hour = time.getNamedItem("hour").getNodeValue();
         String minute = time.getNamedItem("minute").getNodeValue();
 
-        String dateAndTime = month + "/" + day + "/" + year +  " " + hour + ":" + minute;
+        String dateAndTime = month + "/" + day + "/" + year + " " + hour + ":" + minute;
         return dateAndTime;
     }
 }
