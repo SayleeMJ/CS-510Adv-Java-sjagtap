@@ -1,6 +1,5 @@
 package edu.pdx.cs410J.sjagtap;
 
-import com.google.common.annotations.VisibleForTesting;
 import edu.pdx.cs410J.AirportNames;
 import edu.pdx.cs410J.ParserException;
 import edu.pdx.cs410J.web.HttpRequestHelper;
@@ -41,10 +40,10 @@ public class Options {
         int i = 0;
         while (i < args.length) {
 
-//            if (args[i].equals("-README")) {
-//                Options.printReadMeFile(args);
-//                return;
-//            }
+            if (args[i].equals("-README")) {
+                Options.printReadMeFile(args);
+                return;
+            }
 
             if (args[i].equals("-print")) {
                 optionPrint = true;
@@ -53,7 +52,7 @@ public class Options {
             }
 
             if (args[i].equals("-search")) {
-                optionSearchSpecific = true;
+                optionSearch = true;
                 i++;
                 continue;
             }
@@ -92,30 +91,33 @@ public class Options {
             break;
         }
 
-        if (hostName == null || portString == null) {
-            usage("Hostname and or port cannot be empty.");
-            return;
-        }
-
         String airlineName = null;
         String srcAirport = null;
         String dstAirport = null;
         String flightNumber = null;
         String departDate = null;
         String arriveDate = null;
+        Flight flightObject = null;
         int remainingNumberOfArgument = args.length - i;
         if (remainingNumberOfArgument == 1) {
+            if (!optionSearch)
+            {
+                usage("Missing -search tag");
+            }
             airlineName = args[i];
+            validateAirlineName(airlineName);
             optionSearch = true;
         } else if (remainingNumberOfArgument == 3) {
-            if (!optionSearchSpecific)
+            if (!optionSearch)
             {
                 usage("Missing -search tag");
             }
             airlineName = args[i];
             srcAirport = args[i + 1];
             dstAirport = args[i + 2];
+            validateAirlineName(airlineName);
             validateInputParameters(srcAirport, dstAirport);
+            optionSearchSpecific = true;
         } else if (remainingNumberOfArgument == 10) {
             airlineName = args[i];
             flightNumber = args[i + 1];
@@ -123,16 +125,21 @@ public class Options {
             departDate = args[i + 3] + " " + args[i + 4] + " " + args[i + 5];
             dstAirport = args[i + 6];
             arriveDate = args[i + 7] + " " + args[i + 8] + " " + args[i + 9];
-            optionPost = true;
-            validateInputParameters(flightNumber, srcAirport, departDate, dstAirport, arriveDate);
+            if (hostName != null && portString != null)
+            {
+                optionPost = true;
+            }
+            validateAirlineName(airlineName);
+            flightObject = createAndValidateFlightForPretty(flightNumber, srcAirport, departDate, dstAirport, arriveDate);
         } else {
             usage("Invalid number of argument present. Please check readme.");
             return;
         }
 
-        if (!Airline.isValidAirlineName(airlineName)) {
-            usage("Invalid Airline Name");
-            return;
+        if(optionPrint){
+            if (flightObject != null) {
+                Options.printUsingCommandLine(flightObject);
+            }
         }
 
         AirlineRestClient client = new AirlineRestClient(hostName, port);
@@ -140,6 +147,10 @@ public class Options {
         String message = null;
         try {
             if (optionSearch) {
+                if (hostName == null || portString == null) {
+                    usage("Hostname and or port cannot be empty.");
+                    return;
+                }
                 Airline airline = client.getFlights(airlineName);
                 Writer sw = new StringWriter();
                 PrettyPrinter pretty = new PrettyPrinter(sw);
@@ -147,7 +158,11 @@ public class Options {
                 message = sw.toString();
             }
 
-            if (optionSearchSpecific) {
+            if (optionSearch && optionSearchSpecific) {
+                if (hostName == null || portString == null) {
+                    usage("Hostname and or port cannot be empty.");
+                    return;
+                }
                 Airline airline = client.getFlightsFromSrcDestination(airlineName, srcAirport, dstAirport);
                 StringWriter sw = new StringWriter();
                 PrettyPrinter pretty = new PrettyPrinter(sw);
@@ -156,6 +171,10 @@ public class Options {
             }
 
             if (optionPost) {
+                if (hostName == null || portString == null) {
+                    usage("Hostname and or port cannot be empty.");
+                    return;
+                }
                 client.addFlightEntry(airlineName, flightNumber, srcAirport, departDate, dstAirport, arriveDate);
                 message = Messages.definedAirlineAs(airlineName, flightNumber);
 
@@ -171,56 +190,8 @@ public class Options {
         System.out.println(message);
     }
 
-    /**
-     * Validating the input parameters provided to POST api.
-     *
-     * @param flightNumber provided flight number.
-     * @param src          provided source.
-     * @param depart       provided departure time and date.
-     * @param dst          provided destination
-     * @param arrive       provided arriving time and date.
-     */
-    static void validateInputParameters(String flightNumber, String src, String depart, String dst, String arrive) {
-
-        // Validate flight number
-        if (!Flight.isValidFlightNumber(flightNumber)) {
-            usage("Invalid flight number");
-        }
-
-        int flightNum = Integer.parseInt(flightNumber);
-
-        // validate src
-        if (!Flight.isValidSrcAndDest(src)) {
-            usage("Invalid source airport code.");
-        }
-
-        src = src.toUpperCase();
-        String source = AirportNames.getName(src);
-        if (source == null) {
-            usage("The three-letter source airport code does not correspond to a known airport");
-        }
-
-        // validate depart. chekc this
-        if (!Flight.isValidDateAndTimeAndZone12Hour(depart)) {
-            usage("Invalid departure date-time format.");
-        }
-
-        // validate dest
-        if (!Flight.isValidSrcAndDest(dst)) {
-            usage("Invalid destination airport code.");
-        }
-
-        dst = dst.toUpperCase();
-
-        String destination = AirportNames.getName(dst);
-        if (destination == null) {
-            usage("The three-letter destination airport code does not correspond to a known airport");
-        }
-
-        // validate arrive. check this
-        if (!Flight.isValidDateAndTimeAndZone12Hour(arrive)) {
-            usage("Invalid arrival date-time format.");
-        }
+    private static void printUsingCommandLine(Flight flightObject) {
+        System.out.println(flightObject.toString());
     }
 
     /**
@@ -252,6 +223,17 @@ public class Options {
         String destination = AirportNames.getName(dst);
         if (destination == null) {
             usage("The three-letter destination airport code does not correspond to a known airport");
+        }
+    }
+
+    /**
+     *
+     * @param airlineName
+     */
+    static void validateAirlineName(String airlineName)
+    {
+        if (!Airline.isValidAirlineName(airlineName)) {
+            usage("Invalid Airline Name");
         }
     }
 
@@ -408,6 +390,27 @@ public class Options {
     }
 
     /**
+     * Read and print read me file.
+     */
+    static void printReadMeFile(String[] args) {
+        if (args.length == 1) {
+            try {
+                InputStream readme = Project5.class.getResourceAsStream("README.txt");
+                BufferedReader reader = new BufferedReader(new InputStreamReader(readme));
+                String line = reader.readLine();
+                while (line != null) {
+                    System.out.println(line);
+                    line = reader.readLine();
+                }
+            } catch (Exception e) {
+                System.err.println("Unable to read README.md");
+            }
+        } else {
+            usage("Invalid number of argument present.");
+        }
+    }
+
+    /**
      * Prints usage information for this program and exits
      * @param message An error message to print
      */
@@ -420,7 +423,7 @@ public class Options {
         err.println("to the server.");
         err.println();
         err.println("To list all the flights of a airline");
-        err.println("usage: java -jar target/airline-client.jar -host [host] -port [port] [airline]");
+        err.println("usage: java -jar target/airline-client.jar -host [host] -port [port] -search [airline]");
         err.println("  host         Host of web server");
         err.println("  port         Port of web server");
         err.println("  airline      Airline name");
