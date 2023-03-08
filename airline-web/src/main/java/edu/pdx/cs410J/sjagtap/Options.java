@@ -5,6 +5,7 @@ import edu.pdx.cs410J.ParserException;
 import edu.pdx.cs410J.web.HttpRequestHelper;
 
 import java.io.*;
+import java.security.InvalidParameterException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -137,7 +138,7 @@ public class Options {
             usage("Invalid Airline Name");
             return;
         }
-
+//
         if(optionPrint){
             if (flightObject != null) {
                 Options.printUsingCommandLine(flightObject);
@@ -172,10 +173,12 @@ public class Options {
                 message = sw.toString();
             }
 
-            if (optionPost) {
+            if (optionPost && optionPrint) {
+                client.addFlightEntry(airlineName, flightNumber, srcAirport, departDate, dstAirport, arriveDate);
+            }
+            if (optionPost && !optionPrint) {
                 client.addFlightEntry(airlineName, flightNumber, srcAirport, departDate, dstAirport, arriveDate);
                 message = Messages.definedAirlineAs(airlineName, flightNumber);
-
             }
 
         } catch (IOException | ParserException ex) {
@@ -186,7 +189,9 @@ public class Options {
             return;
         }
 
-        System.out.println(message);
+        if(message != null) {
+            System.out.println(message);
+        }
     }
 
     private static void printUsingCommandLine(Flight flightObject) {
@@ -290,7 +295,7 @@ public class Options {
 
         // Validate flight number
         if (!Flight.isValidFlightNumber(flightNumber)) {
-            System.err.println("Invalid flight number");
+            usage("Invalid flight number");
             return null;
         }
 
@@ -298,28 +303,26 @@ public class Options {
 
         // validate src
         if (!Flight.isValidSrcAndDest(src)) {
-            System.err.println("Invalid source airport code.");
+            usage("Invalid source airport code.");
             return null;
         }
 
         src = src.toUpperCase();
-
         String source = AirportNames.getName(src);
         if (source == null) {
-            System.err.println("The three-letter source airport code does not correspond to a known airport");
+            usage("The three-letter source airport code does not correspond to a known airport");
             return null;
         }
 
-
-        // validate depart
+        // validate depart. chekc this
         if (!Flight.isValidDateAndTimeAndZone12Hour(depart)) {
-            System.err.println("Invalid departure date-time format.");
+            usage("Invalid departure date-time format.");
             return null;
         }
 
         // validate dest
         if (!Flight.isValidSrcAndDest(dst)) {
-            System.err.println("Invalid destination airport code.");
+            usage("Invalid destination airport code.");
             return null;
         }
 
@@ -327,13 +330,13 @@ public class Options {
 
         String destination = AirportNames.getName(dst);
         if (destination == null) {
-            System.err.println("The three-letter destination airport code does not correspond to a known airport");
+            usage("The three-letter destination airport code does not correspond to a known airport");
             return null;
         }
 
-        // validate arrive
+        // validate arrive. check this
         if (!Flight.isValidDateAndTimeAndZone12Hour(arrive)) {
-            System.err.println("Invalid arrival date-time format.");
+            usage("Invalid arrival date-time format.");
             return null;
         }
 
@@ -477,6 +480,7 @@ public class Options {
         err.println("  destination   Destination airport");
         err.println("  arrive        Arrival time in AM/PM format");
         err.println();
+        throw new InvalidParameterException("Input given is invalid. Check above error.");
     }
 
     private static void error(String message) {
