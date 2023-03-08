@@ -36,7 +36,7 @@ class Project5IT extends InvokeMainTestCase {
 
     @Test
     void test2EmptyServer() {
-        MainMethodResult result = invokeMain(Project5.class, "-host", HOSTNAME, "-port", PORT, "airline");
+        MainMethodResult result = invokeMain(Project5.class, "-host", HOSTNAME, "-port", PORT, "-search", "airline");
 
         assertThat(result.getTextWrittenToStandardError(), containsString("** 404Airline airline not found in the dictionary"));
 
@@ -53,7 +53,7 @@ class Project5IT extends InvokeMainTestCase {
         String out = result.getTextWrittenToStandardOut();
         assertThat(out, out, containsString(Messages.definedAirlineAs("airline", "123")));
 
-        result = invokeMain(Project5.class, "-host", HOSTNAME, "-port", PORT, "airline");
+        result = invokeMain(Project5.class, "-host", HOSTNAME, "-port", PORT, "-search", "airline");
 
         assertThat(result.getTextWrittenToStandardError(), equalTo(""));
 

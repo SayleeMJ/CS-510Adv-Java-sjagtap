@@ -93,10 +93,10 @@ public class Options {
             break;
         }
 
-        if (hostName == null || portString == null) {
-            usage("Hostname and or port cannot be empty.");
-            return;
-        }
+//        if (hostName == null || portString == null) {
+//            usage("Hostname and or port cannot be empty.");
+//            return;
+//        }
 
         String airlineName = null;
         String srcAirport = null;
@@ -107,11 +107,13 @@ public class Options {
         Flight flightObject = null;
         int remainingNumberOfArgument = args.length - i;
         if (remainingNumberOfArgument == 1) {
+            if(!optionSearch){
+                usage("Missing -search tag");
+            }
             airlineName = args[i];
-            optionSearch = true;
         } else if (remainingNumberOfArgument == 3) {
             optionSearchSpecific = true;
-            if (!optionSearchSpecific) {
+            if (!optionSearch) {
                 usage("Missing -search tag");
             }
             airlineName = args[i];
@@ -125,7 +127,11 @@ public class Options {
             departDate = args[i + 3] + " " + args[i + 4] + " " + args[i + 5];
             dstAirport = args[i + 6];
             arriveDate = args[i + 7] + " " + args[i + 8] + " " + args[i + 9];
-            optionPost = true;
+
+            if (hostName != null || portString != null) {
+                optionPost = true;
+            }
+
             flightObject = createAndValidateFlightForPretty(flightNumber, srcAirport, departDate, dstAirport, arriveDate);
 
         } else {
@@ -150,6 +156,10 @@ public class Options {
         String message = null;
         try {
             if (optionSearch) {
+                if (hostName == null || portString == null) {
+                    usage("Hostname and or port cannot be empty.");
+                    return;
+                }
                 Airline airline = client.getFlights(airlineName);
                 Writer sw = new StringWriter();
                 PrettyPrinter pretty = new PrettyPrinter(sw);
@@ -157,7 +167,11 @@ public class Options {
                 message = sw.toString();
             }
 
-            if (optionSearchSpecific) {
+            if (optionSearchSpecific && optionSearch) {
+                if (hostName == null || portString == null) {
+                    usage("Hostname and or port cannot be empty.");
+                    return;
+                }
                 Airline airline = client.getFlightsFromSrcDestination(airlineName, srcAirport, dstAirport);
                 StringWriter sw = new StringWriter();
                 PrettyPrinter pretty = new PrettyPrinter(sw);
@@ -166,10 +180,18 @@ public class Options {
             }
 
             if (optionPost && optionPrint) {
+                if (hostName == null || portString == null) {
+                    usage("Hostname and or port cannot be empty.");
+                    return;
+                }
                 client.addFlightEntry(airlineName, flightNumber, srcAirport, departDate, dstAirport, arriveDate);
             }
 
             if (optionPost && !optionPrint) {
+                if (hostName == null || portString == null) {
+                    usage("Hostname and or port cannot be empty.");
+                    return;
+                }
                 client.addFlightEntry(airlineName, flightNumber, srcAirport, departDate, dstAirport, arriveDate);
                 message = Messages.definedAirlineAs(airlineName, flightNumber);
             }
@@ -415,7 +437,7 @@ public class Options {
         err.println("to the server.");
         err.println();
         err.println("To list all the flights of a airline");
-        err.println("usage: java -jar target/airline-client.jar -host [host] -port [port] [airline]");
+        err.println("usage: java -jar target/airline-client.jar -host [host] -port [port] -search [airline]");
         err.println("  host         Host of web server");
         err.println("  port         Port of web server");
         err.println("  airline      Airline name");
