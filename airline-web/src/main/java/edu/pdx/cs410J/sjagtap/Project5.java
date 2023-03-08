@@ -12,13 +12,14 @@ import static edu.pdx.cs410J.sjagtap.Options.parseAndProcessArgs;
 public class Project5 {
 
     public static void main(String... args) {
-        try{
+        try {
             parseAndProcessArgs(args);
-        }catch (InvalidParameterException exception) {
-           error("While parsing input parameters: " + exception.getMessage());
+        } catch (InvalidParameterException exception) {
+            error("Error while parsing input parameters: " + exception.getMessage());
         }
 
     }
+
     private static void error(String message) {
         PrintStream err = System.err;
         err.println("** " + message);

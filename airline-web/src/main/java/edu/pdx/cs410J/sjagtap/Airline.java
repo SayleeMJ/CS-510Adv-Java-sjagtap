@@ -14,6 +14,7 @@ public class Airline extends AbstractAirline<Flight> {
 
     /**
      * Constructor for airline.
+     *
      * @param name airline name.
      */
     public Airline(String name) {

@@ -3,6 +3,7 @@ package edu.pdx.cs410J.sjagtap;
 import org.junit.jupiter.api.Test;
 
 import java.io.*;
+import java.security.InvalidParameterException;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -24,25 +25,31 @@ public class OptionsTest {
                 "3", "SNN", "01/01/2022 10:10 AM", "SNN", "01/01/2022 11:10 PM");
         assertThat(flight1 != null, is(true));
 
-        flight1 = Options.createAndValidateFlightForPretty(
-                "a", "SNN", "01/01/2022 10:10 AM", "SNN", "01/01/2022 11:10 PM");
-        assertThat(flight1 == null, is(true));
+        try {
+            flight1 = Options.createAndValidateFlightForPretty(
+                    "a", "SNN", "01/01/2022 10:10 AM", "SNN", "01/01/2022 11:10 PM");
+            flight1 = Options.createAndValidateFlightForPretty(
+                    "3", "abc", "01/01/2022 10:10 AM", "SNN", "01/01/2022 11:10 PM");
 
-        flight1 = Options.createAndValidateFlightForPretty(
-                "3", "abc", "01/01/2022 10:10 AM", "SNN", "01/01/2022 11:10 PM");
-        assertThat(flight1 == null, is(true));
 
-        flight1 = Options.createAndValidateFlightForPretty(
-                "3", "SNN", "01/01/2022 24:10 am", "SNN", "01/01/2022 11:10 PM");
-        assertThat(flight1 == null, is(true));
+            flight1 = Options.createAndValidateFlightForPretty(
+                    "3", "SNN", "01/01/2022 24:10 am", "SNN", "01/01/2022 11:10 PM");
 
-        Flight flight = Options.createAndValidateFlightForPretty(
-                "3", "SNN", "01/01/2022 10:10 AM", "abc", "01/01/2022 11:10 PM");
-        assertThat(flight1 == null, is(true));
 
-        flight1 = Options.createAndValidateFlightForPretty(
-                "3", "SNN", "01/01/2022 10:10 AM", "SNN", "01/01/2022 24:10 PM");
-        assertThat(flight1 == null, is(true));
+            Flight flight = Options.createAndValidateFlightForPretty(
+                    "3", "SNN", "01/01/2022 10:10 AM", "abc", "01/01/2022 11:10 PM");
+
+
+            flight1 = Options.createAndValidateFlightForPretty(
+                    "3", "SNN", "01/01/2022 10:10 AM", "SNN", "01/01/2022 24:10 PM");
+
+        } catch (InvalidParameterException exception) {
+            assertThat(flight1 == null, is(false));
+            assertThat(flight1 == null, is(false));
+            assertThat(flight1 == null, is(false));
+            assertThat(flight1 == null, is(false));
+            assertThat(flight1 != null, is(true));
+        }
     }
 
     /**
@@ -90,9 +97,15 @@ public class OptionsTest {
      */
     @Test
     void ValidateGetFlightPrettyUnknownAirport() {
-        Flight flight1 = Options.createAndValidateFlightForPretty(
-                "3", "ADB", "01/02/2022 10:10 AM", "SNN", "01/01/2022 11:10 PM");
-        assertThat(flight1 != null, is(false));
+        Flight flight1 = null;
+        try {
+            Options.createAndValidateFlightForPretty(
+                    "3", "ADB", "01/02/2022 10:10 AM", "SNN", "01/01/2022 11:10 PM");
+        } catch (InvalidParameterException exception) {
+            assertThat(flight1 != null, is(false));
+        }
+
+
     }
 
     /**

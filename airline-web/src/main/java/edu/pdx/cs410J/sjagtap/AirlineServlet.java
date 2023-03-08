@@ -41,19 +41,16 @@ public class AirlineServlet extends HttpServlet {
      * of flights from source to destination.
      */
     @Override
-    protected void doGet( HttpServletRequest request, HttpServletResponse response ) throws IOException
-    {
-        response.setContentType( "text/xml" );
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        response.setContentType("text/xml");
 
-        String airline = getParameter(AIRLINE_PARAMETER, request );
+        String airline = getParameter(AIRLINE_PARAMETER, request);
         String src = getParameter(SOURCE_PARAMETER, request);
         String dest = getParameter(DEST_PARAMETER, request);
 
         if (airline != null) {
             writeAirline(airline, src, dest, response);
-        }
-        else
-        {
+        } else {
             // if airline is null, throw error
             missingRequiredParameter(response, AIRLINE_PARAMETER);
         }
@@ -65,63 +62,58 @@ public class AirlineServlet extends HttpServlet {
      * "flightNumber". It writes the dictionary entry to the HTTP response.
      */
     @Override
-    protected void doPost( HttpServletRequest request, HttpServletResponse response ) throws IOException
-    {
-        response.setContentType( "text/plain" );
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        response.setContentType("text/plain");
 
-        String airline = getParameter(AIRLINE_PARAMETER, request );
-        if ( airline == null) {
+        String airline = getParameter(AIRLINE_PARAMETER, request);
+        if (airline == null) {
             missingRequiredParameter(response, AIRLINE_PARAMETER);
             return;
         }
 
-        String source = getParameter(SOURCE_PARAMETER, request );
-        if ( source == null) {
-            missingRequiredParameter( response, SOURCE_PARAMETER );
+        String source = getParameter(SOURCE_PARAMETER, request);
+        if (source == null) {
+            missingRequiredParameter(response, SOURCE_PARAMETER);
             return;
         }
 
-        String dest = getParameter(DEST_PARAMETER, request );
-        if ( dest == null) {
-            missingRequiredParameter( response, DEST_PARAMETER );
+        String dest = getParameter(DEST_PARAMETER, request);
+        if (dest == null) {
+            missingRequiredParameter(response, DEST_PARAMETER);
             return;
         }
 
-        String depart = getParameter(DEPART_PARAMETER, request );
-        if ( depart == null) {
-            missingRequiredParameter( response, DEPART_PARAMETER );
+        String depart = getParameter(DEPART_PARAMETER, request);
+        if (depart == null) {
+            missingRequiredParameter(response, DEPART_PARAMETER);
             return;
         }
 
-        String arrive = getParameter(ARRIVE_PARAMETER, request );
-        if ( arrive == null) {
-            missingRequiredParameter( response, ARRIVE_PARAMETER );
+        String arrive = getParameter(ARRIVE_PARAMETER, request);
+        if (arrive == null) {
+            missingRequiredParameter(response, ARRIVE_PARAMETER);
             return;
         }
 
-        String flightNumberString = getParameter(FLIGHTNUMBER_PARAMETER, request );
-        if ( flightNumberString == null) {
-            missingRequiredParameter( response, FLIGHTNUMBER_PARAMETER );
+        String flightNumberString = getParameter(FLIGHTNUMBER_PARAMETER, request);
+        if (flightNumberString == null) {
+            missingRequiredParameter(response, FLIGHTNUMBER_PARAMETER);
             return;
         }
 
         Date departDate;
         try {
             departDate = new SimpleDateFormat("MM/dd/yyyy HH:mm a").parse(depart);
-        }
-        catch(ParseException e)
-        {
-            dateInvalidFormat( response, DEPART_PARAMETER );
+        } catch (ParseException e) {
+            dateInvalidFormat(response, DEPART_PARAMETER);
             return;
         }
 
         Date arriveDate;
         try {
             arriveDate = new SimpleDateFormat("MM/dd/yyyy HH:mm a").parse(arrive);
-        }
-        catch(ParseException e)
-        {
-            dateInvalidFormat( response, ARRIVE_PARAMETER );
+        } catch (ParseException e) {
+            dateInvalidFormat(response, ARRIVE_PARAMETER);
             return;
         }
 
@@ -129,12 +121,9 @@ public class AirlineServlet extends HttpServlet {
         SimpleDateFormat date24Format = new SimpleDateFormat("MM/dd/yyyy HH:mm");
         Flight flight = new Flight(Integer.parseInt(flightNumberString), source, new Date(date24Format.format(departDate)), dest, new Date(date24Format.format(arriveDate)));
 
-        if (this.airlineDictionary.containsKey(airline))
-        {
+        if (this.airlineDictionary.containsKey(airline)) {
             this.airlineDictionary.get(airline).addFlight(flight);
-        }
-        else
-        {
+        } else {
             Airline airlineObject = new Airline(airline);
             airlineObject.addFlight(flight);
             this.airlineDictionary.put(airline, airlineObject);
@@ -144,16 +133,15 @@ public class AirlineServlet extends HttpServlet {
         pw.println(Messages.definedAirlineAs(airline, flight));
         pw.flush();
 
-        response.setStatus( HttpServletResponse.SC_OK);
+        response.setStatus(HttpServletResponse.SC_OK);
     }
 
     /**
      * Writes an error message about a missing parameter to the HTTP response.
      * The text of the error message is created by {@link Messages#missingRequiredParameter(String)}
      */
-    private void missingRequiredParameter( HttpServletResponse response, String parameterName )
-            throws IOException
-    {
+    private void missingRequiredParameter(HttpServletResponse response, String parameterName)
+            throws IOException {
         String message = Messages.missingRequiredParameter(parameterName);
         response.sendError(HttpServletResponse.SC_PRECONDITION_FAILED, message);
     }
@@ -162,9 +150,8 @@ public class AirlineServlet extends HttpServlet {
      * Writes an error message about an invalid date parameter to the HTTP response.
      * The text of the error message is created by {@link Messages#invalidDateFormat(String)}
      */
-    private void dateInvalidFormat( HttpServletResponse response, String parameterName )
-            throws IOException
-    {
+    private void dateInvalidFormat(HttpServletResponse response, String parameterName)
+            throws IOException {
         String message = Messages.invalidDateFormat(parameterName);
         response.sendError(HttpServletResponse.SC_BAD_REQUEST, message);
     }
@@ -179,21 +166,15 @@ public class AirlineServlet extends HttpServlet {
         if (airlineDefinition == null) {
             String message = Messages.airlineNotFound(airline);
             response.sendError(HttpServletResponse.SC_NOT_FOUND, message);
-        }
-
-        else {
+        } else {
             OutputStream ow = response.getOutputStream();
             XmlDumper dumper = new XmlDumper(ow);
 
-            if ( src == null && dest != null )
-            {
+            if (src == null && dest != null) {
                 missingRequiredParameter(response, SOURCE_PARAMETER);
-            }
-            else if ( src != null && dest == null)
-            {
+            } else if (src != null && dest == null) {
                 missingRequiredParameter(response, DEST_PARAMETER);
-            }
-            else if (src != null && dest != null) {
+            } else if (src != null && dest != null) {
                 Airline newAirlineDefinition = new Airline(airlineDefinition.getName());
                 for (Flight f : airlineDefinition.getFlights()) {
                     if (f.getSource().equals(src) && f.getDestination().equals(dest)) {
@@ -201,12 +182,10 @@ public class AirlineServlet extends HttpServlet {
                     }
                 }
 
-                if (newAirlineDefinition.getFlights().size() == 0)
-                {
+                if (newAirlineDefinition.getFlights().size() == 0) {
                     String message = Messages.flightsNotFound(airline, src, dest);
                     response.sendError(HttpServletResponse.SC_NOT_FOUND, message);
-                }
-                else {
+                } else {
                     dumper.dump(newAirlineDefinition);
                 }
             } else {
@@ -221,7 +200,7 @@ public class AirlineServlet extends HttpServlet {
      * Returns the value of the HTTP request parameter with the given name.
      *
      * @return <code>null</code> if the value of the parameter is
-     *         <code>null</code> or is the empty string
+     * <code>null</code> or is the empty string
      */
     private String getParameter(String name, HttpServletRequest request) {
         String value = request.getParameter(name);

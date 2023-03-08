@@ -127,7 +127,6 @@ public class Options {
             arriveDate = args[i + 7] + " " + args[i + 8] + " " + args[i + 9];
             optionPost = true;
             flightObject = createAndValidateFlightForPretty(flightNumber, srcAirport, departDate, dstAirport, arriveDate);
-//            validateInputParameters(flightNumber, srcAirport, departDate, dstAirport, arriveDate);
 
         } else {
             usage("Invalid number of argument present. Please check readme.");
@@ -138,19 +137,12 @@ public class Options {
             usage("Invalid Airline Name");
             return;
         }
-//
-        if(optionPrint){
+
+        if (optionPrint) {
             if (flightObject != null) {
                 Options.printUsingCommandLine(flightObject);
             }
         }
-
-        /**
-         * Function for -print option for new parameters.
-         * Print flights to console.
-         *
-         * @param flight Flight information.
-         */
 
 
         AirlineRestClient client = new AirlineRestClient(hostName, port);
@@ -176,6 +168,7 @@ public class Options {
             if (optionPost && optionPrint) {
                 client.addFlightEntry(airlineName, flightNumber, srcAirport, departDate, dstAirport, arriveDate);
             }
+
             if (optionPost && !optionPrint) {
                 client.addFlightEntry(airlineName, flightNumber, srcAirport, departDate, dstAirport, arriveDate);
                 message = Messages.definedAirlineAs(airlineName, flightNumber);
@@ -189,66 +182,21 @@ public class Options {
             return;
         }
 
-        if(message != null) {
+        if (message != null) {
             System.out.println(message);
         }
     }
 
+    /**
+     * Function for -print option for new parameters.
+     * Print flights to console.
+     *
+     * @param flightObject Flight information.
+     */
     private static void printUsingCommandLine(Flight flightObject) {
         System.out.println(flightObject.toString());
     }
 
-    /**
-     * Validating the input parameters provided to POST api.
-     *
-     * @param flightNumber provided flight number.
-     * @param src          provided source.
-     * @param depart       provided departure time and date.
-     * @param dst          provided destination
-     * @param arrive       provided arriving time and date.
-     */
-    static void validateInputParameters(String flightNumber, String src, String depart, String dst, String arrive) {
-
-        // Validate flight number
-        if (!Flight.isValidFlightNumber(flightNumber)) {
-            usage("Invalid flight number");
-        }
-
-        int flightNum = Integer.parseInt(flightNumber);
-
-        // validate src
-        if (!Flight.isValidSrcAndDest(src)) {
-            usage("Invalid source airport code.");
-        }
-
-        src = src.toUpperCase();
-        String source = AirportNames.getName(src);
-        if (source == null) {
-            usage("The three-letter source airport code does not correspond to a known airport");
-        }
-
-        // validate depart. chekc this
-        if (!Flight.isValidDateAndTimeAndZone12Hour(depart)) {
-            usage("Invalid departure date-time format.");
-        }
-
-        // validate dest
-        if (!Flight.isValidSrcAndDest(dst)) {
-            usage("Invalid destination airport code.");
-        }
-
-        dst = dst.toUpperCase();
-
-        String destination = AirportNames.getName(dst);
-        if (destination == null) {
-            usage("The three-letter destination airport code does not correspond to a known airport");
-        }
-
-        // validate arrive. check this
-        if (!Flight.isValidDateAndTimeAndZone12Hour(arrive)) {
-            usage("Invalid arrival date-time format.");
-        }
-    }
 
     /**
      * Validating the input parameters provided to POST api.
@@ -283,7 +231,7 @@ public class Options {
     }
 
     /**
-     * validating and creating a new flight for project 3 objective.
+     * validating and creating a new flight for 12 hours date format.
      *
      * @param flightNumber provided flight number.
      * @param src          provided source.
@@ -360,6 +308,17 @@ public class Options {
         Flight flight = new Flight(flightNum, src, departDate, dst, arriveDate);
         return flight;
     }
+
+    /**
+     * Validating and creating a new flight for with 24 hours date format.
+     *
+     * @param flightNumber provided flight number.
+     * @param src          provided source.
+     * @param depart       provided departure time and date.
+     * @param dst          provided destination
+     * @param arrive       provided arriving time and date.
+     */
+
     static Flight createAndValidateFlight(String flightNumber, String src, String depart, String dst, String arrive) {
 
         // Validate flight number

@@ -264,11 +264,11 @@ public class Flight extends AbstractFlight implements Comparable {
          *    Flight Duration: 60 Minutes
          */
 
-        String result = "Flight Number: " + flightNumber +"\n"+
-                "   Departing Airport: " + sourceAirport +"\n"+
-                "   Departing date & time: " + departDate +"\n"+
-                "   Arriving Airport: " + destinationAirport +"\n"+
-                "   Arriving  date & time: " + arriveDate +"\n"+
+        String result = "Flight Number: " + flightNumber + "\n" +
+                "   Departing Airport: " + sourceAirport + "\n" +
+                "   Departing date & time: " + departDate + "\n" +
+                "   Arriving Airport: " + destinationAirport + "\n" +
+                "   Arriving  date & time: " + arriveDate + "\n" +
                 "   Flight Duration: " + duration + " minutes";
 
         return result;
