@@ -165,7 +165,7 @@ public class Options {
             }
 
             if (optionSearchSpecific) {
-                Airline airline = client.getFlightsFromSourceDestination(airlineName, srcAirport, dstAirport);
+                Airline airline = client.getFlightsFromSrcDestination(airlineName, srcAirport, dstAirport);
                 StringWriter sw = new StringWriter();
                 PrettyPrinter pretty = new PrettyPrinter(sw);
                 pretty.dump(airline);

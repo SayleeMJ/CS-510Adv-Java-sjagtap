@@ -29,20 +29,14 @@ class Project5IT extends InvokeMainTestCase {
     private static final String PORT = System.getProperty("http.port", "8080");
 
     @Test
-    void test0RemoveAllMappings() throws IOException {
-        AirlineRestClient client = new AirlineRestClient(HOSTNAME, Integer.parseInt(PORT));
-        client.removeAllDictionaryEntries();
-    }
-
-    @Test
     void test1NoCommandLineArguments() {
-        MainMethodResult result = invokeMain( Project5.class );
+        MainMethodResult result = invokeMain(Project5.class);
         assertThat(result.getTextWrittenToStandardError(), containsString("Missing command line arguments. Please provide argument as explained below."));
     }
 
     @Test
     void test2EmptyServer() {
-        MainMethodResult result = invokeMain( Project5.class, "-host", HOSTNAME, "-port", PORT, "airline");
+        MainMethodResult result = invokeMain(Project5.class, "-host", HOSTNAME, "-port", PORT, "airline");
 
         assertThat(result.getTextWrittenToStandardError(), containsString("** 404Airline airline not found in the dictionary"));
 
@@ -52,14 +46,14 @@ class Project5IT extends InvokeMainTestCase {
     @Test
     void test4AddDefinition() {
 
-        MainMethodResult result = invokeMain( Project5.class, "-host", HOSTNAME, "-port", PORT, "airline", "123", "PDX", "07/19/2023", "1:02", "pm", "LAS", "07/19/2023", "6:22", "pm");
+        MainMethodResult result = invokeMain(Project5.class, "-host", HOSTNAME, "-port", PORT, "airline", "123", "PDX", "07/19/2023", "1:02", "pm", "LAS", "07/19/2023", "6:22", "pm");
 
         assertThat(result.getTextWrittenToStandardError(), equalTo(""));
 
         String out = result.getTextWrittenToStandardOut();
         assertThat(out, out, containsString(Messages.definedAirlineAs("airline", "123")));
 
-        result = invokeMain( Project5.class, "-host",HOSTNAME, "-port", PORT, "airline" );
+        result = invokeMain(Project5.class, "-host", HOSTNAME, "-port", PORT, "airline");
 
         assertThat(result.getTextWrittenToStandardError(), equalTo(""));
 

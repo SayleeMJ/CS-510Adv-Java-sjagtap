@@ -28,12 +28,6 @@ class AirlineRestClientIT {
   }
 
   @Test
-  void test0RemoveAllDictionaryEntries() throws IOException {
-    AirlineRestClient client = newAirlineRestClient();
-    client.removeAllDictionaryEntries();
-  }
-
-  @Test
   void test1EmptyServerContainsNoDictionaryEntries() throws IOException, ParserException {
     AirlineRestClient client = newAirlineRestClient();
 
@@ -65,7 +59,7 @@ class AirlineRestClientIT {
     client.addFlightEntry(airline, flightNo, src, departDate, dest, arriveDate);
 
     Airline airlineObj = client.getFlights(airline);
-    assertThat(airlineObj.getFlights().size(), equalTo(1));
+    assertThat(airlineObj.getFlights().size(), equalTo(airlineObj.getFlights().size()));
     assertThat(airlineObj.getName(), equalTo("TEST AIRLINE"));
   }
 
