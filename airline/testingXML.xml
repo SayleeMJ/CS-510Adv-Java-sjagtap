@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="us-ascii"?>
+<!DOCTYPE airline SYSTEM "http://www.cs.pdx.edu/~whitlock/dtds/airline.dtd">
+<airline>
+    <name>Indigo</name>
+    <flight>
+        <number>70</number>
+        <src>SCL</src>
+        <depart>
+            <date day="10" month="10" year="2023"/>
+            <time hour="01" minute="30"/>
+        </depart>
+        <dest>SNN</dest>
+        <arrive>
+            <date day="10" month="10" year="2023"/>
+            <time hour="02" minute="30"/>
+        </arrive>
+    </flight>
+    <flight>
+        <number>70</number>
+        <src>SCL</src>
+        <depart>
+            <date day="10" month="10" year="2023"/>
+            <time hour="01" minute="30"/>
+        </depart>
+        <dest>SNN</dest>
+        <arrive>
+            <date day="10" month="10" year="2023"/>
+            <time hour="02" minute="30"/>
+        </arrive>
+    </flight>
+    <flight>
+        <number>70</number>
+        <src>SCL</src>
+        <depart>
+            <date day="10" month="10" year="2023"/>
+            <time hour="01" minute="30"/>
+        </depart>
+        <dest>SNN</dest>
+        <arrive>
+            <date day="10" month="10" year="2023"/>
+            <time hour="02" minute="30"/>
+        </arrive>
+    </flight>
+    <flight>
+        <number>70</number>
+        <src>SCL</src>
+        <depart>
+            <date day="10" month="10" year="2023"/>
+            <time hour="01" minute="30"/>
+        </depart>
+        <dest>SNN</dest>
+        <arrive>
+            <date day="10" month="10" year="2023"/>
+            <time hour="02" minute="30"/>
+        </arrive>
+    </flight>
+    <flight>
+        <number>70</number>
+        <src>SCL</src>
+        <depart>
+            <date day="10" month="10" year="2023"/>
+            <time hour="01" minute="30"/>
+        </depart>
+        <dest>SNN</dest>
+        <arrive>
+            <date day="10" month="10" year="2023"/>
+            <time hour="02" minute="30"/>
+        </arrive>
+    </flight>
+    <flight>
+        <number>70</number>
+        <src>SCL</src>
+        <depart>
+            <date day="10" month="10" year="2023"/>
+            <time hour="01" minute="30"/>
+        </depart>
+        <dest>SNN</dest>
+        <arrive>
+            <date day="10" month="10" year="2023"/>
+            <time hour="02" minute="30"/>
+        </arrive>
+    </flight>
+    <flight>
+        <number>70</number>
+        <src>SCL</src>
+        <depart>
+            <date day="10" month="10" year="2023"/>
+            <time hour="01" minute="30"/>
+        </depart>
+        <dest>SNN</dest>
+        <arrive>
+            <date day="10" month="10" year="2023"/>
+            <time hour="02" minute="30"/>
+        </arrive>
+    </flight>
+    <flight>
+        <number>70</number>
+        <src>SCL</src>
+        <depart>
+            <date day="10" month="10" year="2023"/>
+            <time hour="01" minute="30"/>
+        </depart>
+        <dest>SNN</dest>
+        <arrive>
+            <date day="10" month="10" year="2023"/>
+            <time hour="02" minute="30"/>
+        </arrive>
+    </flight>
+    <flight>
+        <number>70</number>
+        <src>SCL</src>
+        <depart>
+            <date day="10" month="10" year="2023"/>
+            <time hour="01" minute="30"/>
+        </depart>
+        <dest>SNN</dest>
+        <arrive>
+            <date day="10" month="10" year="2023"/>
+            <time hour="02" minute="30"/>
+        </arrive>
+    </flight>
+    <flight>
+        <number>70</number>
+        <src>SCL</src>
+        <depart>
+            <date day="10" month="10" year="2023"/>
+            <time hour="01" minute="30"/>
+        </depart>
+        <dest>SNN</dest>
+        <arrive>
+            <date day="10" month="10" year="2023"/>
+            <time hour="02" minute="30"/>
+        </arrive>
+    </flight>
+    <flight>
+        <number>70</number>
+        <src>SCL</src>
+        <depart>
+            <date day="10" month="10" year="2023"/>
+            <time hour="01" minute="30"/>
+        </depart>
+        <dest>SNN</dest>
+        <arrive>
+            <date day="10" month="10" year="2023"/>
+            <time hour="02" minute="30"/>
+        </arrive>
+    </flight>
+    <flight>
+        <number>70</number>
+        <src>SCL</src>
+        <depart>
+            <date day="10" month="10" year="2023"/>
+            <time hour="01" minute="30"/>
+        </depart>
+        <dest>SNN</dest>
+        <arrive>
+            <date day="10" month="10" year="2023"/>
+            <time hour="02" minute="30"/>
+        </arrive>
+    </flight>
+    <flight>
+        <number>70</number>
+        <src>SCL</src>
+        <depart>
+            <date day="10" month="10" year="2023"/>
+            <time hour="01" minute="30"/>
+        </depart>
+        <dest>SNN</dest>
+        <arrive>
+            <date day="10" month="10" year="2023"/>
+            <time hour="02" minute="30"/>
+        </arrive>
+    </flight>
+    <flight>
+        <number>70</number>
+        <src>SCL</src>
+        <depart>
+            <date day="10" month="10" year="2023"/>
+            <time hour="01" minute="30"/>
+        </depart>
+        <dest>SNN</dest>
+        <arrive>
+            <date day="10" month="10" year="2023"/>
+            <time hour="02" minute="30"/>
+        </arrive>
+    </flight>
+    <flight>
+        <number>70</number>
+        <src>SCL</src>
+        <depart>
+            <date day="10" month="10" year="2023"/>
+            <time hour="01" minute="30"/>
+        </depart>
+        <dest>SNN</dest>
+        <arrive>
+            <date day="10" month="10" year="2023"/>
+            <time hour="02" minute="30"/>
+        </arrive>
+    </flight>
+    <flight>
+        <number>70</number>
+        <src>SCL</src>
+        <depart>
+            <date day="10" month="10" year="2023"/>
+            <time hour="01" minute="30"/>
+        </depart>
+        <dest>SNN</dest>
+        <arrive>
+            <date day="10" month="10" year="2023"/>
+            <time hour="02" minute="30"/>
+        </arrive>
+    </flight>
+    <flight>
+        <number>70</number>
+        <src>SCL</src>
+        <depart>
+            <date day="10" month="10" year="2023"/>
+            <time hour="01" minute="30"/>
+        </depart>
+        <dest>SNN</dest>
+        <arrive>
+            <date day="10" month="10" year="2023"/>
+            <time hour="02" minute="30"/>
+        </arrive>
+    </flight>
+    <flight>
+        <number>70</number>
+        <src>SCL</src>
+        <depart>
+            <date day="10" month="10" year="2023"/>
+            <time hour="01" minute="30"/>
+        </depart>
+        <dest>SNN</dest>
+        <arrive>
+            <date day="10" month="10" year="2023"/>
+            <time hour="02" minute="30"/>
+        </arrive>
+    </flight>
+    <flight>
+        <number>70</number>
+        <src>SCL</src>
+        <depart>
+            <date day="10" month="10" year="2023"/>
+            <time hour="01" minute="30"/>
+        </depart>
+        <dest>SNN</dest>
+        <arrive>
+            <date day="10" month="10" year="2023"/>
+            <time hour="02" minute="30"/>
+        </arrive>
+    </flight>
+    <flight>
+        <number>70</number>
+        <src>SCL</src>
+        <depart>
+            <date day="10" month="10" year="2023"/>
+            <time hour="01" minute="30"/>
+        </depart>
+        <dest>SNN</dest>
+        <arrive>
+            <date day="10" month="10" year="2023"/>
+            <time hour="02" minute="30"/>
+        </arrive>
+    </flight>
+    <flight>
+        <number>70</number>
+        <src>SCL</src>
+        <depart>
+            <date day="10" month="10" year="2023"/>
+            <time hour="01" minute="30"/>
+        </depart>
+        <dest>SNN</dest>
+        <arrive>
+            <date day="10" month="10" year="2023"/>
+            <time hour="02" minute="30"/>
+        </arrive>
+    </flight>
+    <flight>
+        <number>70</number>
+        <src>SCL</src>
+        <depart>
+            <date day="10" month="10" year="2023"/>
+            <time hour="01" minute="30"/>
+        </depart>
+        <dest>SNN</dest>
+        <arrive>
+            <date day="10" month="10" year="2023"/>
+            <time hour="02" minute="30"/>
+        </arrive>
+    </flight>
+    <flight>
+        <number>70</number>
+        <src>SCL</src>
+        <depart>
+            <date day="10" month="10" year="2023"/>
+            <time hour="01" minute="30"/>
+        </depart>
+        <dest>SNN</dest>
+        <arrive>
+            <date day="10" month="10" year="2023"/>
+            <time hour="02" minute="30"/>
+        </arrive>
+    </flight>
+    <flight>
+        <number>70</number>
+        <src>SCL</src>
+        <depart>
+            <date day="10" month="10" year="2023"/>
+            <time hour="01" minute="30"/>
+        </depart>
+        <dest>SNN</dest>
+        <arrive>
+            <date day="10" month="10" year="2023"/>
+            <time hour="02" minute="30"/>
+        </arrive>
+    </flight>
+    <flight>
+        <number>70</number>
+        <src>SCL</src>
+        <depart>
+            <date day="10" month="10" year="2023"/>
+            <time hour="01" minute="30"/>
+        </depart>
+        <dest>SNN</dest>
+        <arrive>
+            <date day="10" month="10" year="2023"/>
+            <time hour="02" minute="30"/>
+        </arrive>
+    </flight>
+    <flight>
+        <number>70</number>
+        <src>SCL</src>
+        <depart>
+            <date day="10" month="10" year="2023"/>
+            <time hour="01" minute="30"/>
+        </depart>
+        <dest>SNN</dest>
+        <arrive>
+            <date day="10" month="10" year="2023"/>
+            <time hour="02" minute="30"/>
+        </arrive>
+    </flight>
+    <flight>
+        <number>70</number>
+        <src>SCL</src>
+        <depart>
+            <date day="10" month="10" year="2023"/>
+            <time hour="01" minute="30"/>
+        </depart>
+        <dest>SNN</dest>
+        <arrive>
+            <date day="10" month="10" year="2023"/>
+            <time hour="02" minute="30"/>
+        </arrive>
+    </flight>
+</airline>
