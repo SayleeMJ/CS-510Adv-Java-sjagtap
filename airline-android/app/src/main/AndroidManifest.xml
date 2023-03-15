@@ -11,6 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Airline"
         tools:targetApi="31">
+        <activity android:name=".Main2Activity"></activity>
         <activity
             android:name=".MainActivity"
             android:exported="true">
