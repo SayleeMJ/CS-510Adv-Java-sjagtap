@@ -35,7 +35,8 @@ public class XmlParser implements AirlineParser<Airline> {
         AirlineXmlHelper helper = new AirlineXmlHelper();
 
         DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
-        documentBuilderFactory.setValidating(true);
+        // documentBuilderFactory.setValidating(true);
+        // Read this: https://stackoverflow.com/questions/8370148/android-org-w3c-dom-no-validating-documentbuilder-implementation-available
 
         DocumentBuilder builder;
 

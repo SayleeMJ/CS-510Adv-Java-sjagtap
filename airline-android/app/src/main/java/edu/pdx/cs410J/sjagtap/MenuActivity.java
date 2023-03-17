@@ -1,16 +1,12 @@
 package edu.pdx.cs410J.sjagtap;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.io.File;
-import java.io.FileWriter;
-
-public class Main2Activity extends AppCompatActivity {
+public class MenuActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,7 +15,7 @@ public class Main2Activity extends AppCompatActivity {
 
     public void addAirline(View v)
     {
-        Intent i = new Intent(getApplicationContext(), AddAirlineActivity.class);
+        Intent i = new Intent(getApplicationContext(), AddFlightActivity.class);
         startActivity(i);
     }
 

@@ -1,6 +1,7 @@
 package edu.pdx.cs410J.sjagtap;
 
 import edu.pdx.cs410J.AirportNames;
+import edu.pdx.cs410J.ParserException;
 // import edu.pdx.cs410J.ParserException;
 // import edu.pdx.cs410J.web.HttpRequestHelper;
 
@@ -14,6 +15,71 @@ import java.util.Date;
  * Options class to handle each operation passed as command line argument.
  */
 public class Options {
+
+    /**
+     * Read from file, creating new file and write to airline information xml file.
+     *
+     * @param xmlFileName  name of xml file to write.
+     * @param airlineName  airline name from user.
+     * @param flightObject flight object created from command line values.
+     * @return new Airline object.
+     */
+
+    public static void readAndWriteToXmlFile(File file, String airlineName, Flight flightObject) {
+        // Changed this function to take file as input insted of file name as we create file in android app.
+        Airline airline = null;
+        if (file.exists()) {
+            try {
+                // Read airline info.
+                InputStream inputStream = new FileInputStream(file);
+                XmlParser xmlParser = new XmlParser(inputStream);
+                airline = xmlParser.parse();
+
+
+                // Name not matching.
+                String existingAirlineName = airline.getName();
+                if (!existingAirlineName.equals(airlineName)) {
+                    System.err.println("Airline name is different!");
+                    return;
+                }
+            } catch (ParserException p) {
+                System.err.println(p.getMessage());
+                return;
+            } catch (Exception e) {
+                System.err.println("Error While Reading. " + e.getMessage());
+                return;
+            }
+
+            if(flightObject != null) {
+                airline.addFlight(flightObject);
+            }
+            // write to xml file
+            try {
+                OutputStream outputStream = new FileOutputStream(file);
+                XmlDumper xmlDumper = new XmlDumper(outputStream);
+                xmlDumper.dump(airline);
+            } catch (IOException e) {
+                System.err.println(e.getMessage());
+                return;
+            }
+        } else {
+            try {
+                Airline emptyAirline = new Airline(airlineName);
+//                boolean newFile = file.createNewFile();
+                file.createNewFile();
+                // write airline object contents
+                try {
+                    OutputStream outputStream = new FileOutputStream(file);
+                    XmlDumper xmlDumper = new XmlDumper(outputStream);
+                    xmlDumper.dump(emptyAirline);
+                } catch (FileNotFoundException e) {
+                    System.err.println("File does not exists!");
+                }
+            } catch (IOException e) {
+                System.err.println("Enable to create file since its not present.");
+            }
+        }
+    }
 
     /**
      * Gets command line argument. Perform validation. Generate flight object and call appropriate
