@@ -2,10 +2,13 @@ package edu.pdx.cs410J.sjagtap;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -20,6 +23,7 @@ public class AddAirlineActivity extends AppCompatActivity {
 
     public void addAirline(View v)
     {
+        writeFileOnInternalStorage(getApplicationContext(), "inputFile.xml","test");
         String airlineName = ((TextView) findViewById(R.id.airlineName)).getText().toString();
         TextView flightNumberView = findViewById(R.id.flightNumberInput);
         int flightNumber = Integer.parseInt(flightNumberView.getText().toString());
@@ -42,5 +46,23 @@ public class AddAirlineActivity extends AppCompatActivity {
         airline.addFlight(flight);
 
 
+
+    }
+
+    public void writeFileOnInternalStorage(Context mcoContext, String sFileName, String sBody){
+        File dir = mcoContext.getFilesDir();
+//        if(!dir.exists()){
+//            dir.mkdir();
+//        }
+
+        try {
+            File gpxfile = new File(dir, sFileName);
+            FileWriter writer = new FileWriter(gpxfile);
+            writer.append(sBody);
+            writer.flush();
+            writer.close();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }
