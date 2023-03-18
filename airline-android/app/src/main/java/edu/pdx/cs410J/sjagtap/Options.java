@@ -39,8 +39,7 @@ public class Options {
                 // Name not matching.
                 String existingAirlineName = airline.getName();
                 if (!existingAirlineName.equals(airlineName)) {
-                    System.err.println("Airline name is different!");
-                    return;
+                    throw new IllegalArgumentException("Airline name is different!");
                 }
             } catch (ParserException p) {
                 System.err.println(p.getMessage());
@@ -409,48 +408,41 @@ public class Options {
 
         // Validate flight number
         if (!Flight.isValidFlightNumber(flightNumber)) {
-            System.err.println("Invalid flight number");
-            return null;
+            throw new IllegalArgumentException("Invalid flight number");
         }
 
         int flightNum = Integer.parseInt(flightNumber);
 
         // validate src
         if (!Flight.isValidSrcAndDest(src)) {
-            System.err.println("Invalid source airport code.");
-            return null;
+            throw new IllegalArgumentException("Invalid source airport code.");
         }
         src = src.toUpperCase();
         String source = AirportNames.getName(src);
         if (source == null) {
-            System.err.println("The three-letter source airport code does not correspond to a known airport");
-            return null;
+            throw new IllegalArgumentException("The three-letter source airport code does not correspond to a known airport");
         }
 
         // validate depart
         if (!Flight.isValidDateAndTime24Hours(depart)) {
-            System.err.println("Invalid departure date-time format.");
-            return null;
+            throw new IllegalArgumentException("Invalid departure date-time format.");
         }
 
         // validate dest
         if (!Flight.isValidSrcAndDest(dst)) {
-            System.err.println("Invalid destination airport code.");
-            return null;
+            throw new IllegalArgumentException("Invalid destination airport code.");
         }
 
         dst = dst.toUpperCase();
 
         String destination = AirportNames.getName(dst);
         if (destination == null) {
-            System.err.println("The three-letter destination airport code does not correspond to a known airport");
-            return null;
+            throw new IllegalArgumentException("The three-letter destination airport code does not correspond to a known airport");
         }
 
         // validate arrive
         if (!Flight.isValidDateAndTime24Hours(arrive)) {
-            System.err.println("Invalid arrival date-time format.");
-           return null;
+            throw new IllegalArgumentException("Invalid arrival date-time format.");
         }
 
         // Covert string to date
