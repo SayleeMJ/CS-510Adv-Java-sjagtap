@@ -10,6 +10,8 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 public class XmlParser implements AirlineParser<Airline> {
 
@@ -35,15 +37,14 @@ public class XmlParser implements AirlineParser<Airline> {
         AirlineXmlHelper helper = new AirlineXmlHelper();
 
         DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
-        // documentBuilderFactory.setValidating(true);
-        // Read this: https://stackoverflow.com/questions/8370148/android-org-w3c-dom-no-validating-documentbuilder-implementation-available
+        documentBuilderFactory.setValidating(true);
 
         DocumentBuilder builder;
 
         try {
             builder = documentBuilderFactory.newDocumentBuilder();
         } catch (ParserConfigurationException e) {
-            throw new RuntimeException(e);
+            throw  new RuntimeException(e);
         }
         builder.setErrorHandler(helper);
         builder.setEntityResolver(helper);
@@ -62,10 +63,10 @@ public class XmlParser implements AirlineParser<Airline> {
 
         NodeList nodeList = document.getElementsByTagName("flight");
 
-        for (int i = 0; i < nodeList.getLength(); i++) {
+        for(int i =0; i < nodeList.getLength(); i++){
             Node node = nodeList.item(i);
 
-            if (node.getNodeType() == Node.ELEMENT_NODE) {
+            if(node.getNodeType() == Node.ELEMENT_NODE){
                 Flight flight = createFlight(node);
                 airline.addFlight(flight);
             }
@@ -73,11 +74,64 @@ public class XmlParser implements AirlineParser<Airline> {
         return airline;
     }
 
+    public List<Airline> parseAirlines() throws ParserException {
+        List<Airline> resultAirlines = new ArrayList<>();
+
+        AirlineXmlHelper helper = new AirlineXmlHelper();
+
+        DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
+        // documentBuilderFactory.setValidating(true);
+        // Read this: https://stackoverflow.com/questions/8370148/android-org-w3c-dom-no-validating-documentbuilder-implementation-available
+
+        DocumentBuilder builder;
+
+        try {
+            builder = documentBuilderFactory.newDocumentBuilder();
+        } catch (ParserConfigurationException e) {
+            throw  new RuntimeException(e);
+        }
+        builder.setErrorHandler(helper);
+        builder.setEntityResolver(helper);
+
+
+        Document document = null;
+        try {
+            document = builder.parse(reader);
+            document.getDocumentElement().normalize();
+        } catch (IOException | SAXException e) {
+            throw new ParserException("The XML file does not conform to the DTD. " + e.getMessage());
+        }
+
+        // Get all airlines.
+        NodeList airlineNodeList = document.getElementsByTagName("airline");
+
+        for (int j = 0; j < airlineNodeList.getLength(); j++) {
+            Element airLineElement =  (Element) airlineNodeList.item(j);;
+            String airlineName = airLineElement.getElementsByTagName("name").item(0).getTextContent();
+            Airline airline = new Airline(airlineName);
+
+            NodeList nodeList = airLineElement.getElementsByTagName("flight");
+
+            for(int i =0; i < nodeList.getLength(); i++){
+                Node node = nodeList.item(i);
+
+                if(node.getNodeType() == Node.ELEMENT_NODE){
+                    Flight flight = createFlight(node);
+                    airline.addFlight(flight);
+                }
+            }
+
+            resultAirlines.add(airline);
+        }
+
+        return resultAirlines;
+    }
 
     /**
      * This function parse the data of flight from xml file and creates a flight object.
      *
      * @param node nodelist of flight
+     *
      * @return This will return the Flight object which contains information
      * of flight from the xml file.
      */
@@ -104,6 +158,7 @@ public class XmlParser implements AirlineParser<Airline> {
      * This function parse the date and time from xml file.
      *
      * @param departureTimeDate node of which contains departure and arrival time date
+     *
      * @return Date and time string in required format to read from xml file
      */
     private String getDateTime(Node departureTimeDate) {
@@ -117,7 +172,7 @@ public class XmlParser implements AirlineParser<Airline> {
         String hour = time.getNamedItem("hour").getNodeValue();
         String minute = time.getNamedItem("minute").getNodeValue();
 
-        String dateAndTime = month + "/" + day + "/" + year + " " + hour + ":" + minute;
+        String dateAndTime = month + "/" + day + "/" + year +  " " + hour + ":" + minute;
         return dateAndTime;
     }
 }

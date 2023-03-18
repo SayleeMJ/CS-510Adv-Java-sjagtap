@@ -49,7 +49,6 @@ public class AddFlightActivity extends AppCompatActivity {
             Toast.makeText(this, exception.getMessage(), Toast.LENGTH_LONG).show();
             return;
         }
-
     }
 
 //    public void writeFileOnInternalStorage(Context mcoContext, String sFileName, String sBody) {

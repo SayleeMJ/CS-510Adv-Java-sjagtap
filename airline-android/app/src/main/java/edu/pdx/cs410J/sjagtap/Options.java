@@ -10,6 +10,7 @@ import java.security.InvalidParameterException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Options class to handle each operation passed as command line argument.
@@ -457,6 +458,37 @@ public class Options {
         }
         Flight flight = new Flight(flightNum, src, departDate, dst, arriveDate);
         return flight;
+    }
+
+    public static List<Airline>  readAllAirlinesFromXML(File file) throws IOException {
+        List<Airline> result = null;
+        try {
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+
+            InputStream inputStream = new FileInputStream(file);
+            XmlParser xmlParser = new XmlParser(inputStream);
+            result = xmlParser.parseAirlines();
+        } catch (Exception e) {
+            throw new IOException("Unable To read from file");
+        }
+
+        return result;
+    }
+
+    public static void  WriteAllAirlinesToXML(File file, List<Airline> airlines) throws IOException {
+        try {
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+
+            OutputStream outputStream = new FileOutputStream(file);
+            XmlDumper xmlDumper = new XmlDumper(outputStream);
+            xmlDumper.dump(airlines);
+        } catch (Exception e) {
+            throw new IOException("Unable To read from file");
+        }
     }
 
 //    /**

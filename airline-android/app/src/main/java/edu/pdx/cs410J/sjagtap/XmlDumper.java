@@ -18,6 +18,7 @@ import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 public class XmlDumper implements AirlineDumper<Airline> {
 
@@ -49,7 +50,6 @@ public class XmlDumper implements AirlineDumper<Airline> {
             documentBuilder = documentBuilderFactory.newDocumentBuilder();
 
             Document document = documentBuilder.newDocument();
-
 
             // Create a root element for in memory tree
             Element rootElement = document.createElement("airline");
@@ -83,8 +83,48 @@ public class XmlDumper implements AirlineDumper<Airline> {
 
             DOMSource source = new DOMSource(document);
 
-//            StreamResult console = new StreamResult(System.out);
-//            transformer.transform(source, console);
+            StreamResult file = new StreamResult(this.writer);
+            transformer.transform(source, file);
+
+        } catch (Exception e) {
+            throw new IOException("Not able to write XML file." + e.getMessage());
+        }
+    }
+
+    public void dump(List<Airline> listAirline) throws IOException {
+        try {
+            // This is an API
+            DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
+
+            //Create a document
+            DocumentBuilder documentBuilder = null;
+            documentBuilder = documentBuilderFactory.newDocumentBuilder();
+
+            Document document = documentBuilder.newDocument();
+
+            // Create a root element for in memory tree
+            Element rootElement = document.createElement("airlines");
+            document.appendChild(rootElement);
+
+            for (Airline airline: listAirline) {
+                Element airlineElement = getArilineElement(airline, document);
+                rootElement.appendChild(airlineElement);
+            }
+
+            // Creates a new file format and transforms it into respective given file format
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer transformer = transformerFactory.newTransformer();
+
+            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+            transformer.setOutputProperty(OutputKeys.ENCODING, "us-ascii");
+            document.setXmlStandalone(true);
+
+            DOMImplementation domImplementation = document.getImplementation();
+            DocumentType doctype = domImplementation.createDocumentType("airline", AirlineXmlHelper.PUBLIC_ID, AirlineXmlHelper.SYSTEM_ID);
+            document.appendChild(doctype);
+            transformer.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM, doctype.getSystemId());
+
+            DOMSource source = new DOMSource(document);
 
             StreamResult file = new StreamResult(this.writer);
             transformer.transform(source, file);
@@ -92,15 +132,43 @@ public class XmlDumper implements AirlineDumper<Airline> {
         } catch (Exception e) {
             throw new IOException("Not able to write XML file." + e.getMessage());
         }
+    }
 
+    /**
+     * This function creates airline.
+     *
+     * @param airline airline.
+     * @param document object of Document
+     *
+     * @return This will return the flightElement which contains information
+     * of flight.
+     */
+    private Element getArilineElement(Airline airline, Document document) {
+        Element airLineElement = document.createElement("airline");
+
+        // Create airline name tag
+        Element airlineNameElement = document.createElement("name");
+        // Create a text node by getting the airline name
+        airlineNameElement.appendChild(document.createTextNode(airline.getName()));
+
+        airLineElement.appendChild(airlineNameElement);
+
+        Collection<Flight> flights = airline.getFlights();
+        for (Flight flight : flights) {
+            Element flightElement = getFlightElement(flight, document);
+            airLineElement.appendChild(flightElement);
+        }
+
+        return airLineElement;
     }
 
     /**
      * This function gets the data of flight from command line arguments
      * and creates the elements for xml file.
      *
-     * @param flight   collection of flight
+     * @param flight collection of flight
      * @param document object of Document
+     *
      * @return This will return the flightElement which contains information
      * of flight.
      */
@@ -144,8 +212,9 @@ public class XmlDumper implements AirlineDumper<Airline> {
      * This function creates attribute dictionary for date and time tag.
      *
      * @param departureDate contains departure and arrival time date
-     * @param document      object of Document
+     * @param document  object of Document
      * @param parentElement Element variable
+     *
      */
     private void addDateAndTime(Date departureDate, Document document, Element parentElement) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm");
