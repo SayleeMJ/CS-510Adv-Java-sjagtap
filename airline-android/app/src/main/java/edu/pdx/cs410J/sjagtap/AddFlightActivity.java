@@ -2,13 +2,12 @@ package edu.pdx.cs410J.sjagtap;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.File;
-import java.io.FileWriter;
 
 public class AddFlightActivity extends AppCompatActivity {
 
@@ -27,11 +26,30 @@ public class AddFlightActivity extends AppCompatActivity {
         String destination = ((TextView) findViewById(R.id.etDestination)).getText().toString();
         String arrivalDate = ((TextView) findViewById(R.id.etArrival)).getText().toString();
 
+        Flight newFlight = null;
+        try{
+            newFlight = Options.createAndValidateFlightForPretty(flightNumber, source, departureDate, destination, arrivalDate);
 
-        Flight newFlight = Options.createAndValidateFlightForPretty(flightNumber, source, departureDate, destination, arrivalDate);
-        File dir = getApplicationContext().getFilesDir();
-        File file = new File(dir, "FlightDatabase.xml");
-        Options.readAndWriteToXmlFile(file, airlineName, newFlight);
+        } catch (IllegalArgumentException illegalArgumentException){
+            Toast.makeText(this, illegalArgumentException.getMessage(), Toast.LENGTH_LONG).show();
+            return;
+        } catch (Exception exception){
+            Toast.makeText(this, exception.getMessage(), Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        try{
+            File dir = getApplicationContext().getFilesDir();
+            File file = new File(dir, "FlightDatabase.xml");
+            Options.readAndWriteToXmlFile(file, airlineName, newFlight);
+        } catch (IllegalArgumentException illegalArgumentException){
+            Toast.makeText(this, illegalArgumentException.getMessage(), Toast.LENGTH_LONG).show();
+            return;
+        } catch (Exception exception){
+            Toast.makeText(this, exception.getMessage(), Toast.LENGTH_LONG).show();
+            return;
+        }
+
     }
 
 //    public void writeFileOnInternalStorage(Context mcoContext, String sFileName, String sBody) {
