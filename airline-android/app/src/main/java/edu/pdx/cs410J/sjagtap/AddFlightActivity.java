@@ -35,6 +35,7 @@ public class AddFlightActivity extends AppCompatActivity {
             return;
         } catch (Exception exception){
             Toast.makeText(this, exception.getMessage(), Toast.LENGTH_LONG).show();
+            return;
         }
 
         try{
@@ -43,8 +44,10 @@ public class AddFlightActivity extends AppCompatActivity {
             Options.readAndWriteToXmlFile(file, airlineName, newFlight);
         } catch (IllegalArgumentException illegalArgumentException){
             Toast.makeText(this, illegalArgumentException.getMessage(), Toast.LENGTH_LONG).show();
+            return;
         } catch (Exception exception){
             Toast.makeText(this, exception.getMessage(), Toast.LENGTH_LONG).show();
+            return;
         }
 
     }
