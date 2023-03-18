@@ -8,6 +8,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
+import java.security.cert.PKIXRevocationChecker;
+import java.util.List;
 
 public class AddFlightActivity extends AppCompatActivity {
 
@@ -41,7 +43,29 @@ public class AddFlightActivity extends AppCompatActivity {
         try{
             File dir = getApplicationContext().getFilesDir();
             File file = new File(dir, "FlightDatabase.xml");
-            Options.readAndWriteToXmlFile(file, airlineName, newFlight);
+            List<Airline> listAirlines = Options.readAllAirlinesFromXML(file);
+
+            boolean flag = false;
+//            for (Airline airline: listAirlines) {
+//                if (airline.getName().equals(airlineName)) {
+//                    airline.addFlight(newFlight);
+//                    flag = true;
+//                    break;
+//                }
+//            }
+
+            flag = true;
+            Airline airline = new Airline(airlineName);
+            airline.addFlight(newFlight);
+            listAirlines.add(airline);
+
+            if (flag) {
+                Options.WriteAllAirlinesToXML(file, listAirlines);
+                Toast.makeText(this, "Flight added successfully.", Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(this, "Airline not found.", Toast.LENGTH_LONG).show();
+            }
+
         } catch (IllegalArgumentException illegalArgumentException){
             Toast.makeText(this, illegalArgumentException.getMessage(), Toast.LENGTH_LONG).show();
             return;
@@ -50,17 +74,4 @@ public class AddFlightActivity extends AppCompatActivity {
             return;
         }
     }
-
-//    public void writeFileOnInternalStorage(Context mcoContext, String sFileName, String sBody) {
-//        File dir = mcoContext.getFilesDir();
-//        try {
-//            File gpxfile = new File(dir, sFileName);
-//            FileWriter writer = new FileWriter(gpxfile);
-//            writer.append(sBody);
-//            writer.flush();
-//            writer.close();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
 }
