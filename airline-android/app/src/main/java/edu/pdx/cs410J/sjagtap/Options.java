@@ -19,7 +19,7 @@ public class Options {
     /**
      * Read from file, creating new file and write to airline information xml file.
      *
-     * @param xmlFileName  name of xml file to write.
+//     * @param xmlFileName  name of xml file to write.
      * @param airlineName  airline name from user.
      * @param flightObject flight object created from command line values.
      * @return new Airline object.
@@ -331,49 +331,47 @@ public class Options {
 
         // Validate flight number
         if (!Flight.isValidFlightNumber(flightNumber)) {
-            usage("Invalid flight number");
-            return null;
+           throw new IllegalArgumentException("Invalid flight number.");
         }
 
         int flightNum = Integer.parseInt(flightNumber);
 
         // validate src
         if (!Flight.isValidSrcAndDest(src)) {
-            usage("Invalid source airport code.");
-            return null;
+            throw new IllegalArgumentException("Invalid source airport code.");
         }
 
         src = src.toUpperCase();
         String source = AirportNames.getName(src);
         if (source == null) {
-            usage("The three-letter source airport code does not correspond to a known airport");
-            return null;
+//            usage();
+            throw new IllegalArgumentException("The three-letter source airport code does not correspond to a known airport");
         }
 
         // validate depart. chekc this
         if (!Flight.isValidDateAndTimeAndZone12Hour(depart)) {
-            usage("Invalid departure date-time format.");
-            return null;
+//            usage();
+            throw new IllegalArgumentException("Invalid departure date-time format.");
         }
 
         // validate dest
         if (!Flight.isValidSrcAndDest(dst)) {
-            usage("Invalid destination airport code.");
-            return null;
+//            usage();
+            throw new IllegalArgumentException("Invalid destination airport code.");
         }
 
         dst = dst.toUpperCase();
 
         String destination = AirportNames.getName(dst);
         if (destination == null) {
-            usage("The three-letter destination airport code does not correspond to a known airport");
-            return null;
+//            usage();
+            throw new IllegalArgumentException("The three-letter destination airport code does not correspond to a known airport");
         }
 
         // validate arrive. check this
         if (!Flight.isValidDateAndTimeAndZone12Hour(arrive)) {
-            usage("Invalid arrival date-time format.");
-            return null;
+//            usage();
+            throw new IllegalArgumentException("Invalid arrival date-time format.");
         }
 
         // convert string to date.
@@ -384,13 +382,13 @@ public class Options {
             departDate = simpleDateFormat.parse(depart);
             arriveDate = simpleDateFormat.parse(arrive);
         } catch (ParseException e) {
-            System.err.println("Invalid date-time format.");
-            return null;
+//            System.err.println();
+            throw new IllegalArgumentException("Invalid date-time format.");
         }
 
         if (arriveDate.before(departDate)) {
-            System.err.println("Arrival datetime is before departure datetime.");
-            return null;
+//            System.err.println();
+            throw new IllegalArgumentException("Arrival datetime is before departure datetime.");
         }
 
         Flight flight = new Flight(flightNum, src, departDate, dst, arriveDate);
@@ -452,7 +450,7 @@ public class Options {
         // validate arrive
         if (!Flight.isValidDateAndTime24Hours(arrive)) {
             System.err.println("Invalid arrival date-time format.");
-            return null;
+           return null;
         }
 
         // Covert string to date
