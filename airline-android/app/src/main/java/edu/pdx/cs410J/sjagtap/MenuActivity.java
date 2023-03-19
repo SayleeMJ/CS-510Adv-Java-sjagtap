@@ -10,12 +10,18 @@ public class MenuActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_second);
+        setContentView(R.layout.activity_menu);
+    }
+
+    public void addFlight(View v)
+    {
+        Intent i = new Intent(getApplicationContext(), AddFlightActivity.class);
+        startActivity(i);
     }
 
     public void addAirline(View v)
     {
-        Intent i = new Intent(getApplicationContext(), AddFlightActivity.class);
+        Intent i = new Intent(getApplicationContext(), AddAirlineActivity.class);
         startActivity(i);
     }
 
@@ -28,6 +34,7 @@ public class MenuActivity extends AppCompatActivity {
     public void prettyPrint(View v)
     {
         Intent i = new Intent(getApplicationContext(), PrettyPrintActivity.class);
+        i.putExtra("Operation", "PrintAll");
         startActivity(i);
     }
 
