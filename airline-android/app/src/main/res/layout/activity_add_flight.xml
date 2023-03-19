@@ -25,6 +25,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-condensed"
                 android:textStyle="bold"
+                android:textSize="15dp"
                 android:text="Airline Name:" />
 
             <EditText
@@ -53,6 +54,7 @@
                 android:layout_weight="1"
                 android:fontFamily="sans-serif-condensed"
                 android:textStyle="bold"
+                android:textSize="15dp"
                 android:text="Flight Number:" />
 
             <EditText
@@ -83,6 +85,7 @@
                 android:layout_weight="1"
                 android:fontFamily="sans-serif-condensed"
                 android:textStyle="bold"
+                android:textSize="15dp"
                 android:text="Source Airport:" />
 
             <EditText
@@ -110,6 +113,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:fontFamily="sans-serif-condensed"
+                android:textSize="15dp"
                 android:text="Departure DateTime:"
                 android:textStyle="bold" />
 
@@ -139,6 +143,7 @@
                 android:layout_weight="1"
                 android:fontFamily="sans-serif-condensed"
                 android:textStyle="bold"
+                android:textSize="15dp"
                 android:text="Destination Airport:" />
 
             <EditText
@@ -167,6 +172,7 @@
                 android:layout_weight="1"
                 android:fontFamily="sans-serif-condensed"
                 android:textStyle="bold"
+                android:textSize="15dp"
                 android:text="Arrival DateTime:" />
 
             <EditText
