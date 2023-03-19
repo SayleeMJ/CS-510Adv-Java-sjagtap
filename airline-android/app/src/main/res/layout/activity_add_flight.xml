@@ -4,7 +4,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#B776B3AC"
     tools:context=".AddFlightActivity">
+
+    <LinearLayout
+        android:layout_width="390dp"
+        android:layout_height="250dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="monospace"
+            android:text="**Add Flight Details**"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.301" />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -24,9 +49,10 @@
                 android:layout_width="151dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-condensed"
-                android:textStyle="bold"
+                android:text="Airline Name:"
+                android:textColor="@color/black"
                 android:textSize="15dp"
-                android:text="Airline Name:" />
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/etAirlineName"
@@ -34,10 +60,11 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:fontFamily="sans-serif-condensed"
-                android:hint="eg. Emirates"
+                android:textColor="@color/black"
+                android:textSize="15dp"
+                android:hint="@string/AirlineName"
                 android:inputType="textPersonName"
-                android:textSize="13dp"
-                android:textStyle="italic" />
+                />
 
         </LinearLayout>
 
@@ -53,9 +80,10 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:fontFamily="sans-serif-condensed"
-                android:textStyle="bold"
+                android:text="Flight Number:"
+                android:textColor="@color/black"
                 android:textSize="15dp"
-                android:text="Flight Number:" />
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/etFLightNumber"
@@ -64,10 +92,11 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:fontFamily="sans-serif-condensed"
-                android:hint="eg. 1234"
+                android:hint="@string/FlightNumber"
                 android:inputType="textPersonName"
-                android:textSize="13dp"
-                android:textStyle="italic"
+                android:textColor="@color/black"
+                android:textSize="15dp"
+
                 />
 
         </LinearLayout>
@@ -84,9 +113,10 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:fontFamily="sans-serif-condensed"
-                android:textStyle="bold"
+                android:text="Source Airport:"
+                android:textColor="@color/black"
                 android:textSize="15dp"
-                android:text="Source Airport:" />
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/etSource"
@@ -94,10 +124,11 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:hint="eg. SNN"
+                android:fontFamily="sans-serif-condensed"
+                android:hint="@string/AirportName"
                 android:inputType="textPersonName"
-                android:textSize="13dp"
-                android:textStyle="italic" />
+                android:textColor="@color/black"
+                android:textSize="15dp" />
 
         </LinearLayout>
 
@@ -113,8 +144,9 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:fontFamily="sans-serif-condensed"
-                android:textSize="15dp"
                 android:text="Departure DateTime:"
+                android:textColor="@color/black"
+                android:textSize="15dp"
                 android:textStyle="bold" />
 
             <EditText
@@ -123,10 +155,11 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:hint="eg. MM/DD/YY HH:mm am/pm"
+                android:fontFamily="sans-serif-condensed"
+                android:hint="@string/DateTime"
                 android:inputType="textPersonName"
-                android:textSize="13dp"
-                android:textStyle="italic" />
+                android:textColor="@color/black"
+                android:textSize="15dp" />
 
         </LinearLayout>
 
@@ -142,9 +175,10 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:fontFamily="sans-serif-condensed"
-                android:textStyle="bold"
+                android:text="Destination Airport:"
+                android:textColor="@color/black"
                 android:textSize="15dp"
-                android:text="Destination Airport:" />
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/etDestination"
@@ -152,10 +186,11 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:hint="eg. XYZ"
+                android:fontFamily="sans-serif-condensed"
+                android:hint="@string/AirportName"
                 android:inputType="textPersonName"
-                android:textSize="13dp"
-                android:textStyle="italic" />
+                android:textColor="@color/black"
+                android:textSize="15dp" />
 
         </LinearLayout>
 
@@ -171,9 +206,10 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:fontFamily="sans-serif-condensed"
-                android:textStyle="bold"
+                android:text="Arrival DateTime:"
+                android:textColor="@color/black"
                 android:textSize="15dp"
-                android:text="Arrival DateTime:" />
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/etArrival"
@@ -181,10 +217,13 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:hint="eg. MM/DD/YY HH:mm am/pm"
+                android:fontFamily="sans-serif-condensed"
+                android:hint="@string/DateTime"
                 android:inputType="textPersonName"
-                android:textSize="13dp"
-                android:textStyle="italic" />
+                android:textColor="@color/black"
+                android:textSize="15dp"
+
+                />
 
         </LinearLayout>
 
