@@ -7,45 +7,55 @@
     tools:context=".AddFlightActivity">
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="700dp"
+        android:gravity="center"
+        android:orientation="vertical">
 
         <LinearLayout
             android:id="@+id/llAirlineName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="390dp"
+            android:layout_height="45dp"
             android:gravity="center"
             android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/tvAirlineName"
-                android:layout_width="wrap_content"
+                android:layout_width="151dp"
                 android:layout_height="wrap_content"
-                android:text="Airline Name" />
+                android:fontFamily="sans-serif-condensed"
+                android:textStyle="bold"
+                android:textSize="15dp"
+                android:text="Airline Name:" />
 
             <EditText
                 android:id="@+id/etAirlineName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
+                android:fontFamily="sans-serif-condensed"
+                android:hint="eg. Emirates"
                 android:inputType="textPersonName"
-                android:text="Name" />
+                android:textSize="13dp"
+                android:textStyle="italic" />
 
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/llLFightNumber"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="390dp"
+            android:layout_height="45dp"
             android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/tvFLightNumber"
-                android:layout_width="wrap_content"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Flight Number" />
+                android:fontFamily="sans-serif-condensed"
+                android:textStyle="bold"
+                android:textSize="15dp"
+                android:text="Flight Number:" />
 
             <EditText
                 android:id="@+id/etFLightNumber"
@@ -53,23 +63,30 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
+                android:fontFamily="sans-serif-condensed"
+                android:hint="eg. 1234"
                 android:inputType="textPersonName"
-                android:text="Name" />
+                android:textSize="13dp"
+                android:textStyle="italic"
+                />
 
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/llSource"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="390dp"
+            android:layout_height="45dp"
             android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/tvSource"
-                android:layout_width="wrap_content"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Source Airport" />
+                android:fontFamily="sans-serif-condensed"
+                android:textStyle="bold"
+                android:textSize="15dp"
+                android:text="Source Airport:" />
 
             <EditText
                 android:id="@+id/etSource"
@@ -77,23 +94,28 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
+                android:hint="eg. SNN"
                 android:inputType="textPersonName"
-                android:text="Name" />
+                android:textSize="13dp"
+                android:textStyle="italic" />
 
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/llDepartureDateTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="390dp"
+            android:layout_height="45dp"
             android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/tvDeparture"
-                android:layout_width="wrap_content"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Departure DateTime" />
+                android:fontFamily="sans-serif-condensed"
+                android:textSize="15dp"
+                android:text="Departure DateTime:"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/etDeparture"
@@ -101,23 +123,28 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
+                android:hint="eg. MM/DD/YY HH:mm am/pm"
                 android:inputType="textPersonName"
-                android:text="Name" />
+                android:textSize="13dp"
+                android:textStyle="italic" />
 
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/llDestination"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="390dp"
+            android:layout_height="45dp"
             android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/tvDestination"
-                android:layout_width="wrap_content"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Destination Airport" />
+                android:fontFamily="sans-serif-condensed"
+                android:textStyle="bold"
+                android:textSize="15dp"
+                android:text="Destination Airport:" />
 
             <EditText
                 android:id="@+id/etDestination"
@@ -125,23 +152,28 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
+                android:hint="eg. XYZ"
                 android:inputType="textPersonName"
-                android:text="Name" />
+                android:textSize="13dp"
+                android:textStyle="italic" />
 
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/llArrivalDateTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="390dp"
+            android:layout_height="45dp"
             android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/tvArrival"
-                android:layout_width="wrap_content"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Arrival DateTime" />
+                android:fontFamily="sans-serif-condensed"
+                android:textStyle="bold"
+                android:textSize="15dp"
+                android:text="Arrival DateTime:" />
 
             <EditText
                 android:id="@+id/etArrival"
@@ -149,21 +181,23 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
+                android:hint="eg. MM/DD/YY HH:mm am/pm"
                 android:inputType="textPersonName"
-                android:text="Name" />
+                android:textSize="13dp"
+                android:textStyle="italic" />
 
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/llButton"
-            android:layout_width="wrap_content"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
 
             <Button
                 android:id="@+id/btAdd"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
