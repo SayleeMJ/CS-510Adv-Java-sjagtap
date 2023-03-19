@@ -96,9 +96,10 @@ public class PrettyPrintActivity extends AppCompatActivity {
             return sb.toString();
         }
 
-        sb.append("<p><b>Flights for airline " + searchedAirline.getName() + "</b></p>");
+        sb.append("<p><b>Flights for Airline " + searchedAirline.getName() + "</b></p>");
 
 
+        int searchIndex = 0;
         // Filter airlines.
         for (Flight flight : searchedAirline.getFlights()) {
             if (source != null && !source.isEmpty() && !source.equals(flight.getSource())) {
@@ -111,7 +112,8 @@ public class PrettyPrintActivity extends AppCompatActivity {
                 continue;
             }
 
-            sb.append("<p>" + flight.ToStringPretty() + "</p>");
+            sb.append("<p>"+ (searchIndex + 1) + ". "  + flight.ToStringPretty() + "</p>");
+            searchIndex++;
         }
 
         // Print.
@@ -121,7 +123,7 @@ public class PrettyPrintActivity extends AppCompatActivity {
     private String PrintPrettyOption(List<Airline> listAirLine) {
         StringBuilder sb = new StringBuilder();
         for (Airline airline : listAirLine) {
-            sb.append("<p><b>Flights for airline " + airline.getName() + "</b></p>");
+            sb.append("<p><b><u>Flights for Airline " + airline.getName() + "<u></b></p>");
             List<Flight> list = new ArrayList<Flight>(airline.getFlights());
             for (int index = 0; index < list.size(); index++) {
                 sb.append("<p>" + (index + 1) + ". " + list.get(index).ToStringPretty() + "</p>");
