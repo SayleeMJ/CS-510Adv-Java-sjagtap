@@ -41,6 +41,14 @@ public class MenuActivity extends AppCompatActivity {
     public void readMe(View v)
     {
         Intent i = new Intent(getApplicationContext(), PrettyPrintActivity.class);
+        i.putExtra("Operation", "ReadMe");
+        startActivity(i);
+    }
+
+    public void help(View v)
+    {
+        Intent i = new Intent(getApplicationContext(), PrettyPrintActivity.class);
+        i.putExtra("Operation", "Help");
         startActivity(i);
     }
 

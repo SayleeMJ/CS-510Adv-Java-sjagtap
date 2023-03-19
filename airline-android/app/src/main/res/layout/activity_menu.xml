@@ -90,7 +90,7 @@
                 android:id="@+id/btHelp"
                 android:layout_width="100pt"
                 android:layout_height="wrap_content"
-                android:onClick="readMe"
+                android:onClick="help"
                 android:text="Help" />
 
         </LinearLayout>
