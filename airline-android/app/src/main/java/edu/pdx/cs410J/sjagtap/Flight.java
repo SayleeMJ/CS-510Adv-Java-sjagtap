@@ -255,12 +255,12 @@ public class Flight extends AbstractFlight implements Comparable {
         String arriveDate = this.getArrivalString();
         long duration = this.durationOfFlight();
 
-        String result = "Flight " + flightNumber +
-                " departs " + departDate +
-                " at " + sourceAirport +
-                " arrives " + destinationAirport +
-                " at " + arriveDate +
-                ". Total flight duration in minutes " + duration;
+        String result = "Flight Number: " + flightNumber + "<br>" +
+                "&nbsp;&nbsp;&nbsp;&nbsp;Departing Airport: " + sourceAirport + "<br>" +
+                "&nbsp;&nbsp;&nbsp;&nbsp;Departing date & time: " + departDate + "<br>" +
+                "&nbsp;&nbsp;&nbsp;&nbsp;Arriving Airport: " + destinationAirport + "<br>" +
+                "&nbsp;&nbsp;&nbsp;&nbsp;Arriving  date & time: " + arriveDate + "<br>" +
+                "&nbsp;&nbsp;&nbsp;&nbsp;Flight Duration: " + duration + " minutes";
 
         return result;
     }

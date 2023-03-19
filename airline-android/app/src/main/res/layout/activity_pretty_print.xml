@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#B776B3AC"
     tools:context=".PrettyPrintActivity">
 
     <LinearLayout
@@ -22,6 +23,8 @@
                 android:layout_height="match_parent"
                 android:fadeScrollbars="false"
                 android:scrollbarAlwaysDrawVerticalTrack="true"
+                android:textColor="@color/black"
+                android:textSize="15dp"
                 android:scrollbars="horizontal|vertical"
                 android:text="TextView" />
         </LinearLayout>
