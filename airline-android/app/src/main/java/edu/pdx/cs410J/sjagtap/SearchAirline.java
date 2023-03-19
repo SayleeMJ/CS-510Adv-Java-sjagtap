@@ -4,16 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.ScrollView;
-import android.widget.SearchView;
 import android.widget.TextView;
-
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
+import android.widget.Toast;
 
 public class SearchAirline extends AppCompatActivity {
 
@@ -24,31 +17,21 @@ public class SearchAirline extends AppCompatActivity {
     }
 
     public void onSearch(View v) {
-        String airlineName = ((TextView) findViewById(R.id.airlineSearchInput)).getText().toString();
-        String source = ((TextView) findViewById(R.id.sourceSearchInput)).getText().toString();
-        String destination = ((TextView) findViewById(R.id.destSearchInput)).getText().toString();
-        StringBuilder sb = new StringBuilder();
-        try {
-            FileInputStream fis = getApplicationContext().openFileInput( "inputFile.xml");
-            InputStreamReader isr = new InputStreamReader(fis);
-            BufferedReader bufferedReader = new BufferedReader(isr);
-            String line;
-            while ((line = bufferedReader.readLine()) != null) {
-                sb.append(line);
-            }
-        }
-        catch(Exception e)
-        {
-            Log.println(Log.ERROR,"test", e.getMessage());
-        }
+        String airlineName = ((TextView) findViewById(R.id.etAirlineName)).getText().toString();
+        String source = ((TextView) findViewById(R.id.etSourceAirport)).getText().toString();
+        String destination = ((TextView) findViewById(R.id.etDestinationAirport)).getText().toString();
 
+        if (airlineName == null || airlineName.isEmpty()) {
+            Toast.makeText(this, "Airline name is not optional.", Toast.LENGTH_LONG).show();
+            return;
+        }
 
         Intent i = new Intent(getApplicationContext(), PrettyPrintActivity.class);
-        i.putExtra("printResult", sb.toString());
+        i.putExtra("Operation", "Search");
+        i.putExtra("airlineName", airlineName);
+        i.putExtra("source", source);
+        i.putExtra("destination", destination);
+
         startActivity(i);
-//        TextView view = findViewById(R.id.searchOutput);
-//        // read from airline and search
-//        view.setText("Results blah blahResults blah blahResults blah blahResults blah blahResults blah blahResults blah blahResults blah blahResults blah blahResults blah blahResults blah blahResults blah blahResults blah blahResults blah blahResults blah blahResults blah blahResults blah blahResults blah blahResults blah blahResults blah blahResults blah blahResults blah blahResults blah blahResults blah blahResults blah blahResults blah blahResults blah blahResults blah blahResults blah blahResults blah blahResults blah blahResults blah blahResults blah blahResults blah blahResults blah blahResults blah blahResults blah blahResults blah blahResults blah blahResults blah blahResults blah blahResults blah blahResults blah blahResults blah blahResults blah blahResults blah blahResults blah blahResults blah blahResults blah blahResults blah blahResults blah blahResults blah blahResults blah blahResults blah blahResults blah blah");
-//    }
     }
 }

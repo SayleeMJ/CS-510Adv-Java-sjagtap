@@ -8,7 +8,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
-import java.security.cert.PKIXRevocationChecker;
 import java.util.List;
 
 public class AddFlightActivity extends AppCompatActivity {
@@ -19,7 +18,7 @@ public class AddFlightActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_flight);
     }
 
-    public void addAirline(View v)
+    public void AddFlightButtonHandler(View v)
     {
         String airlineName = ((TextView) findViewById(R.id.etAirlineName)).getText().toString();
         String flightNumber = ((TextView) findViewById(R.id.etFLightNumber)).getText().toString();
@@ -46,18 +45,13 @@ public class AddFlightActivity extends AppCompatActivity {
             List<Airline> listAirlines = Options.readAllAirlinesFromXML(file);
 
             boolean flag = false;
-//            for (Airline airline: listAirlines) {
-//                if (airline.getName().equals(airlineName)) {
-//                    airline.addFlight(newFlight);
-//                    flag = true;
-//                    break;
-//                }
-//            }
-
-            flag = true;
-            Airline airline = new Airline(airlineName);
-            airline.addFlight(newFlight);
-            listAirlines.add(airline);
+            for (Airline airline: listAirlines) {
+                if (airline.getName().equals(airlineName)) {
+                    airline.addFlight(newFlight);
+                    flag = true;
+                    break;
+                }
+            }
 
             if (flag) {
                 Options.WriteAllAirlinesToXML(file, listAirlines);
