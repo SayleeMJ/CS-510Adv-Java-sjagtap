@@ -9,12 +9,13 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="700dp"
+        android:gravity="center"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="700dp"
             android:orientation="horizontal">
 
             <TextView
@@ -25,7 +26,9 @@
                 android:scrollbarAlwaysDrawVerticalTrack="true"
                 android:textColor="@color/black"
                 android:textSize="15dp"
+                android:fontFamily="monospace"
                 android:scrollbars="horizontal|vertical"
+                android:justificationMode="inter_word"
                 android:text="TextView" />
         </LinearLayout>
     </LinearLayout>

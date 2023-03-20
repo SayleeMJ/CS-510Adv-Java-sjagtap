@@ -70,13 +70,23 @@ public class PrettyPrintActivity extends AppCompatActivity {
     }
 
     private String getReadMe() {
-        return "Read me " +
-                "here";
+        return "<p>"+ "This is a README file!" + "<br>" +
+                "Name: Saylee Mohan Jagtap" + "<br>" +
+                "Odin ID: sjagtap" + "<br>" +
+                "PSU ID: 972267084"+ "<br><br>" +
+                "This android application creates an Airline object with Airline name." + "<br><br>"+
+                "This android application has functionalities:"+ "<br>"+
+                "1. To add an Airline only with Airline name. " +"<br>"+
+                "2. To add Airline with all the flights for this airline." +"<br>"+
+                "3. Each flight object has flight number, source, depart date time, destination, arrive date time." + "<br>"+
+                "4. After creating Airline it reads/writes the object's data into the xml file which is used as storage source." + "<br>"+
+                "5. To search flights for a specified airline or specified source and destination along with airline name." +"<br>"+
+                "6. To pretty print all the airlines with their corresponding flights." +"<br>"+
+                "7. Help option that guides user to access application functionalities"+ "</p>";
     }
 
     private String getHelp() {
-        return "Help Text" +
-                "Here";
+        return "help";
     }
 
     private String Search(String airlineName, String source, String destination, List<Airline> listAirLine) {
@@ -123,7 +133,7 @@ public class PrettyPrintActivity extends AppCompatActivity {
     private String PrintPrettyOption(List<Airline> listAirLine) {
         StringBuilder sb = new StringBuilder();
         for (Airline airline : listAirLine) {
-            sb.append("<p><b><u>Flights for Airline " + airline.getName() + "<u></b></p>");
+            sb.append("<p><b>Flights for Airline " + airline.getName() + "</b></p>");
             List<Flight> list = new ArrayList<Flight>(airline.getFlights());
             for (int index = 0; index < list.size(); index++) {
                 sb.append("<p>" + (index + 1) + ". " + list.get(index).ToStringPretty() + "</p>");
