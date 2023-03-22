@@ -1,6 +1,7 @@
 package edu.pdx.cs410J.sjagtap;
 
 import com.google.common.annotations.VisibleForTesting;
+
 import edu.pdx.cs410J.AbstractFlight;
 import edu.pdx.cs410J.AirportNames;
 
@@ -255,12 +256,13 @@ public class Flight extends AbstractFlight implements Comparable {
         String arriveDate = this.getArrivalString();
         long duration = this.durationOfFlight();
 
-        String result = "Flight Number: " + flightNumber + "\n" +
-                "   Departing Airport: " + sourceAirport + "\n" +
-                "   Departing date & time: " + departDate + "\n" +
-                "   Arriving Airport: " + destinationAirport + "\n" +
-                "   Arriving  date & time: " + arriveDate + "\n" +
-                "   Flight Duration: " + duration + " minutes";
+        String result = "Flight Number: " + flightNumber + "<br>" +
+                "&nbsp;&nbsp;&nbsp;&nbsp;Departing Airport: " + sourceAirport + "<br>" +
+                "&nbsp;&nbsp;&nbsp;&nbsp;Departing date & time: " + departDate + "<br>" +
+                "&nbsp;&nbsp;&nbsp;&nbsp;Arriving Airport: " + destinationAirport + "<br>" +
+                "&nbsp;&nbsp;&nbsp;&nbsp;Arriving  date & time: " + arriveDate + "<br>" +
+                "&nbsp;&nbsp;&nbsp;&nbsp;Flight Duration: " + duration + " minutes";
+
 
         return result;
     }
@@ -374,4 +376,3 @@ public class Flight extends AbstractFlight implements Comparable {
         }
     }
 }
-

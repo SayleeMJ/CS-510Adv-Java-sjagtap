@@ -1,7 +1,15 @@
 package edu.pdx.cs410J.sjagtap;
 
 import com.google.common.annotations.VisibleForTesting;
+
 import edu.pdx.cs410J.AbstractAirline;
+import edu.pdx.cs410J.AirportNames;
+
+import java.util.*;
+
+/**
+ * Class for airline information.
+ */
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -44,7 +52,8 @@ public class Airline extends AbstractAirline<Flight> {
     public Collection<Flight> getFlights() {
         Flight[] flightArray = arrayList.toArray(new Flight[0]);
         Arrays.sort(flightArray);
-        return Arrays.asList(flightArray);
+        List covertedArrayList = Arrays.asList(flightArray);
+        return covertedArrayList;
     }
 
 
@@ -64,3 +73,4 @@ public class Airline extends AbstractAirline<Flight> {
         return true;
     }
 }
+
