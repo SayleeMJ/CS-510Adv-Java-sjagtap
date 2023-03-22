@@ -262,6 +262,7 @@ public class Flight extends AbstractFlight implements Comparable {
                 "&nbsp;&nbsp;&nbsp;&nbsp;Arriving  date & time: " + arriveDate + "<br>" +
                 "&nbsp;&nbsp;&nbsp;&nbsp;Flight Duration: " + duration + " minutes";
 
+
         return result;
     }
 
@@ -374,5 +375,3 @@ public class Flight extends AbstractFlight implements Comparable {
         }
     }
 }
-
-

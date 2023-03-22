@@ -9,6 +9,11 @@ import java.util.*;
 /**
  * Class for airline information.
  */
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+
 public class Airline extends AbstractAirline<Flight> {
     private final String name;
     ArrayList<Flight> arrayList;
@@ -66,3 +71,4 @@ public class Airline extends AbstractAirline<Flight> {
         return true;
     }
 }
+
