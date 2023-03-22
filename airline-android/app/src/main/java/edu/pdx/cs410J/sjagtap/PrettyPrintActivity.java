@@ -142,6 +142,9 @@ public class PrettyPrintActivity extends AppCompatActivity {
             searchIndex++;
         }
 
+        if(searchIndex == 0){
+            sb.append("No flights found for this Airline");
+        }
         // Print.
         return sb.toString();
     }

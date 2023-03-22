@@ -27,7 +27,7 @@ public class AddAirlineActivity extends AppCompatActivity {
         if (airlineName == null ||
                 airlineName.isEmpty() ||
                 !Airline.isValidAirlineName(airlineName)) {
-            Toast.makeText(AddAirlineActivity.this, "Invalid airline name.", Toast.LENGTH_LONG);
+            Toast.makeText(AddAirlineActivity.this, "Invalid airline name.", Toast.LENGTH_LONG).show();
             return;
         }
 
