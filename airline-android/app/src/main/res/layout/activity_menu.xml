@@ -11,7 +11,8 @@
         android:layout_width="390dp"
         android:layout_height="250dp"
         android:gravity="center"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        tools:ignore="MissingConstraints">
 
         <TextView
             android:id="@+id/textView"
