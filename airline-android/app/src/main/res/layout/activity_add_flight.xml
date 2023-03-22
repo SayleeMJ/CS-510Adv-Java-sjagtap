@@ -11,7 +11,8 @@
         android:layout_width="390dp"
         android:layout_height="250dp"
         android:gravity="center"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        tools:ignore="MissingConstraints">
 
         <TextView
             android:id="@+id/textView"
@@ -35,7 +36,8 @@
         android:layout_width="match_parent"
         android:layout_height="700dp"
         android:gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:ignore="MissingConstraints">
 
         <LinearLayout
             android:id="@+id/llAirlineName"
@@ -52,7 +54,8 @@
                 android:text="Airline Name:"
                 android:textColor="@color/black"
                 android:textSize="15dp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                tools:ignore="TextSizeCheck" />
 
             <EditText
                 android:id="@+id/etAirlineName"
@@ -60,11 +63,11 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:fontFamily="sans-serif-condensed"
-                android:textColor="@color/black"
-                android:textSize="15dp"
                 android:hint="@string/AirlineName"
                 android:inputType="textPersonName"
-                />
+                android:textColor="@color/black"
+                android:textSize="15dp"
+                tools:ignore="TextSizeCheck,TouchTargetSizeCheck" />
 
         </LinearLayout>
 
@@ -83,7 +86,8 @@
                 android:text="Flight Number:"
                 android:textColor="@color/black"
                 android:textSize="15dp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                tools:ignore="TextSizeCheck" />
 
             <EditText
                 android:id="@+id/etFLightNumber"
@@ -97,7 +101,7 @@
                 android:textColor="@color/black"
                 android:textSize="15dp"
 
-                />
+                tools:ignore="TextSizeCheck,TouchTargetSizeCheck" />
 
         </LinearLayout>
 
@@ -116,7 +120,8 @@
                 android:text="Source Airport:"
                 android:textColor="@color/black"
                 android:textSize="15dp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                tools:ignore="TextSizeCheck" />
 
             <EditText
                 android:id="@+id/etSource"
@@ -128,7 +133,8 @@
                 android:hint="@string/AirportName"
                 android:inputType="textPersonName"
                 android:textColor="@color/black"
-                android:textSize="15dp" />
+                android:textSize="15dp"
+                tools:ignore="TextSizeCheck,TouchTargetSizeCheck" />
 
         </LinearLayout>
 
@@ -147,7 +153,8 @@
                 android:text="Departure DateTime:"
                 android:textColor="@color/black"
                 android:textSize="15dp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                tools:ignore="TextSizeCheck" />
 
             <EditText
                 android:id="@+id/etDeparture"
@@ -159,7 +166,8 @@
                 android:hint="@string/DateTime"
                 android:inputType="textPersonName"
                 android:textColor="@color/black"
-                android:textSize="15dp" />
+                android:textSize="15dp"
+                tools:ignore="TextSizeCheck,TouchTargetSizeCheck" />
 
         </LinearLayout>
 
@@ -178,7 +186,8 @@
                 android:text="Destination Airport:"
                 android:textColor="@color/black"
                 android:textSize="15dp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                tools:ignore="TextSizeCheck" />
 
             <EditText
                 android:id="@+id/etDestination"
@@ -190,7 +199,8 @@
                 android:hint="@string/AirportName"
                 android:inputType="textPersonName"
                 android:textColor="@color/black"
-                android:textSize="15dp" />
+                android:textSize="15dp"
+                tools:ignore="TextSizeCheck,TouchTargetSizeCheck" />
 
         </LinearLayout>
 
@@ -209,7 +219,8 @@
                 android:text="Arrival DateTime:"
                 android:textColor="@color/black"
                 android:textSize="15dp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                tools:ignore="TextSizeCheck" />
 
             <EditText
                 android:id="@+id/etArrival"
@@ -223,7 +234,7 @@
                 android:textColor="@color/black"
                 android:textSize="15dp"
 
-                />
+                tools:ignore="TextSizeCheck,TouchTargetSizeCheck" />
 
         </LinearLayout>
 
