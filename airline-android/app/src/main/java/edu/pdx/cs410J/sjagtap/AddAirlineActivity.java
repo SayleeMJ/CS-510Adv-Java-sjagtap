@@ -3,6 +3,7 @@ package edu.pdx.cs410J.sjagtap;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,17 +19,15 @@ public class AddAirlineActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_airline);
     }
 
-    public void AddAirlineButtonHandler(View v)
-    {
+    public void AddAirlineButtonHandler(View v) {
         String airlineName = ((TextView) findViewById(R.id.etAirlineName)).getText().toString();
 
         List<Airline> listAirlines;
         File file;
-
         if (airlineName == null ||
                 airlineName.isEmpty() ||
                 !Airline.isValidAirlineName(airlineName)) {
-            Toast.makeText(this, "Invalid airline name.", Toast.LENGTH_LONG).show();
+            Toast.makeText(AddAirlineActivity.this, "Invalid airline name.", Toast.LENGTH_LONG);
             return;
         }
 
@@ -42,7 +41,7 @@ public class AddAirlineActivity extends AppCompatActivity {
         }
 
         boolean flag = false;
-        for (Airline airline: listAirlines) {
+        for (Airline airline : listAirlines) {
             if (airline.getName().equals(airlineName)) {
                 flag = true;
                 break;

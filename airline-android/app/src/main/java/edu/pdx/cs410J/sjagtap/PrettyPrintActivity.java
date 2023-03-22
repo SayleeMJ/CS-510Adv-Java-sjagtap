@@ -70,7 +70,7 @@ public class PrettyPrintActivity extends AppCompatActivity {
     }
 
     private String getReadMe() {
-        return "<p>"+ "This is a README file!" + "<br>" +
+        return "<p align=\"justify\">"+ "This is a README file!" + "<br>" +
                 "Name: Saylee Mohan Jagtap" + "<br>" +
                 "Odin ID: sjagtap" + "<br>" +
                 "PSU ID: 972267084"+ "<br><br>" +
@@ -82,11 +82,27 @@ public class PrettyPrintActivity extends AppCompatActivity {
                 "4. After creating Airline it reads/writes the object's data into the xml file which is used as storage source." + "<br>"+
                 "5. To search flights for a specified airline or specified source and destination along with airline name." +"<br>"+
                 "6. To pretty print all the airlines with their corresponding flights." +"<br>"+
-                "7. Help option that guides user to access application functionalities"+ "</p>";
+                "7. Help option that guides user to access application functionalities"+ "<br><br>"+
+                "I have used system android gestures functionality to move bach to earlier screen."+ "<br>"+
+                "To use this functionality you can change the setting."+"<br>" +
+                "To do this <b>Go to setting > System > Locate 3 Button Navigation Switch </b></p>";
     }
 
     private String getHelp() {
-        return "help";
+        return "<b>What is Airline app?</b>" + "<br>" +
+                "<p align=\"justify\">The Airline is an application that supports features such as add new airline and new flight details. Search airline with specified name along with specified source and destination name and many more features.</p>" +
+                "<br>" +
+                "<b>How do I use the app?</b>" + "<br>" +
+                "<p align=\"justify\">We suggest starting by adding new airline. To do this, tap on the Add Airline button on the menu screen for add new airline name and Add flight details by tapping on the Add Flight button on the menu screen.</p>" +
+                "<br>" +
+                "<b>How do I use other features?</b>" +"<br>" +"<br>" +
+                "<b>Search: </b>" +"<br>" +
+                "<p align=\"justify\">This feature will provide you the options for searching specified airline by only airline or along with specified source or destination airport name.</p>" +
+                "<p align=\"justify\">To do this tap on the Search button and provide the details as per requirements.</b>" + "<br>" + "<br>" +
+                "<b>Pretty Print:</b>" +
+                "<p align=\"justify\">This feature will provide you all the airline details in the pretty format. To do this tap on Pretty Print button on the menu screen.</p>" +
+                "<b>ReadMe: </b>" +
+                "<p align=\"justify\">This feature will provide you details of about the owner of this application . To do this tap on ReadMe button on the menu screen.</p>";
     }
 
     private String Search(String airlineName, String source, String destination, List<Airline> listAirLine) {
