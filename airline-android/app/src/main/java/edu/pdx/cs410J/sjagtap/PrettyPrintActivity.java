@@ -70,21 +70,21 @@ public class PrettyPrintActivity extends AppCompatActivity {
     }
 
     private String getReadMe() {
-        return "<p align=\"justify\">"+ "This is a README file!" + "<br>" +
+        return "<p align=\"justify\">" + "This is a README file!" + "<br>" +
                 "Name: Saylee Mohan Jagtap" + "<br>" +
                 "Odin ID: sjagtap" + "<br>" +
-                "PSU ID: 972267084"+ "<br><br>" +
-                "This android application creates an Airline object with Airline name." + "<br><br>"+
-                "This android application has functionalities:"+ "<br>"+
-                "1. To add an Airline only with Airline name. " +"<br>"+
-                "2. To add Airline with all the flights for this airline." +"<br>"+
-                "3. Each flight object has flight number, source, depart date time, destination, arrive date time." + "<br>"+
-                "4. After creating Airline it reads/writes the object's data into the xml file which is used as storage source." + "<br>"+
-                "5. To search flights for a specified airline or specified source and destination along with airline name." +"<br>"+
-                "6. To pretty print all the airlines with their corresponding flights." +"<br>"+
-                "7. Help option that guides user to access application functionalities"+ "<br><br>"+
-                "I have used system android gestures functionality to move back to earlier screen."+ "<br>"+
-                "To use this functionality you can change the setting."+"<br>" +
+                "PSU ID: 972267084" + "<br><br>" +
+                "This android application creates an Airline object with Airline name." + "<br><br>" +
+                "This android application has functionalities:" + "<br>" +
+                "1. To add an Airline only with Airline name. " + "<br>" +
+                "2. To add Airline with all the flights for this airline." + "<br>" +
+                "3. Each flight object has flight number, source, depart date time, destination, arrive date time." + "<br>" +
+                "4. After creating Airline it reads/writes the object's data into the xml file which is used as storage source." + "<br>" +
+                "5. To search flights for a specified airline or specified source and destination along with airline name." + "<br>" +
+                "6. To pretty print all the airlines with their corresponding flights." + "<br>" +
+                "7. Help option that guides user to access application functionalities" + "<br><br>" +
+                "I have used system android gestures functionality to move back to earlier screen." + "<br>" +
+                "To use this functionality you can change the setting." + "<br>" +
                 "To do this <b>Go to setting > System > Locate 3 Button Navigation Switch </b></p>";
     }
 
@@ -95,15 +95,15 @@ public class PrettyPrintActivity extends AppCompatActivity {
                 "<b>How do I use the app?</b>" + "<br>" +
                 "<p align=\"justify\">We suggest starting by adding new airline. To do this, tap on the Add Airline button on the menu screen for add new airline name and Add flight details by tapping on the Add Flight button on the menu screen.</p>" +
                 "<br>" +
-                "<b>How do I use other features?</b>" +"<br>" +"<br>" +
-                "<b>Search: </b>" +"<br>" +
+                "<b>How do I use other features?</b>" + "<br>" + "<br>" +
+                "<b>Search: </b>" + "<br>" +
                 "<p align=\"justify\">This feature will provide you the options for searching specified airline by only airline or along with specified source or destination airport name.</p>" +
                 "<p align=\"justify\">To do this tap on the Search button and provide the details as per requirements.</b>" + "<br>" + "<br>" +
                 "<b>Pretty Print:</b>" +
                 "<p align=\"justify\">This feature will provide you all the airline details in the pretty format. To do this tap on Pretty Print button on the menu screen.</p>" +
                 "<b>ReadMe: </b>" +
                 "<p align=\"justify\">This feature will provide you details of about the owner of this application . To do this tap on ReadMe button on the menu screen.</p>" + "<br>" +
-                "<p align=\"justify\">To use android gestures functionality to move back to earlier screen."+ "<br>"+
+                "<p align=\"justify\">To use android gestures functionality to move back to earlier screen." + "<br>" +
                 "<b>Go to setting > System > Locate 3 Button Navigation Switch </b></p>";
     }
 
@@ -140,11 +140,11 @@ public class PrettyPrintActivity extends AppCompatActivity {
                 continue;
             }
 
-            sb.append("<p>"+ (searchIndex + 1) + ". "  + flight.ToStringPretty() + "</p>");
+            sb.append("<p>" + (searchIndex + 1) + ". " + flight.ToStringPretty() + "</p>");
             searchIndex++;
         }
 
-        if(searchIndex == 0){
+        if (searchIndex == 0) {
             sb.append("No flights found for this Airline");
         }
         // Print.

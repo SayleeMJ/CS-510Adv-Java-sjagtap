@@ -1,6 +1,7 @@
 package edu.pdx.cs410J.sjagtap;
 
 import edu.pdx.cs410J.AirlineDumper;
+
 import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
 import org.w3c.dom.DocumentType;
@@ -13,6 +14,7 @@ import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+
 import java.io.IOException;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
@@ -106,7 +108,7 @@ public class XmlDumper implements AirlineDumper<Airline> {
             Element rootElement = document.createElement("airlines");
             document.appendChild(rootElement);
 
-            for (Airline airline: listAirline) {
+            for (Airline airline : listAirline) {
                 Element airlineElement = getArilineElement(airline, document);
                 rootElement.appendChild(airlineElement);
             }
@@ -137,9 +139,8 @@ public class XmlDumper implements AirlineDumper<Airline> {
     /**
      * This function creates airline.
      *
-     * @param airline airline.
+     * @param airline  airline.
      * @param document object of Document
-     *
      * @return This will return the flightElement which contains information
      * of flight.
      */
@@ -166,9 +167,8 @@ public class XmlDumper implements AirlineDumper<Airline> {
      * This function gets the data of flight from command line arguments
      * and creates the elements for xml file.
      *
-     * @param flight collection of flight
+     * @param flight   collection of flight
      * @param document object of Document
-     *
      * @return This will return the flightElement which contains information
      * of flight.
      */
@@ -212,9 +212,8 @@ public class XmlDumper implements AirlineDumper<Airline> {
      * This function creates attribute dictionary for date and time tag.
      *
      * @param departureDate contains departure and arrival time date
-     * @param document  object of Document
+     * @param document      object of Document
      * @param parentElement Element variable
-     *
      */
     private void addDateAndTime(Date departureDate, Document document, Element parentElement) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm");

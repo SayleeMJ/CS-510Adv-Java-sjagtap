@@ -1,6 +1,7 @@
 package edu.pdx.cs410J.sjagtap;
 
 import com.google.common.annotations.VisibleForTesting;
+
 import edu.pdx.cs410J.AbstractFlight;
 import edu.pdx.cs410J.AirportNames;
 

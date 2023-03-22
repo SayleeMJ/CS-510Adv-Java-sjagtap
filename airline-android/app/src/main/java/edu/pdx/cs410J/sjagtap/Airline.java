@@ -1,6 +1,7 @@
 package edu.pdx.cs410J.sjagtap;
 
 import com.google.common.annotations.VisibleForTesting;
+
 import edu.pdx.cs410J.AbstractAirline;
 import edu.pdx.cs410J.AirportNames;
 
@@ -20,6 +21,7 @@ public class Airline extends AbstractAirline<Flight> {
 
     /**
      * Constructor for airline.
+     *
      * @param name airline name.
      */
     public Airline(String name) {

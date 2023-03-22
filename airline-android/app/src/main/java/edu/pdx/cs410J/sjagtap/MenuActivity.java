@@ -13,40 +13,34 @@ public class MenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_menu);
     }
 
-    public void addFlight(View v)
-    {
+    public void addFlight(View v) {
         Intent i = new Intent(getApplicationContext(), AddFlightActivity.class);
         startActivity(i);
     }
 
-    public void addAirline(View v)
-    {
+    public void addAirline(View v) {
         Intent i = new Intent(getApplicationContext(), AddAirlineActivity.class);
         startActivity(i);
     }
 
-    public void searchAirline(View v)
-    {
+    public void searchAirline(View v) {
         Intent i = new Intent(getApplicationContext(), SearchAirline.class);
         startActivity(i);
     }
 
-    public void prettyPrint(View v)
-    {
+    public void prettyPrint(View v) {
         Intent i = new Intent(getApplicationContext(), PrettyPrintActivity.class);
         i.putExtra("Operation", "PrintAll");
         startActivity(i);
     }
 
-    public void readMe(View v)
-    {
+    public void readMe(View v) {
         Intent i = new Intent(getApplicationContext(), PrettyPrintActivity.class);
         i.putExtra("Operation", "ReadMe");
         startActivity(i);
     }
 
-    public void help(View v)
-    {
+    public void help(View v) {
         Intent i = new Intent(getApplicationContext(), PrettyPrintActivity.class);
         i.putExtra("Operation", "Help");
         startActivity(i);
