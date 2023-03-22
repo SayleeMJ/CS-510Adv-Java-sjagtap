@@ -83,7 +83,7 @@ public class PrettyPrintActivity extends AppCompatActivity {
                 "5. To search flights for a specified airline or specified source and destination along with airline name." +"<br>"+
                 "6. To pretty print all the airlines with their corresponding flights." +"<br>"+
                 "7. Help option that guides user to access application functionalities"+ "<br><br>"+
-                "I have used system android gestures functionality to move bach to earlier screen."+ "<br>"+
+                "I have used system android gestures functionality to move back to earlier screen."+ "<br>"+
                 "To use this functionality you can change the setting."+"<br>" +
                 "To do this <b>Go to setting > System > Locate 3 Button Navigation Switch </b></p>";
     }
@@ -102,7 +102,9 @@ public class PrettyPrintActivity extends AppCompatActivity {
                 "<b>Pretty Print:</b>" +
                 "<p align=\"justify\">This feature will provide you all the airline details in the pretty format. To do this tap on Pretty Print button on the menu screen.</p>" +
                 "<b>ReadMe: </b>" +
-                "<p align=\"justify\">This feature will provide you details of about the owner of this application . To do this tap on ReadMe button on the menu screen.</p>";
+                "<p align=\"justify\">This feature will provide you details of about the owner of this application . To do this tap on ReadMe button on the menu screen.</p>" + "<br>" +
+                "<p align=\"justify\">To use android gestures functionality to move back to earlier screen."+ "<br>"+
+                "<b>Go to setting > System > Locate 3 Button Navigation Switch </b></p>";
     }
 
     private String Search(String airlineName, String source, String destination, List<Airline> listAirLine) {
