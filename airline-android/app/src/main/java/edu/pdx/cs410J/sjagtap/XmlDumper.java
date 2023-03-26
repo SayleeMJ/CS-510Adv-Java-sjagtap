@@ -121,11 +121,6 @@ public class XmlDumper implements AirlineDumper<Airline> {
             transformer.setOutputProperty(OutputKeys.ENCODING, "us-ascii");
             document.setXmlStandalone(true);
 
-            DOMImplementation domImplementation = document.getImplementation();
-            DocumentType doctype = domImplementation.createDocumentType("airline", AirlineXmlHelper.PUBLIC_ID, AirlineXmlHelper.SYSTEM_ID);
-            document.appendChild(doctype);
-            transformer.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM, doctype.getSystemId());
-
             DOMSource source = new DOMSource(document);
 
             StreamResult file = new StreamResult(this.writer);

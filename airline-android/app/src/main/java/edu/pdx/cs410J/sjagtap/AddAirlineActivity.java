@@ -9,6 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 public class AddAirlineActivity extends AppCompatActivity {
@@ -37,6 +38,7 @@ public class AddAirlineActivity extends AppCompatActivity {
             listAirlines = Options.readAllAirlinesFromXML(file);
         } catch (Exception e) {
             Toast.makeText(this, "Unable to read. Malformed database.", Toast.LENGTH_LONG).show();
+            System.out.println("Exception: "+e.getMessage());
             return;
         }
 
@@ -55,6 +57,8 @@ public class AddAirlineActivity extends AppCompatActivity {
             Airline airline = new Airline(airlineName);
             listAirlines.add(airline);
 
+//          List<Airline> airlines = new ArrayList<>();
+//          airlines.add(airline);
             try {
                 Options.WriteAllAirlinesToXML(file, listAirlines);
             } catch (Exception e) {

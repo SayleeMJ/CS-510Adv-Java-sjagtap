@@ -66,7 +66,7 @@ public class Airline extends AbstractAirline<Flight> {
     @VisibleForTesting
     static boolean isValidAirlineName(String str) {
         for (int i = 0; i < str.length(); i++) {
-            if (!Character.isLetterOrDigit(str.charAt(i))) {
+            if (!Character.isLetterOrDigit(str.charAt(i)) && str.charAt(i) != ' ') {
                 return false;
             }
         }

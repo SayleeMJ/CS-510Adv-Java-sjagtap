@@ -83,6 +83,7 @@ public class PrettyPrintActivity extends AppCompatActivity {
                 "5. To search flights for a specified airline or specified source and destination along with airline name." + "<br>" +
                 "6. To pretty print all the airlines with their corresponding flights." + "<br>" +
                 "7. Help option that guides user to access application functionalities" + "<br><br>" +
+                "<b>Note:</b> You cannot use special characters while defining airline name (such as: @ , _ , - , ', \", .(dot))." + "<br><br>" +
                 "I have used system android gestures functionality to move back to earlier screen." + "<br>" +
                 "To use this functionality you can change the setting." + "<br>" +
                 "To do this <b>Go to setting > System > Locate 3 Button Navigation Switch </b></p>";
@@ -153,6 +154,9 @@ public class PrettyPrintActivity extends AppCompatActivity {
 
     private String PrintPrettyOption(List<Airline> listAirLine) {
         StringBuilder sb = new StringBuilder();
+        if(listAirLine.isEmpty()){
+            sb.append("Airlines are not present in database to pretty print.");
+        }
         for (Airline airline : listAirLine) {
             sb.append("<p><b>Flights for Airline " + airline.getName() + "</b></p>");
             List<Flight> list = new ArrayList<Flight>(airline.getFlights());
